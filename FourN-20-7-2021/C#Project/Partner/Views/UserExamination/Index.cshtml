@@ -1,0 +1,109 @@
+﻿@model UserExaminationDisplayModel
+@{
+    ViewData["Title"] = "Examination Management";
+}
+<div class="container">
+    <div style="margin-top:15px" class="container subMenu">
+        <div class="container row mt-3">
+
+            <div class="col-md-10">
+                <div class="col-md-12 child-inline row">
+                    <div class="col-md-6">
+                        <input class="form-control" id="TxtSearch" placeholder="Enter Email" />
+                    </div>
+                    <div class="col-md-6 mt-1">
+                        <select id="ResultStatus" class="form-control select2">
+                            <option value="0">All result</option>
+                            <option value="@((int)ResultEnum.Vuot)">Passed</option>
+                            <option value="@((int)ResultEnum.KhongVuot)">Failed</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-2 p-3 mt-4">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <button class="btn btn-primary" id="btnFilter">Filter</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    @if (Model.UserExaminations.Any())
+    {
+        <div id="IndexPartial" style="display:block; margin-top:15px">
+            <partial name="_IndexPartial" model="Model.UserExaminations" />
+        </div> }
+                    else
+                    {
+        <div id="IndexPartial" style="display:block; margin-top:15px">
+            <div class="text-center" style="color:brown">
+                <h2>Not Examination</h2>
+            </div>
+        </div>
+     }
+</div>
+
+
+<script>
+
+    function showAll() {
+        $.ajax({
+            url: "/UserExamination/IndexPartial",
+            method: "get",
+            success: function (res) {
+                $("#IndexPartial").html("");
+                $("#IndexPartial").html(res.html);
+                $(".subMenu").show();
+            },
+        })
+    }
+
+    function showDetails(userExamId) {
+        $.ajax({
+            url: "/UserExamination/Details",
+            type: "get",
+            data: {
+                userExamId: userExamId,
+            },
+            success: function (res) {
+                $("#IndexPartial").html("");
+                $("#IndexPartial").html(res.html);
+                $(".subMenu").hide();
+            },
+            error: function () {
+                toastr.error("");
+            }
+        });
+    }
+
+
+
+    $("#btnFilter").off().click(function () {
+        var dateStart = $("#txtDateStart").val();
+        var dateEnd = $("#txtDateEnd").val();
+        var examType = $("#ExamType").val();
+        var txtSearch = $("#TxtSearch").val();
+        var resultStatus = $("#ResultStatus").val();
+
+        $.ajax({
+            url: "/UserExamination/SearchUserExaminations",
+            method: "POST",
+            data: {
+                ExamType: examType,
+                DateStart: dateStart,
+                DateEnd: dateEnd,
+                TxtSearch: txtSearch,
+                ResultStatus: resultStatus
+            },
+            success: function (res) {
+                $("#IndexPartial").html("");
+                $("#IndexPartial").html(res.html);
+                $(".subMenu").show();
+            },
+        })
+    })
+</script>
+

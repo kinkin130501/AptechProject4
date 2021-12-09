@@ -1,0 +1,98 @@
+﻿@model QuestionGroupViewModel
+@{
+    var parentId = 0;
+}
+<dl class="row">
+    <dt class="col-sm-2">
+        Bộ câu hỏi
+    </dt>
+    <dd class="col-sm-10">
+        @Html.DisplayFor(model => model.Content)
+    </dd>
+
+    <dt class="col-sm-2">
+        Loại câu hỏi
+    </dt>
+    <dd class="col-sm-10">
+        @{
+            var typeGroup = HelperViewData.GetEnumDisplayName((QuestionTypes)Model.QuestionType);
+        }
+        @typeGroup
+    </dd>
+</dl>
+
+<h4 class="control-label">List question in Exam</h4>
+<div id="showQuestion">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    Question
+                </th>
+                <th>
+                    Mark
+                </th>
+                <th>
+                    Allow random answer
+                </th>
+                <th>
+                    Status
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.QuestionViewModels)
+            {
+                var type = HelperViewData.GetEnumDisplayName((QuestionTypes)item.QuestionType);
+                parentId = (int)item.ParentQuestionId;
+
+                <div style="display:none">
+                    <select id="txtQuestionType">
+                        <option selected value="@item.QuestionType">@type</option>
+                    </select>
+                </div>
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Content)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Score)
+                    </td>
+                    <td>
+                        @(item.IsRandom? "Allow": "Not Allow")
+
+                    </td>
+                    <td>
+                        @if (item.IsActive)
+                        {
+                            <span class="badge badge-pill badge-success">Active</span>
+                        }
+                        else
+                        {
+                            <span class="badge badge-pill badge-default">Deactive</span>
+                        }
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-outline-primary" onclick="showEdit(@item.QuestionId)">Edit</button>
+                        <button type="button" class="btn btn-outline-primary" onclick="showDetails(@item.QuestionId)">View</button>
+                        @*<button type="button" class="btn btn-outline-primary" onclick="showDelete(@item.QuestionId)">Xóa</button>*@
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>
+
+<input id="txtGroupId" type="hidden" value="@parentId" />
+<input id="location" value="QuestionListDeTails" type="hidden" />
+<div id="showCreateQuestion"></div>
+<div class="form-group">
+    <input id="btnAddQuestion" type="button" value="Add question" onclick="showCreateQuestion()" class="btn btn-info" />
+    <button type="button" class="btn btn-outline-warm" onclick="showAll()">Back</button>
+</div>
+<script>
+
+</script>
+
+

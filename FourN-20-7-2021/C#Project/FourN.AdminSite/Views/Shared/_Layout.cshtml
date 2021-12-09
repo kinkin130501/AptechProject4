@@ -1,0 +1,590 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FourN</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- iCheck for checkboxes and radio inputs -->
+    <link rel="stylesheet" href="~/plugins/icheck-bootstrap/icheck-bootstrap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/css/adminlte.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="~/css/OverlayScrollbars.min.css">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="~/css/daterangepicker.css">
+    <!-- summernote -->
+    <link rel="stylesheet" href="~/plugins/summernote/summernote-bs4.min.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="~/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <!-- Select2 -->
+    <link rel="stylesheet" href="~/plugins/select2/css/select2.min.css">
+    <link rel="stylesheet" href="~/plugins/select2-bootstrap4-theme/select2-bootstrap4.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/plugins/fontawesome-free/css/all.min.css">
+    @RenderSection("CSS", required: false)
+
+    <!-- module 4 CSS-->
+    <link href='~/css/module4_calendar.css?v=1' rel='stylesheet' />
+    <!-- jquery -->
+    <script src='/js/jquery-3.6.0.min.js'></script>
+    <script src="~/plugins/signalr/dist/browser/signalr.js"></script>
+    <link rel="stylesheet" href="~/plugins/toastr/toastr.min.css" />
+    @*<link rel="stylesheet" href="~/css/select2.min.css">
+    <link rel="stylesheet" href="~/css/select2-bootstrap4.min.css">*@
+
+    <!-- BS Stepper -->
+    <link rel="stylesheet" href="~/dist/css/adminlte.min.css">
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+    <div class="wrapper">
+
+        <!-- Preloader -->
+        <div class="preloader flex-column justify-content-center align-items-center">
+            <img class="animation__shake" src="~/img/logo.png" alt="FourN" height="350" width="350">
+        </div>
+
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            <!-- Left navbar links -->
+            <!-- Right navbar links -->
+            <ul class="navbar-nav ml-auto">
+                <!-- Navbar Search -->
+                <li data-toggle="tooltip" data-placement="bottom" title="Tasks are NEW" class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                        <i style="font-size: 25px; font-weight: bolder;" class="far fa-lightbulb"></i>
+                        <span id="notiNew" class="badge badge-danger navbar-badge"></span>
+                    </a>
+                </li>
+                <li data-toggle="tooltip" data-placement="bottom" title="Tasks are PROCESSING" class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                        <i style="font-size: 25px; font-weight: bolder;" class="fas fa-spinner"></i>
+                        <span id="notiProcess" class="badge badge-danger navbar-badge"></span>
+                    </a>
+                </li>
+                <li data-toggle="tooltip" data-placement="bottom" title="Tasks are CHECKING" class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                        <i style="font-size: 25px; font-weight: bolder;" class="fas fa-tasks"></i>
+                        <span id="notiChecking" class="badge badge-danger navbar-badge"></span>
+                    </a>
+                </li>
+                <li data-toggle="tooltip" data-placement="bottom" title="Tasks are DEBUG" class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                        <i style="font-size: 25px; font-weight: bolder;" class="fas fa-bug"></i>
+                        <span id="notiDebug" class="badge badge-danger navbar-badge"></span>
+                    </a>
+                </li>
+                <li data-toggle="tooltip" data-placement="bottom" title="Tasks are DONE" class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                        <i style="font-size: 25px; font-weight: bolder;" class="fas fa-check-circle"></i>
+                        <span id="notiDone" class="badge badge-danger navbar-badge"></span>
+                    </a>
+                </li>
+                <!-- Notifications Dropdown Menu -->
+                <li class="nav-item dropdown li-badge">
+                    <a class="nav-link a-dropdown" data-toggle="dropdown" href="#">
+                        <i class="far fa-bell" style="font-size: 25px;"></i>
+                        <span class="badge badge-danger navbar-badge count-badge">0</span>
+                    </a>
+                    <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right dropdown-badge" style="max-width: 900px;">
+                    </div>
+                </li>
+                @*<li class="nav-item">
+                    <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+                        <i class="fas fa-expand-arrows-alt"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+                        <i class="fas fa-th-large"></i>
+                    </a>
+                </li>*@
+            </ul>
+        </nav>
+        <!-- /.navbar -->
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <!-- Brand Logo -->
+            <a class="brand-link">
+                <img src="~/img/logo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: 0.8; background-color: white">
+                <span class="brand-text font-weight-light">FourN</span>
+            </a>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Sidebar user panel (optional) -->
+                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                    @*<div class="image">
+                        <img src="~/img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image">
+                    </div>*@
+                    <div class="info">
+                        <a href="/Profile/Profile?userid=@Context.Session.GetCurrentAuthentication().UserId" class="d-block">@Context.Session.GetCurrentAuthentication().UserName</a>
+                    </div>
+                </div>
+
+                <!-- Sidebar Menu -->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        @if (Context.Session.GetCurrentAuthentication().Applications != null && Context.Session.GetCurrentAuthentication().Applications.Any())
+                        {
+                            <!-- add li  -->
+                            <li class="Calendar">
+                                <a href="/Module4/Calendar" class="nav-link">
+                                    <i class="fa fa-calendar"></i>
+                                    <p>Daily Work</p>
+                                    <span class="pull-right-container">
+                                    </span>
+                                </a>
+                            </li>
+                            <!-- end add li -->
+                            foreach (var app in @Context.Session.GetCurrentAuthentication().Applications)
+                            {
+                                @*<li class="nav-item" style="color:azure">@app.displayname.ToUpper()</li>*@
+                                @if (app.authcontrollers != null && app.authcontrollers.Any())
+                                {
+                                    @foreach (var controller in app.authcontrollers)
+                                    {
+                                        <li class="@controller.name">
+                                            <a href="/@app.name/@controller.name" class="nav-link">
+                                                <i class="@controller.iconclass"></i>
+                                                <p>@controller.display</p>
+                                                <span class="pull-right-container">
+                                                </span>
+                                            </a>
+                                        </li>
+                                    }
+                                }
+
+                            }
+                            <li class="Message">
+                                <a href="/Module4/Message/" class="nav-link">
+                                    <i class="fa fa-envelope"></i>
+                                    <p>Message</p>
+                                    <span class="pull-right-container">
+                                    </span>
+                                </a>
+                            </li>
+                            <!-- add li  -->
+                            <li class="ChatRoom">
+                                <a href="/Module4/Message/Messenger" class="nav-link">
+                                    <i class="fab fa-facebook-messenger"></i>
+                                    <p>Chat Room</p>
+                                    <span class="pull-right-container">
+                                    </span>
+                                </a>
+                            </li>
+                            <!-- end add li -->
+                            <!-- add li  -->
+                            <li class="Logout">
+                                <a class="nav-link a-log-out">
+                                    <i class="fas fa-sign-out-alt"></i>
+                                    <p>Log Out</p>
+                                    <span class="pull-right-container">
+                                    </span>
+                                </a>
+                            </li>
+                            <!-- end add li -->
+                        }
+
+                    </ul>
+                </nav>
+                <!-- /.sidebar-menu -->
+            </div>
+            <!-- /.sidebar -->
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- /.col -->
+            <!--</div>--><!-- /.row -->
+            <!--</div>--><!-- /.container-fluid -->
+            <!--</div>-->
+            <!-- /.content-header -->
+            <!-- Main content -->
+            <section class="content">
+                <div class="container-fluid">
+                    @RenderBody()
+                </div><!-- /.container-fluid -->
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+        <!-- modal -->
+        <div class="modal" id="layout-modal-alert" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Warning</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p class="message-modal-p-content">Do you want to log out ?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-primary layout-modal-btn-ok">Ok</button>
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end modal -->
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+    </div>
+    <!-- /.control-sidebar -->
+    <!-- ./wrapper -->
+    <!-- jQuery get notification-->
+    @*<script src="~/js/jquery.min.js"></script>*@
+<script>
+    $(document).ready(function () {
+        $.ajax({
+            url: '/Module4/Calendar/GetAllNotification',
+            dataType: 'json',
+            //data: {
+            //    content: text,
+            //    groupid: groupid
+            //},
+            type: "GET",
+            beforeSend: function () {
+
+            },
+            complete: function () {
+
+            },
+            success: function (json) {
+                if (json['status'] == true) {
+                    if (json['count'] > 0) {
+                        var numCount = Number($('span.count-badge').text());
+                        numCount = numCount + json['countNoti'];
+                        $('span.count-badge').css('display', 'block');
+                        $('span.count-badge').text(numCount)
+                        $.each(json['result'], function (key, value) {
+                            if (value['notitype'] == 'message') {
+                                if (value['notiread'] == 0)
+                                    var html = '<a class="dropdown-item" href="/Module4/Message" data-id="' + value['notiid'] + '" style="color:red;font-weight: 700"><i class="fas fa-envelope mr-2"></i> You have a new <span id="notify" >' + value['notitype'] + '</span> from ' + value['usersSend']['username'] + ' at ' + value['noticreate'] + '</a ><div class="dropdown-divider"></div>';
+                                else
+                                    var html = '<a class="dropdown-item" href="/Module4/Message" data-id="' + value['notiid'] + '" style="color:black;font-weight: 100"><i class="fas fa-envelope mr-2"></i> You have a new <span id="notify" >' + value['notitype'] + '</span> from ' + value['usersSend']['username'] + ' at ' + value['noticreate'] + '</a ><div class="dropdown-divider"></div>';
+                                $('div.dropdown-badge').append(html);
+                            }
+                            else if (value['notitype'] == 'meeting') {
+                                if (value['notiread'] == 0)
+                                    var html = '<a class="dropdown-item" href="/Module4/Calendar" data-id="' + value['notiid'] + '" style="color:red;font-weight: 700"><i class="fas fa-envelope mr-2"></i> You have a new <span id="notify" >' + value['notitype'] + '</span> from ' + value['usersSend']['username'] + ' at ' + value['noticreate'] + '</a ><div class="dropdown-divider"></div>';
+                                else
+                                    var html = '<a class="dropdown-item" href="/Module4/Calendar" data-id="' + value['notiid'] + '" style="color:black;font-weight: 100"><i class="fas fa-envelope mr-2"></i> You have a new <span id="notify" >' + value['notitype'] + '</span> from ' + value['usersSend']['username'] + ' at ' + value['noticreate'] + '</a ><div class="dropdown-divider"></div>';
+                                $('div.dropdown-badge').append(html);
+                            }
+                            else {
+                                if (value['notiread'] == 0)
+                                    var html = '<a class="dropdown-item" href="/Module4/Calendar" data-id="' + value['notiid'] + '" style="color:red;font-weight: 700"><i class="fas fa-envelope mr-2"></i> You have a new <span id="notify" >' + value['notitype'] + '</span> from ' + value['usersSend']['username'] + ' at ' + value['noticreate'] + '</a ><div class="dropdown-divider"></div>';
+                                else
+                                    var html = '<a class="dropdown-item" href="/Module4/Calendar" data-id="' + value['notiid'] + '" style="color:black;font-weight: 100"><i class="fas fa-envelope mr-2"></i> You have a new <span id="notify" >' + value['notitype'] + '</span> from ' + value['usersSend']['username'] + ' at ' + value['noticreate'] + '</a ><div class="dropdown-divider"></div>';
+                                $('div.dropdown-badge').append(html);
+                            }
+                        });
+                    }
+                    else {
+                        var html = '<a class="dropdown-item" data-id="0" href="#">No notification.</a ><div class="dropdown-divider"></div>';
+                        $('.dropdown-badge').append(html);
+                    }
+                }
+            },
+            error: function (xhr, ajaxOptions, thrownError) {
+                alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+            },
+        });//end ajax
+    });
+</script>
+    <!-- module 1-->
+    <!-- end module 1-->
+    <!-- jQuery UI 1.11.4 -->
+    <script src="~/js/jquery-ui.min.js"></script>
+    <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
+    <script>
+        $.widget.bridge('uibutton', $.ui.button)
+    </script>
+    <!-- Bootstrap 4 -->
+    <script src="~/js/bootstrap.bundle.min.js"></script>
+    <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- ChartJS -->
+    <script src="~/js/Chart.min.js"></script>
+    <!-- Sparkline -->
+    <script src="~/js/sparkline.js"></script>
+    <!-- JQVMap -->
+    <script src="~/js/jquery.vmap.min.js"></script>
+    <script src="~/js/jquery.vmap.usa.js"></script>
+    <!-- jQuery Knob Chart -->
+    <script src="~/js/jquery.knob.min.js"></script>
+    <!-- daterangepicker -->
+    <script src="~/js/moment.min.js"></script>
+    <script src="~/plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- Tempusdominus Bootstrap 4 -->
+    <script src="~/js/tempusdominus-bootstrap-4.min.js"></script>
+    <!-- Summernote -->
+    <script src="~/js/summernote-bs4.min.js"></script>
+    <!-- overlayScrollbars -->
+    <script src="~/js/jquery.overlayScrollbars.min.js"></script>
+    <script src="~/plugins/toastr/toastr.min.js"></script>
+    <!-- DataTables  & Plugins -->
+    <script src="~/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="~/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="~/plugins/jszip/jszip.min.js"></script>
+    <script src="~/plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="~/plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="~/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="~/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="~/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <script src="~/plugins/select2/js/select2.full.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="~/js/adminlte.js"></script>
+    <!-- AdminLTE for demo purposes -->
+    <script src="~/js/demo.js"></script>
+    <!-- jQuery -->
+    @*<script src="~/plugins/jquery/jquery.min.js"></script>*@
+    <!-- Bootstrap 4 -->
+    <script src="~/plugins/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- date-range-picker -->
+    <script src="~/plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- bootstrap color picker -->
+    <script src="~/plugins/bootstrap-colorpicker/js/bootstrap-colorpicker.min.js"></script>
+    <!-- chart -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+    <!-- mustaches library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mustache.js/2.3.0/mustache.min.js"></script>
+    <!-- Select box -->
+    <script src="https://cdn.jsdelivr.net/gh/bbbootstrap/libraries@main/choices.min.js"></script>
+
+    <!-- module 1-->
+    <script src="~/dist/js/projectmanagement.js"></script>
+
+    <script>
+        $('a.a-dropdown').click(function () {
+            var status = $(".dropdown-badge").css('display');
+            if (status == "block") {
+                $(".dropdown-badge").css("display", "none");
+                $('.dropdown-badge a').css('color', 'black');
+                $('.dropdown-badge a').css('font-weight', '100');
+                $('.dropdown-badge a i').css('color', 'black');
+            }
+            else {
+                $(".dropdown-badge").css("display", "block");
+            }
+        });
+        $('li.li-badge').click(function () {
+            var status = $(".dropdown-badge").css('display');
+            if (status == "block") {
+                $(".dropdown-badge").css("display", "none");
+            }
+            var id = $(this).attr("data-id");
+            $.ajax({
+                url: '/Module4/Calendar/ReadAllNotification',
+                dataType: 'json',
+                data: {
+                    id: id
+                },
+                type: "POST",
+                beforeSend: function () {
+                },
+                complete: function () {
+
+                },
+                success: function (json) {
+                    if (json['status'] == true) {
+                        $('span.count-badge').text(0)
+                        //$('span.count-badge').css('display', 'none');
+                        $('.dropdown-badge').css('display', 'block');
+                        //$('.dropdown-badge a').css('color', 'black');
+                        //$('.dropdown-badge a').css('font-weight', '100');
+                        //$('.dropdown-badge a i').css('color', 'black');
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                },
+            });//end ajax
+        });
+        $('li.Logout').click(function () {
+            $.ajax({
+                url: '/Module4/Calendar/Logout',
+                dataType: 'json',
+                //data: {
+                //    content: text,
+                //    groupid: groupid
+                //},
+                type: "POST",
+                beforeSend: function () {
+                },
+                complete: function () {
+
+                },
+                success: function (json) {
+                    if (json['status'] == true) {
+                        location = "https://localhost:44316/Authentication/Login"
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                },
+            });//end ajax
+        });
+    </script>
+    @RenderSection("Scripts", required: false)
+
+    <script>
+        $(function () {
+            $('.summerynote').summernote()
+            $('.select2').select2()
+
+            //Initialize Select2 Elements
+            $('.select2bs4').select2({
+                theme: 'bootstrap4'
+            })
+
+            // CodeMirror
+            CodeMirror.fromTextArea(document.getElementById("codeMirrorDemo"), {
+                mode: "htmlmixed",
+                theme: "monokai"
+            });
+
+            //Datemask dd/mm/yyyy
+            $('#datemask').inputmask('dd/mm/yyyy', { 'placeholder': 'dd/mm/yyyy' })
+            //Datemask2 mm/dd/yyyy
+            $('#datemask2').inputmask('mm/dd/yyyy', { 'placeholder': 'mm/dd/yyyy' })
+            //Money Euro
+            $('[data-mask]').inputmask()
+
+            //Date picker
+            $('.reservationdate').datetimepicker({
+                format: 'L'
+            });
+
+            //Date and time picker
+            $('#reservationdatetime').datetimepicker({ icons: { time: 'far fa-clock' } });
+
+            //Date range picker
+            $('#reservation').daterangepicker()
+            //Date range picker with time picker
+            $('.reservationtime').daterangepicker({
+                timePicker: true,
+                timePickerIncrement: 30,
+                locale: {
+                    format: 'MM/DD/YYYY hh:mm A'
+                }
+            })
+            //Date range as a button
+            $('#daterange-btn').daterangepicker(
+                {
+                    ranges: {
+                        'Today': [moment(), moment()],
+                        'Yesterday': [moment().subtract(1, 'days'), moment().subtract(1, 'days')],
+                        'Last 7 Days': [moment().subtract(6, 'days'), moment()],
+                        'Last 30 Days': [moment().subtract(29, 'days'), moment()],
+                        'This Month': [moment().startOf('month'), moment().endOf('month')],
+                        'Last Month': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+                    },
+                    startDate: moment().subtract(29, 'days'),
+                    endDate: moment()
+                },
+                function (start, end) {
+                    $('#reportrange span').html(start.format('MMMM D, YYYY') + ' - ' + end.format('MMMM D, YYYY'))
+                }
+            )
+
+            //Timepicker
+            $('#timepicker').datetimepicker({
+                format: 'LT'
+            })
+
+            //Bootstrap Duallistbox
+            $('.duallistbox').bootstrapDualListbox()
+
+            //Colorpicker
+            $('.my-colorpicker1').colorpicker()
+            //color picker with addon
+            $('.my-colorpicker2').colorpicker()
+
+            $('.my-colorpicker2').on('colorpickerChange', function (event) {
+                $('.my-colorpicker2 .fa-square').css('color', event.color.toString());
+            })
+
+            $("input[data-bootstrap-switch]").each(function () {
+                $(this).bootstrapSwitch('state', $(this).prop('checked'));
+            })
+            $('.dropdown-submenu a.test').on("click", function (e) {
+                $(this).next('ul').toggle();
+                e.stopPropagation();
+                e.preventDefault();
+            })
+
+        })
+
+        // Get the template HTML and remove it from the doumenthe template HTML and remove it from the doument
+        //var previewNode = document.querySelector("#template")
+        //previewNode.id = ""
+        //var previewTemplate = previewNode.parentNode.innerHTML
+        //previewNode.parentNode.removeChild(previewNode)
+
+        //var myDropzone = new Dropzone(document.body, { // Make the whole body a dropzone
+        //    url: "/target-url", // Set the url
+        //    thumbnailWidth: 80,
+        //    thumbnailHeight: 80,
+        //    parallelUploads: 20,
+        //    previewTemplate: previewTemplate,
+        //    autoQueue: false, // Make sure the files aren't queued until manually added
+        //    previewsContainer: "#previews", // Define the container to display the previews
+        //    clickable: ".fileinput-button" // Define the element that should be used as click trigger to select files.
+        //})
+
+        //myDropzone.on("addedfile", function (file) {
+        //    // Hookup the start button
+        //    file.previewElement.querySelector(".start").onclick = function () { myDropzone.enqueueFile(file) }
+        //})
+
+        //// Update the total progress bar
+        //myDropzone.on("totaluploadprogress", function (progress) {
+        //    document.querySelector("#total-progress .progress-bar").style.width = progress + "%"
+        //})
+
+        //myDropzone.on("sending", function (file) {
+        //    // Show the total progress bar when upload starts
+        //    document.querySelector("#total-progress").style.opacity = "1"
+        //    // And disable the start button
+        //    file.previewElement.querySelector(".start").setAttribute("disabled", "disabled")
+        //})
+
+        //// Hide the total progress bar when nothing's uploading anymore
+        //myDropzone.on("queuecomplete", function (progress) {
+        //    document.querySelector("#total-progress").style.opacity = "0"
+        //})
+
+        //// Setup the buttons for all transfers
+        //// The "add files" button doesn't need to be setup because the config
+        //// `clickable` has already been specified.
+        //document.querySelector("#actions .start").onclick = function () {
+        //    myDropzone.enqueueFiles(myDropzone.getFilesWithStatus(Dropzone.ADDED))
+        //}
+        //document.querySelector("#actions .cancel").onclick = function () {
+        //    myDropzone.removeAllFiles(true)
+        //}
+                                                                                                  // DropzoneJS Demo Code End
+    </script>
+    <!-- end module 1-->
+</body>
+</html>
+

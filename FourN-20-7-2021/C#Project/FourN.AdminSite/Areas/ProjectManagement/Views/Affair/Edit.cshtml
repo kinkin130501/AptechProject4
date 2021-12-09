@@ -1,0 +1,119 @@
+﻿@model FourN.Data.Models.Affairs
+
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">EDIT AFFAIR</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<div class="card card-primary">
+    <form method="post" asp-controller="Affair" asp-action="Edit">
+        <div class="card-body">
+            <input type="hidden" asp-for="affairid" value="@Model.affairid" />
+            <input type="hidden" asp-for="projectid" value="@Model.projectid" />
+            <input type="hidden" asp-for="affairtag" value="@Model.affairtag" />
+            <input type="hidden" asp-for="typeofaffair" value="@Model.typeofaffair" />
+            <div class="form-group">
+                <label for="inputEmail4">Name</label>
+                <input value="@Model.affairname" asp-for="affairname" class="form-control" readonly />
+            </div>
+            <div class="form-row">
+                @*<div class="form-group col-md-5">
+                        <label for="inputEmail4">Percentage of Project (%)(1 - @ViewData["sparePercent"])</label>
+                        <input type="range" min="1" max="@ViewData["sparePercent"]" value="@ViewData["value"]" asp-for="affairtag" class="custom-range custom-range-teal" />
+                        <p>Value: <span class="badge badge-warning" id="valueaffairtag">0</span></p>
+                    </div>*@
+                <div class="form-group col-md-6 parent">
+                    <label>Member</label>
+                    @if (Model.userid != null)
+                    {
+                        <input type="hidden" value="@Model.userid" class="getMemberID" />
+                    }
+
+                    <select asp-for="userid" class="custom-select">
+                        <option value="@Model.userid">@ViewData["member"] </option>
+                        @foreach (var u in ViewBag.viewUser)
+                        {
+                            <option class="selectMemberID" value="@u.userid">@u.username </option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Status</label>
+
+                    <div class="form-check">
+                        <input checked asp-for="status" class="form-check-input" type="radio" name="checkstatus" id="" value="1">
+                        <label class="form-check-label" for="exampleRadios1">Processing...</label>
+                    </div>
+                    <div class="form-check">
+                        <input asp-for="status" class="form-check-input" type="radio" name="checkstatus" id="" value="2">
+                        <label class="form-check-label" for="exampleRadios1">Debugging...</label>
+                    </div>
+                    <div class="form-check">
+                        <input asp-for="status" class="form-check-input" type="radio" name="checkstatus" id="" value="3">
+                        <label class="form-check-label" for="exampleRadios1">Checking...</label>
+                    </div>
+                    <div class="form-check">
+                        <input asp-for="status" class="form-check-input" type="radio" name="checkstatus" id="" value="4">
+                        <label class="form-check-label" for="exampleRadios1">Done</label>
+                    </div>
+                    <div class="form-check">
+                        <input asp-for="status" class="form-check-input" type="radio" name="checkstatus" id="" value="5">
+                        <label class="form-check-label" for="exampleRadios1">Restart Affair</label>
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Start Time (Plan)</label>
+                    <div class="input-group date">
+                        <input type="text" value="@Model.starttimeplan.ToString("yyyy/MM/dd HH:mm:ss")" disabled asp-for="starttimeplan" class="form-control" />
+                        <input value="@Model.starttimeplan.ToString("yyyy/MM/dd HH:mm:ss")" name="starttimeplan" type="hidden" />
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">End Time (Plan)</label>
+                    <div class="input-group date">
+                        <input type="text" value="@Model.endtimeplan.ToString("yyyy/MM/dd HH:mm:ss")" disabled asp-for="endtimeplan" class="form-control" />
+                        <input value="@Model.endtimeplan.ToString("yyyy/MM/dd HH:mm:ss")" name="endtimeplan" type="hidden" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Start Time (Actual)</label>
+                    <div class="input-group date">
+                        <input value="@Model.starttimeplan.ToString("yyyy/MM/dd HH:mm:ss")" name="starttimeactual" asp-for="starttimeactual" type="text" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">End Time (Actual)</label>
+                    <div class="input-group date">
+                        <input value="@Model.endtimeplan.ToString("yyyy/MM/dd HH:mm:ss")" name="endtimeactual" asp-for="endtimeactual" type="text" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail4">Note From Member</label>
+                <textarea style="height: 100px;" asp-for="notemember" class="form-control summerynote"> @Html.Raw(Model.notemember) </textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="inputEmail4">Note From Leader</label>
+                <textarea style="height: 100px;" asp-for="noteleader" class="form-control summerynote"> @Html.Raw(Model.noteleader) </textarea>
+            </div>
+        </div>
+        <!-- /.card-body -->
+
+        <div class="card-footer">
+            <button onclick="return checkTimeAffair()" type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+    @*}*@
+</div>
+<script src="~/js/notify.js"></script>

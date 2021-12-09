@@ -1,0 +1,90 @@
+﻿@model InterviewModel
+<div class="container">
+    <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">
+                        Interview schedule
+                    </h3>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                @if(Model.OldInterviewModel != null)
+                {
+                <div>
+                    <label><i>You created interview at @Model.OldInterviewModel.DateTime</i></label>
+                </div>
+                }
+                
+                <form method="post" asp-action="CreateInterview" enctype="multipart/form-data" id="createPostForm">
+                    <input type="hidden" asp-for="departmentid"/>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label>Choose Interviewer (<span style="color:red">*</span>) </label>
+                            <select class="form-control" asp-for="userid">
+                                @foreach (var item in Model.users)
+                                {
+                                    <option value="@item.UserID">@item.Username</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Time interview</label>
+                            <br />
+                            <label><i>( Format YYYY/MM/DD HH:mm )</i></label>
+                            <input type="text" asp-for="DateTime" class="form-control" />
+                        </div>
+                        <div class="form-group">
+                            <label>List candidate:</label>
+                            <ul>
+                                @foreach (var item in Model.partners)
+                                {
+                                    <li>@item.Name - @item.Phone - @item.Email</li>
+                                }
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary" id="btnSubmit">Submit</button>
+                        <a type="submit" class="btn btn-warning" asp-action="Index">Back</a>
+                    </div>
+                </form>
+            </div>
+            <!-- /.card -->
+        </div>
+    </div>
+</div>
+<script>
+    Date.prototype.addDays = function (days) {
+        var date = new Date(this.valueOf());
+        date.setDate(date.getDate() + days);
+        return date;
+    }
+    $(document).ready(function () {
+        var date = new Date();
+        var startdate = date.addDays(1)
+
+        var maxdate = date.addDays(60)
+
+        var mindate = date.addDays(1)
+        $('input#DateTime').daterangepicker({
+            timePicker24Hour: true,
+            singleDatePicker: true,
+            autoApply: true,
+            timePicker: true,
+            timePickerIncrement: 15,
+            startDate: startdate,
+            maxDate: maxdate,
+            minDate: mindate,
+           /* endDate: moment().startOf('hour').add(32, 'hour'),*/
+            locale: {
+                format: 'YYYY/MM/DD HH:mm'
+            }
+        });
+    });
+</script>

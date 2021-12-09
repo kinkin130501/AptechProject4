@@ -1,0 +1,53 @@
+﻿@model IEnumerable<ExaminationViewModel>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+               Examination
+            </th>
+            <th>
+                Information
+            </th>
+            <th>
+                Status
+            </th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Name)
+                </td>
+                <td>
+                    @{ var type = HelperViewData.GetEnumDisplayName((ExamTypes)item.ExamType); }
+
+                    Type: @type <br />
+                    Max mark: @Html.DisplayFor(modelItem => item.MaxScore) <br />
+                    Pass Mark: @Html.DisplayFor(modelItem => item.PassScore) <br />
+                    Total question: @Html.DisplayFor(modelItem => item.TotalQuestion)
+                </td>
+                <td>
+                    @if (item.IsActive)
+                    {
+                        <span class="badge badge-pill badge-success">Active</span>
+                    }
+                    else
+                    {
+                        <span class="badge badge-pill badge-default">Deactive</span>
+                    }
+                </td>
+                <td>
+                    <button type="button" class="btn btn-outline-primary" onclick="showDetails(@item.ExamId)">View</button>
+                    <button type="button" class="btn btn-outline-primary" onclick="showDelete(@item.ExamId)">Delete</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+
+

@@ -1,0 +1,36 @@
+﻿@model IEnumerable<PartnerViewModel>
+@{
+    ViewData["Title"] = "Candicate";
+}
+<div class="container">
+    <table id="example1" class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+                <th>Time</th>
+                <th>CV</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.Phone</td>
+                    <td>@item.Email</td>
+                    <td>@item.Time</td>
+                    <td>
+                        @*<a class="btn btn-primary btn-sm" href="User/Detail/@item.PartnerId">
+            <i class="fas fa-folder">
+            </i>
+            View
+        </a>*@
+                        <a href="@item.FileURL" download="@item.Name">Tải CV này tại đây</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

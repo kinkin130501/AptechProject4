@@ -1,0 +1,77 @@
+﻿@model IEnumerable<FourN.Data.ViewModel.UserViewModel>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">List Employee</h3>
+                @*<div class="card-tools">
+                    <div class="input-group input-group-sm" style="width:250px;">
+                        <input type="text" name="table_search" class="form-control float-right" placeholder="Search Document">
+                        <div class="input-group-append">
+                            <button type="submit" class="btn btn-default">
+                                <i class="fas fa-search"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>*@
+            </div>
+            <div class="container text-right">
+                <a class="btn btn-primary btn-rounded" style="margin: 10px" href="@Url.Action("Create")">Create new</a>
+            </div>    
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0" id="index_partial">
+                <partial name="_Index" model="@Model" />
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+</div>
+@section Scripts{
+    <script>
+        $(document).ready(function () {
+            //add color background
+            $('li.User').css('background-color', 'azure');
+        });
+        $(function () {
+            $("#example1").DataTable({
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+                "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        });
+        function showAll() {
+            $.ajax({
+                url: "/User/User/IndexPartial",
+                method: "get",
+                success: function (res) {
+                    $("#index_partial").html("");
+                    $("#index_partial").html(res.html);
+                },
+            })
+        }
+        function confirmDelete(id) {
+            var confirmText = "Bạn có muốn hoàn thành tác vụ này?";
+            if (confirm(confirmText)) {
+                $.ajax({
+                    url: "/User/User/Delete",
+                    method: "post",
+                    data: {
+                        id: id
+                    },
+                    success: function () {
+                        showAll();
+                        toastr.success('Cập nhật thành công')
+                    },
+                    error: function () {
+                        toastr.error('Có lỗi xảy ra, vui lòng thử lại')
+                    }
+                })
+            }
+        }
+    </script>
+}
+
+

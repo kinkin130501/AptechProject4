@@ -1,0 +1,526 @@
+﻿@model FourN.Data.ViewModel.CostProjectViewModel
+
+@{
+    ViewData["Title"] = "Detail";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    List<FourN.Data.Models.Affairs> affairsList = ViewBag.affairList;
+    List<FourN.Data.Models.User> userList = ViewBag.userList;
+    List<FourN.Data.Models.Request> requestList = ViewBag.requestList;
+    List<int> listUser = ViewBag.listUser;
+    int sumTask = 0, hoursc = 0, hoursd = 0;
+    long moneyrequestc = 0;
+    double ota = 0, costextraa = 0;
+    TimeSpan timeStart = TimeSpan.Parse("9:00"), timeEnd = TimeSpan.Parse("18:00"),
+    timeMid = TimeSpan.Parse("12:00");
+    
+}
+<div class="row">
+
+    <div class="col-12">
+        <div class="callout callout-info">
+            <h4><i class="fas fa-info"></i> PROJECT DETAILS INFORMATION</h4>
+        </div>
+        <!-- Main content -->
+        <div class="invoice p-3 mb-3">
+            <div class="row invoice-info">
+                <div class="col-md-3 invoice-col">
+                    <h5>Project Code: <b style="color:red">@Model.projectcode</b></h5>
+                    <h5>Project Name: <b style="color:darkgreen">@Model.projectname</b></h5>
+                </div>
+                <div class="col-md-4 invoice-col">
+                    <h5>Start (Plan): <b style="color:red">@Model.startplan.ToString("dd/MM/yyyy")</b></h5>
+                    <h5>End (Plan): <b style="color:darkgreen">@Model.endplan.ToString("dd/MM/yyyy")</b></h5>
+                </div>
+                <div class="col-md-4 invoice-col">
+                    <h5>Start (Actual): <b style="color:red">@Model.startactual.Value.ToString(string.Format("dd/MM/yyyy"))</b></h5>
+                    <h5>End (Actual): <b style="color:darkgreen">@Model.endactual.Value.ToString(string.Format("dd/MM/yyyy"))</b></h5>
+
+                </div>
+                <div class="col-md-1 invoice-col">
+                    <a class="btn btn-block btn-primary btn-md" asp-controller="Costsalary" asp-action="ExportDoneExcel" asp-route-id="@Model.projectid">
+                        <i class="fas fa-save"></i> Save Excel
+                    </a>
+                </div>
+            </div>
+            <hr />
+            <div class="row invoice-info">
+                <div class="col-md-3 invoice-col">
+                    <br />
+                    <h4 style="color:brown">
+                        DETAIL LIST OF TASKS
+                    </h4>
+                </div>
+                <div class="col-md-5 invoice-col">
+                    <p>
+                        <strong>NOTE: </strong><br />
+                        With Practitioners is <b>MEMBER</b> Labor Cost is <i style="color:dimgrey">100,000 (vnd/h)</i><br />
+                        With Practitioners is <b>LEADER</b> Labor Cost is <i style="color:dimgrey">200,000 (vnd/h)</i><br />
+                        With Practitioners is <b>PM</b> Labor Cost is <i style="color:dimgrey">300,000 (vnd/h)</i><br />
+                        With Practitioners is <b>FREELANCER</b> Labor Cost is <i style="color:dimgrey">80,000 (vnd/h)</i>
+                    </p>
+                </div>
+                <div class="col-md-4 invoice-col">
+                    <p>
+                        <strong>TOTAL COST EQUALS: </strong><br />
+                        <i style="color:red"><b>(Labor Cost * Total Time Actual)</b></i> + <i style="color:blue"><b>(Total Extra Cost)</b></i>
+                    </p>
+                </div>
+            </div>
+            <hr />
+            <!-- Table row -->
+            <div class="row" style="overflow:hidden">
+                <div class="col-12" style="overflow-y:scroll">
+                    <table id="example1" class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>Task Name</th>
+                                <th style="width:50px">Type Of Task</th>
+                                <th>Practitioners</th>
+                                <th>Start (Plan)</th>
+                                <th>End (Plan)</th>
+                                <th>Start (Actual)</th>
+                                <th>End (Actual)</th>
+                                <th>Total Time (Plan/Actual)</th>
+                                <th>Total Extra Cost (Request + Overtime)</th>
+                                <th>Total Cost</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach(var itemTask in Model.CostTaskViewModel)
+                            {
+                            <tr>
+                                <td></td>
+                                <td>@itemTask.affairname</td>
+                                <td>
+                                    @if (itemTask.typeofaffair == 0)
+                                    {
+                                        <b style="color:aqua">Analisys</b>
+                                    }
+                                    else if (itemTask.typeofaffair == 1)
+                                    {
+                                        <b style="color:blue">Design</b>
+                                    }
+                                    else if (itemTask.typeofaffair == 2)
+                                    {
+                                        <b style="color:coral">Implementation</b>
+                                    }
+                                    else if (itemTask.typeofaffair == 3)
+                                    {
+                                        <b style="color:blueviolet">Testing</b>
+                                    }
+                                    else
+                                    {
+                                       <b style="color:black">Deployment</b>
+                                    }
+                                </td>
+                                <td>
+                                    @if (itemTask.User.isfreelancer == true)
+                                    {
+                                        <p>@itemTask.User.username <b>(Freelancer)</b></p>
+                                    }
+                                    else if (itemTask.User.isemployee == true)
+                                    {
+                                        <p>@itemTask.User.username <b>(Member)</b></p>
+                                    }
+                                    else if (itemTask.User.islead == true)
+                                    {
+                                        <p>@itemTask.User.username <b>(Leader)</b></p>
+                                    }
+                                    else if (itemTask.User.isemployee == false && itemTask.User.islead == false && itemTask.User.isfreelancer == false)
+                                    {
+                                        <p>@itemTask.User.username <b>(PM)</b></p>
+                                    }
+                                </td>
+                                <td>@itemTask.starttimeplan.ToString("dd/MM/yyyy HH:mm")</td>
+                                <td>@itemTask.endtimeplan.ToString("dd/MM/yyyy HH:mm")</td>
+                                <td>@itemTask.starttimeactual.Value.ToString("dd/MM/yyyy HH:mm")</td>
+                                <td>@itemTask.endtimeactual.Value.ToString("dd/MM/yyyy HH:mm")</td>
+                                <td>
+                                    <p><b style="color:brown">@itemTask.totalPlan</b> / <b style="color:blue">@itemTask.totalActual</b> (hours)</p>
+                                </td>
+                                <td>
+                                    <b><strong style="color:darkred">@string.Format("{0:#,##0}", itemTask.costExtra)</strong>
+                                    (<strong style="color:brown">@string.Format("{0:#,##0}", itemTask.moneyRequest)</strong> + <strong style="color:blue">@string.Format("{0:#,##0}", itemTask.moneyOvertime)</strong>)
+                                    (vnd) </b>
+                                </td>
+                                <td><strong style="color:darkred">@string.Format("{0:#,##0}", itemTask.totalCost)</strong></td>
+                            </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <hr />
+            <div class="row">
+                <div class="col-6">
+                    <p class="lead">Total</p>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <tr>
+                                <th style="width:50%">Tasks:</th>
+                                <td>
+                                    @foreach (var item2 in affairsList)
+                                    {
+
+                                        if (item2.projectid == Model.projectid)
+                                        {
+                                            sumTask++;
+                                        }
+
+                                    }
+                                    <b style="color:brown">@sumTask (tasks)</b>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Total Planned Hours/ Actual Hours:</th>
+                                <td>
+                                    @foreach (var itemTask in affairsList.Where(a => a.projectid == Model.projectid))
+                                    {
+                                        DateTime startTime, endTime, startTimeb, endTimeb;
+                                        int hours = 0, hourss = 0;
+                                        double hFull, hCFull, hOFull;
+
+                                        startTime = DateTime.Parse(itemTask.starttimeactual.Value.ToString());
+                                        endTime = DateTime.Parse(itemTask.endtimeactual.Value.ToString());
+                                        startTimeb = DateTime.Parse(itemTask.starttimeplan.ToString());
+                                        endTimeb = DateTime.Parse(itemTask.endtimeplan.ToString());
+                                        int dayss = 0, dayse = 0;
+                                        for (DateTime date = startTime; date.DayOfYear <= endTime.DayOfYear; date = date.AddDays(1))
+                                        {
+                                            if (date.DayOfWeek == DayOfWeek.Saturday || date.DayOfWeek == DayOfWeek.Sunday)
+                                            {
+
+                                            }
+                                            else
+                                            {
+                                                hFull = ((TimeSpan)(timeEnd - timeStart)).TotalHours - 1;
+                                                if (timeEnd > startTime.TimeOfDay && timeStart <= startTime.TimeOfDay
+                                                && startTime.TimeOfDay <= timeMid)
+                                                {
+                                                    hCFull = (((TimeSpan)(timeEnd - startTime.TimeOfDay)).TotalHours - 1);
+                                                }
+                                                else if (timeEnd > startTime.TimeOfDay && timeStart <= startTime.TimeOfDay
+                                                    && startTime.TimeOfDay > timeMid)
+                                                {
+                                                    hCFull = (((TimeSpan)(timeEnd - startTime.TimeOfDay)).TotalHours);
+                                                }
+                                                else
+                                                {
+                                                    hCFull = hFull;
+                                                }
+                                                if (timeEnd > endTime.TimeOfDay && timeStart <= endTime.TimeOfDay
+                                                    && endTime.TimeOfDay > timeMid)
+                                                {
+                                                    hOFull = ((TimeSpan)(endTime.TimeOfDay - timeStart)).TotalHours - 1;
+                                                }
+                                                else if (timeEnd > endTime.TimeOfDay && timeStart <= endTime.TimeOfDay
+                                                    && endTime.TimeOfDay <= timeMid)
+                                                {
+                                                    hOFull = ((TimeSpan)(endTime.TimeOfDay - timeStart)).TotalHours;
+                                                }
+                                                else
+                                                {
+                                                    hOFull = hFull;
+                                                }
+                                                dayss++;
+                                                hours = (int)(hCFull + hOFull + (int)(dayss - 2) * hFull);
+                                            }
+
+                                        }
+                                        hoursc += hours;
+
+                                        for (DateTime date = startTimeb; date.DayOfYear <= endTimeb.DayOfYear; date = date.AddDays(1))
+                                        {
+                                            if (date.DayOfWeek == DayOfWeek.Saturday || date.DayOfWeek == DayOfWeek.Sunday)
+                                            {
+
+                                            }
+                                            else
+                                            {
+                                                hFull = ((TimeSpan)(timeEnd - timeStart)).TotalHours - 1;
+                                                if (timeEnd > startTimeb.TimeOfDay && timeStart <= startTimeb.TimeOfDay
+                                                && startTimeb.TimeOfDay <= timeMid)
+                                                {
+                                                    hCFull = (((TimeSpan)(timeEnd - startTimeb.TimeOfDay)).TotalHours - 1);
+                                                }
+                                                else if (timeEnd > startTimeb.TimeOfDay && timeStart <= startTimeb.TimeOfDay
+                                                    && startTimeb.TimeOfDay > timeMid)
+                                                {
+                                                    hCFull = (((TimeSpan)(timeEnd - startTimeb.TimeOfDay)).TotalHours);
+                                                }
+                                                else
+                                                {
+                                                    hCFull = hFull;
+                                                }
+                                                if (timeEnd > endTimeb.TimeOfDay && timeStart <= endTimeb.TimeOfDay
+                                                    && endTimeb.TimeOfDay > timeMid)
+                                                {
+                                                    hOFull = ((TimeSpan)(endTimeb.TimeOfDay - timeStart)).TotalHours - 1;
+                                                }
+                                                else if (timeEnd > endTimeb.TimeOfDay && timeStart <= endTimeb.TimeOfDay
+                                                    && endTimeb.TimeOfDay <= timeMid)
+                                                {
+                                                    hOFull = ((TimeSpan)(endTimeb.TimeOfDay - timeStart)).TotalHours;
+                                                }
+                                                else
+                                                {
+                                                    hOFull = hFull;
+                                                }
+                                                dayse++;
+                                                hourss = (int)(hCFull + hOFull + (int)(dayse - 2) * hFull);
+                                            }
+
+                                        }
+                                        hoursd += hourss;
+
+                                    }
+                                    <p><b style="color:brown">@hoursd</b> / <b style="color:blue">@hoursc</b> (hours)</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Total Extra Cost (Request + Overtime):</th>
+                                <td>
+                                    @foreach (var itemTask in affairsList)
+                                    {
+                                        foreach (var itemUser2 in userList)
+                                        {
+                                            foreach (var itemRequest in requestList)
+                                            {
+                                                if (itemTask.userid == itemUser2.userid)
+                                                {
+                                                    if (itemRequest.taskid == itemTask.affairid)
+                                                    {
+                                                        if (itemRequest.requestname == "Overtime" && itemRequest.status == 1)
+                                                        {
+                                                            if (itemUser2.islead == true)
+                                                            {
+                                                                ota += ((long)itemRequest.totaltime) * 200000 * 2;
+                                                            }
+                                                            else if (itemUser2.isemployee == true)
+                                                            {
+                                                                ota += ((long)itemRequest.totaltime) * 100000 * 2;
+                                                            }
+                                                            else if (itemUser2.isemployee == false && itemUser2.islead == false && itemUser2.isfreelancer == false)
+                                                            {
+                                                                ota += ((long)itemRequest.totaltime) * 300000 * 2;
+                                                            }
+                                                        }
+                                                        if (itemRequest.requestname == "RequestMoney" && itemRequest.status == 1)
+                                                        {
+                                                            moneyrequestc += (long)itemRequest.requestmoney;
+                                                        }
+                                                        costextraa = moneyrequestc + ota;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    <p>
+                                        <strong>@string.Format("{0:#,##0}", costextraa) (vnd)</strong> ( <i style="color:brown">@string.Format("{0:#,##0}", moneyrequestc)</i> + <i style="color:blue">@string.Format("{0:#,##0}", ota)</i>)
+                                    </p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>Total Amount:</th>
+                                <td>
+                                    <b><strong style="color:darkred">@string.Format("{0:#,##0}", Model.totalCost)</strong>(vnd)</b>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+                <!-- /.col -->
+            </div>
+
+            <hr />
+            <div class="row invoice-info">
+                <div class="col-md-3 invoice-col">
+                    <br />
+                    <h4 style="color:brown">
+                        LIST OF PARTICIPANT MEMBERS
+                    </h4>
+                </div>
+                <div class="col-md-9 invoice-col">
+                    <p>
+                        <strong>TOTAL COST EQUALS: </strong><br />
+                        <i style="color:red"><b>(Labor Cost * Total Hours)</b></i>
+                        +
+                        <i style="color:blue"><b>(Labor Cost * Total Overtime * 2)</b></i>
+                        <br />
+                        With Practitioners is <b>MEMBER</b> Labor Cost is <i style="color:dimgrey">100,000 (vnd/h)</i><br />
+                        With Practitioners is <b>LEADER</b> Labor Cost is <i style="color:dimgrey">200,000 (vnd/h)</i><br />
+                        With Practitioners is <b>PM</b> Labor Cost is <i style="color:dimgrey">300,000 (vnd/h)</i>
+                    </p>
+                </div>
+                <div class="col-md-4 invoice-col">
+                    <p>
+
+                    </p>
+                </div>
+            </div>
+            <hr />
+            <div class="row" style="overflow:hidden">
+                <div class="col-12" style="overflow-y:scroll">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th>#</th>
+                                <th>Practitioners</th>
+                                <th>Total Tasks</th>
+                                <th>Total Hours</th>
+                                <th>Total Overtime</th>
+                                <th>Total Cost</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in listUser)
+                            {
+                                int countTask = 0;
+                                double ot = 0, costtotal = 0;
+                                DateTime startTime, endTime;
+                                int hours = 0;
+                                double hFull, hCFull, hOFull;
+                                <tr>
+                                    <td></td>
+                                    <td>
+                                        @foreach (var itemUser in userList)
+                                        {
+                                            if (itemUser.userid == item && itemUser.islead == true)
+                                            {
+                                                <span>@itemUser.username <b>(Leader)</b></span>
+                                            }
+                                            else if (itemUser.userid == item && itemUser.isemployee == true)
+                                            {
+                                                <span>@itemUser.username <b>(Member)</b></span>
+                                            }
+                                            if (itemUser.userid == item && itemUser.islead == false && itemUser.isemployee == false && itemUser.isfreelancer == false)
+                                            {
+                                                <span>@itemUser.username <b>(PM)</b></span>
+                                            }
+                                        }
+                                    </td>
+                                    <td>
+                                        @foreach (var itemTask in affairsList)
+                                        {
+                                            if (itemTask.userid == item)
+                                            {
+                                                countTask++;
+                                            }
+                                        }
+                                        <b style="color:brown">@countTask (tasks)</b>
+                                    </td>
+                                    <td>
+                                        @foreach (var itemTask in affairsList)
+                                        {
+                                            int dayss = 0;
+                                            if (itemTask.starttimeactual != null && itemTask.endtimeactual != null)
+                                            {
+                                                if (itemTask.userid == item)
+                                                {
+                                                    startTime = DateTime.Parse(itemTask.starttimeactual.Value.ToString());
+                                                    endTime = DateTime.Parse(itemTask.endtimeactual.Value.ToString());
+                                                    hFull = ((TimeSpan)(timeEnd - timeStart)).TotalHours - 1;
+
+                                                    for (DateTime date = startTime; date <= endTime; date = date.AddDays(1))
+                                                    {
+                                                        if (date.DayOfWeek == DayOfWeek.Saturday || date.DayOfWeek == DayOfWeek.Sunday)
+                                                        {
+
+                                                        }
+                                                        else
+                                                        {
+                                                            hFull = ((TimeSpan)(timeEnd - timeStart)).TotalHours - 1;
+                                                            if (timeEnd > startTime.TimeOfDay && timeStart <= startTime.TimeOfDay
+                                                            && startTime.TimeOfDay <= timeMid)
+                                                            {
+                                                                hCFull = (((TimeSpan)(timeEnd - startTime.TimeOfDay)).TotalHours - 1);
+                                                            }
+                                                            else if (timeEnd > startTime.TimeOfDay && timeStart <= startTime.TimeOfDay
+                                                                && startTime.TimeOfDay > timeMid)
+                                                            {
+                                                                hCFull = (((TimeSpan)(timeEnd - startTime.TimeOfDay)).TotalHours);
+                                                            }
+                                                            else
+                                                            {
+                                                                hCFull = hFull;
+                                                            }
+                                                            if (timeEnd > endTime.TimeOfDay && timeStart <= endTime.TimeOfDay
+                                                                && endTime.TimeOfDay > timeMid)
+                                                            {
+                                                                hOFull = ((TimeSpan)(endTime.TimeOfDay - timeStart)).TotalHours - 1;
+                                                            }
+                                                            else if (timeEnd > endTime.TimeOfDay && timeStart <= endTime.TimeOfDay
+                                                                && endTime.TimeOfDay <= timeMid)
+                                                            {
+                                                                hOFull = ((TimeSpan)(endTime.TimeOfDay - timeStart)).TotalHours;
+                                                            }
+                                                            else
+                                                            {
+                                                                hOFull = hFull;
+                                                            }
+                                                            dayss++;
+                                                            hours = (int)(hCFull + hOFull + (int)(dayss - 2) * hFull);
+                                                        }
+
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        <b style="color:blue">@hours (hours)</b>
+                                    </td>
+                                    <td>
+                                        @foreach (var itemRequest in requestList)
+                                        {
+                                            foreach (var itemTask in affairsList)
+                                            {
+                                                if (itemRequest.taskid == itemTask.affairid && itemTask.userid == item)
+                                                {
+                                                    if (itemRequest.requestname == "Overtime" && itemRequest.status == 1)
+                                                    {
+                                                        ot += (double)itemRequest.totaltime;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                        <b style="color:chocolate">@ot (hours)</b>
+                                    </td>
+                                    <td>
+                                        @foreach (var itemUser in userList)
+                                        {
+                                            if (itemUser.userid == item && itemUser.islead == true)
+                                            {
+                                                costtotal = (hours * 200000) + (ot * 2 * 200000);
+                                            }
+                                            else if (itemUser.userid == item && itemUser.isemployee == true)
+                                            {
+                                                costtotal = (hours * 100000) + (ot * 2 * 100000);
+                                            }
+                                            else if (itemUser.userid == item && itemUser.islead == false && itemUser.isemployee == false && itemUser.isfreelancer == false)
+                                            {
+                                                costtotal = (hours * 300000) + (ot * 2 * 300000);
+                                            }
+                                        }
+                                        <b><strong style="color:darkred">@string.Format("{0:#,##0.00}", costtotal)</strong>(vnd)</b>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@section Scripts
+{
+    <script>
+        $(function () {
+            $("#example1").DataTable({
+                "responsive": false, "lengthChange": false, "autoWidth": false,
+                "buttons": ["colvis"]
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        });
+    </script>
+}
+<script src="~/js/notify.js"></script>

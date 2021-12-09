@@ -1,0 +1,158 @@
+{
+  "format": 1,
+  "restore": {
+    "E:\\FPT-Aptech\\Project Sem4\\FourN-final\\FourN-final\\FourN-20-7-2021\\C#Project\\FourN.Services\\FourN.Services.csproj": {}
+  },
+  "projects": {
+    "E:\\FPT-Aptech\\Project Sem4\\FourN-final\\FourN-final\\FourN-20-7-2021\\C#Project\\4N\\FourN.Data.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\FPT-Aptech\\Project Sem4\\FourN-final\\FourN-final\\FourN-20-7-2021\\C#Project\\4N\\FourN.Data.csproj",
+        "projectName": "FourN.Data",
+        "projectPath": "E:\\FPT-Aptech\\Project Sem4\\FourN-final\\FourN-final\\FourN-20-7-2021\\C#Project\\4N\\FourN.Data.csproj",
+        "packagesPath": "C:\\Users\\vuman\\.nuget\\packages\\",
+        "outputPath": "E:\\FPT-Aptech\\Project Sem4\\FourN-final\\FourN-final\\FourN-20-7-2021\\C#Project\\4N\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\vuman\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "Microsoft.AspNet.Mvc": {
+              "target": "Package",
+              "version": "[5.2.7, )"
+            },
+            "Microsoft.AspNetCore.Http.Features": {
+              "target": "Package",
+              "version": "[5.0.7, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[5.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.Relational": {
+              "target": "Package",
+              "version": "[5.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[5.0.5, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.5, )"
+            },
+            "NEST": {
+              "target": "Package",
+              "version": "[7.12.1, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.203\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "E:\\FPT-Aptech\\Project Sem4\\FourN-final\\FourN-final\\FourN-20-7-2021\\C#Project\\FourN.Services\\FourN.Services.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "E:\\FPT-Aptech\\Project Sem4\\FourN-final\\FourN-final\\FourN-20-7-2021\\C#Project\\FourN.Services\\FourN.Services.csproj",
+        "projectName": "FourN.Services",
+        "projectPath": "E:\\FPT-Aptech\\Project Sem4\\FourN-final\\FourN-final\\FourN-20-7-2021\\C#Project\\FourN.Services\\FourN.Services.csproj",
+        "packagesPath": "C:\\Users\\vuman\\.nuget\\packages\\",
+        "outputPath": "E:\\FPT-Aptech\\Project Sem4\\FourN-final\\FourN-final\\FourN-20-7-2021\\C#Project\\FourN.Services\\obj\\",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "C:\\Users\\vuman\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net5.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net5.0": {
+            "targetAlias": "net5.0",
+            "projectReferences": {
+              "E:\\FPT-Aptech\\Project Sem4\\FourN-final\\FourN-final\\FourN-20-7-2021\\C#Project\\4N\\FourN.Data.csproj": {
+                "projectPath": "E:\\FPT-Aptech\\Project Sem4\\FourN-final\\FourN-final\\FourN-20-7-2021\\C#Project\\4N\\FourN.Data.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net5.0": {
+          "targetAlias": "net5.0",
+          "dependencies": {
+            "Microsoft.Extensions.Hosting.Abstractions": {
+              "target": "Package",
+              "version": "[5.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.203\\RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}

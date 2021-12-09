@@ -1,0 +1,99 @@
+﻿@model IEnumerable<UserExaminationViewModel>
+@{ 
+    var timeConsume = "";
+    var count = 0;
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                STT
+            </th>
+            <th>
+                User
+            </th>
+            <th>
+                Information
+            </th>
+            <th>
+                Status
+            </th>
+            <th>
+                Result
+            </th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @(++count)
+                </td>
+                <td>
+                    Name: @Html.DisplayFor(modelItem => item.Partner.Name)
+                    <br />
+                    Email: @Html.DisplayFor(modelItem => item.Partner.Email)<br />
+                    Phone: @Html.DisplayFor(modelItem => item.Partner.Phone)
+
+                </td>
+
+                <td>
+                    @*<p>Bài thi: @item.Examination?.Name</p>*@
+                    <p>Date: @Html.DisplayFor(modelItem => item.CreatedAt)</p>
+                    @if (item.TimeConsumed < 60)
+                    {
+                        timeConsume = item.TimeConsumed + " giây";
+                    }
+
+                    @if (item.TimeConsumed < 3600 && item.TimeConsumed >= 60)
+                    {
+                        var res = item.TimeConsumed % 60;
+                        timeConsume = item.TimeConsumed / 60 + " phút, " + res + " giây";
+                    }
+
+                    @if (item.TimeConsumed >= 3600)
+                    {
+                        var resMinute = item.TimeConsumed % 3600;//158s
+                        var resSecond = resMinute % 60;
+                        var timeConsume1 = resMinute / 60 + " phút, " + resSecond + " giây";
+                        timeConsume = item.TimeConsumed / 3600 + " giờ, " + timeConsume1;
+                    }
+                    <p>Time: @timeConsume</p>
+                    <p>Mark: @Html.DisplayFor(modelItem => item.Score)/ @Html.DisplayFor(modelItem => item.Examination.MaxScore)</p>
+                </td>
+                <td>
+                    @{
+                        var type = HelperViewData.GetEnumDisplayName((StatusEnum)item.StatusEnumValue);
+                    }
+                    @if (item.StatusEnumValue == (int)StatusEnum.DaChamDiem)
+                    {
+                        <span class="badge badge-pill badge-success">@type</span>
+                    }
+                    else
+                    {
+                        <span class="badge badge-pill badge-warning">@type</span>
+                    }
+                </td>
+                <td>
+                    @{
+                        var type1 = HelperViewData.GetEnumDisplayName((ResultEnum)item.ResultEnumValue);
+                    }
+                    @if (item.ResultEnumValue == (int)ResultEnum.Vuot)
+                    {
+                        <span class="badge badge-pill badge-success">@type1</span>
+                    }
+                    else
+                    {
+                        <span class="badge badge-pill badge-default">@type1</span>
+                    }
+                </td>
+
+                <td>
+                    <button type="button" class="btn btn-outline-primary" onclick="showDetails(@item.UserExaminationId)">View</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

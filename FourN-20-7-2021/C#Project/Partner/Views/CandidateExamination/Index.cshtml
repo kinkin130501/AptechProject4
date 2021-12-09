@@ -1,0 +1,99 @@
+﻿@model UserExaminationDisplayModel
+@{ ViewData["Title"] = "Quản lý bài thi"; }
+<div class="container">
+    <div style="margin-top:15px" class="container subMenu">
+        <div class="container row mt-3">
+
+            <div class="col-md-10">
+                <div class="col-md-12 child-inline row">
+                    <div class="col-md-12">
+                        <input class="form-control" id="TxtSearch" placeholder="Enter your email" />
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-2">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <button class="btn btn-primary" id="btnFilter">Filter</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="IndexPartial" style="display:block; margin-top:15px">
+        @if (Model.UserExaminations.Any())
+        {
+            <partial name="_IndexPartial" model="Model.UserExaminations" />
+        }
+    </div>
+</div>
+
+
+<script>function showAll() {
+        $.ajax({
+            url: "/CandidateExamination/IndexPartial",
+            method: "get",
+            success: function (res) {
+                $("#IndexPartial").html("");
+                $("#IndexPartial").html(res.html);
+                $(".subMenu").show();
+            },
+        })
+    }
+
+    function showDetails(userExamId) {
+        $.ajax({
+            url: "/CandidateExamination/Details",
+            type: "get",
+            data: {
+                userExamId: userExamId,
+            },
+            success: function (res) {
+                $("#IndexPartial").html("");
+                $("#IndexPartial").html(res.html);
+                $(".subMenu").hide();
+            },
+            error: function () {
+                toastr.error("");
+            }
+        });
+    }
+
+
+
+    $("#btnFilter").off().click(function () {
+        var txtSearch = $("#TxtSearch").val();
+        $.ajax({
+            url: "/CandidateExamination/SearchUserExaminations",
+            method: "POST",
+            data: {
+                TxtSearch: txtSearch,
+            },
+            success: function (res) {
+                $("#IndexPartial").html("");
+                $("#IndexPartial").html(res.html);
+                $(".subMenu").show();
+            },
+        })
+    });
+
+    function showExam(examId) {
+        $.ajax({
+            url: "/CandidateExamination/MockExam",
+            type: "get",
+            data: {
+                userExamId: examId,
+            },
+            success: function (res) {
+                $("#IndexPartial").html("");
+                $("#IndexPartial").html(res.html);
+                $("#subMenu").hide();
+            },
+            error: function () {
+                toastr.error("Processing has error, please try again.");
+            }
+        });
+    }
+    </script>
+

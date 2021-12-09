@@ -1,0 +1,90 @@
+﻿@model GroupViewModel
+<div class="row">
+    <!-- left column -->
+    <div class="col-md-12">
+        <!-- general form elements -->
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Create</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form asp-action="Create" method="post" id="createGroup">
+                <div class="card-body">
+                    <div class="form-group">
+                        <label>Name (<span style="color:red">*</span>) : </label>
+                        <input type="text" class="form-control" asp-for="GroupName">
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="LeaderId">Leader (<span style="color:red">*</span>) : </label>
+                        <select id="fourn-leaderid" asp-for="LeaderId" class="form-control select2-blue">
+                            <option value="">Choose an option</option>
+                            @foreach (var item in Model.SelectListLeaders)
+                            {
+                                <option value="@item.Value">@item.Text</option>
+                            }
+                        </select>
+                        <div id="fourn-error"></div>
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="Listmembersid">Members (<span style="color:red">*</span>) : </label>
+                        <div class="select2-purple">
+                            <select class="select2" id="Listmembers-id" asp-for="Listmembersid" multiple="multiple" data-placeholder="Select members" data-dropdown-css-class="select2-purple" style="width: 100%;">
+                                @foreach (var item in Model.SelectListStaffs)
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                    <a type="submit" class="btn btn-warning" asp-action="Index">Back</a>
+                </div>
+            </form>
+        </div>
+        <!-- /.card -->
+    </div>
+</div>
+<script>
+    $("#createGroup").submit(function () {
+        var count = 0;
+        $(".Error").remove();
+        if ($("#GroupName").val().trim() == "" || $("#GroupName").val() == null) {
+            $("<div><i style='color:red' class='Error'>Can't not blank name</div>").insertAfter("#GroupName");
+            count++;
+        } else {
+            var name = $("#GroupName").val()
+            $.ajax({
+                url: "/Group/Group/checkGroupName",
+                method: "post",
+                data: { name: name },
+                success: function (res) {
+                    if (res.result == false) {
+                        $("<div><i style='color:red' class='Error'>Name is already, please try again.</div>").insertAfter("#GroupName");
+                        return false;
+                    }
+                },
+                error: function () {
+                    toastr.success('Processing has error, please try again.')
+                }
+            });
+        }
+        if ($("#fourn-leaderid :selected")[0].value == "") {
+            $("<div><i style='color:red' class='Error'>Can't not blank leader</div>").insertAfter("#fourn-leaderid");
+            count++;
+        }
+        if ($("#Listmembers-id").val().length == 0) {
+            $("<div><i style='color:red' class='Error'>Can't not blank member</div>").insertAfter("#Listmembers-id");
+            count++;
+        }
+        if (count > 0) {
+            toastr.error("Form is not validate, please check form and try again.")
+            return false;
+        }
+    });
+</script>
+<script src="~/js/notify.js"></script>

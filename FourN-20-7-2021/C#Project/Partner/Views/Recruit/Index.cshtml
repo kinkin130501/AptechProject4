@@ -1,0 +1,76 @@
+﻿@model IEnumerable<DepartmentViewModel>
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="container">
+    <div id="indexpartial">
+    <partial name="_IndexPartial" model="Model" />
+    </div>
+</div>
+<script>
+    $(function () {
+        $("#example1").DataTable({
+            "responsive": true, "lengthChange": false, "autoWidth": false,
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    });
+    function showAll() {
+        $.ajax({
+            url: "/Recruit/IndexPartial",
+            method: "get",
+            success: function (res) {
+                $("#indexpartial").html("");
+                $("#indexpartial").html(res.html);
+            },
+        })
+    }
+    function Delete(id) {
+        var isOk = confirm("Information of candidate will be delete. Are you sure ? ");
+        if (isOk) {
+            $.ajax({
+                url: "/Recruit/Delete/" + id,
+                method: "post",
+                success: function (data) {
+                    toastr.success(data.message);
+                    showAll();
+                },
+                error: function () {
+                    toastr.error("Có lỗi xảy ra, vui lòng thử lại sau")
+                }
+            });
+        }
+    }
+    function showInterview(departmentid) {
+        $.ajax({
+            url: "/Recruit/CreateInterview",
+            data: { departmentid: departmentid},
+            method: "get",
+            success: function (res) {
+                $("#indexpartial").html("");
+                $("#indexpartial").html(res.html);
+            },
+        })
+    }
+    function showDetail(departmentid) {
+        $.ajax({
+            url: "/Recruit/Detail",
+            data: { departmentid: departmentid },
+            method: "get",
+            success: function (res) {
+                $("#indexpartial").html("");
+                $("#indexpartial").html(res.html);
+            },
+        })
+    }
+    function showEdit(departmentid) {
+        $.ajax({
+            url: "/Recruit/Edit",
+            data: { departmentid: departmentid },
+            method: "get",
+            success: function (res) {
+                $("#indexpartial").html("");
+                $("#indexpartial").html(res.html);
+            },
+        })
+    }
+</script>
+<script src="~/js/notify.js"></script>

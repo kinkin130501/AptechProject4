@@ -1,0 +1,50 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+    <UserSecretsId>30b31062-0d38-4fa7-8a2b-bf23405b558c</UserSecretsId>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="wwwroot\Partner\**" />
+    <Content Remove="wwwroot\Partner\**" />
+    <EmbeddedResource Remove="wwwroot\Partner\**" />
+    <None Remove="wwwroot\Partner\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\4N\FourN.Data.csproj" />
+    <ProjectReference Include="..\FourN.Services\FourN.Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\img\" />
+    <Folder Include="wwwroot\Department\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Answer\_IndexCanEdit.cshtml" />
+    <None Include="Views\Answer\_IndexNoEdit.cshtml" />
+    <None Include="Views\Answer\__CreateAnswer.cshtml" />
+    <None Include="Views\Examination\Index.cshtml" />
+    <None Include="Views\Examination\_Create.cshtml" />
+    <None Include="Views\Examination\_Details.cshtml" />
+    <None Include="Views\Examination\_IndexPartial.cshtml" />
+    <None Include="Views\Examination\_MockExam.cshtml" />
+    <None Include="Views\Examination\__QuestionRandomView.cshtml" />
+    <None Include="Views\Question\Index.cshtml" />
+    <None Include="Views\Question\_Create.cshtml" />
+    <None Include="Views\Question\_Details.cshtml" />
+    <None Include="Views\Question\_Edit.cshtml" />
+    <None Include="Views\Question\_IndexPartial.cshtml" />
+    <None Include="Views\Question\_QuestionListDetails.cshtml" />
+    <None Include="Views\UserExamination\Index.cshtml" />
+    <None Include="Views\UserExamination\_Details.cshtml" />
+    <None Include="Views\UserExamination\_IndexPartial.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+  </ItemGroup>
+
+</Project>

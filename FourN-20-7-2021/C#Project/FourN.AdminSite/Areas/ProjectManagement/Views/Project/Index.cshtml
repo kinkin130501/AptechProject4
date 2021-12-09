@@ -1,0 +1,413 @@
+﻿@model IEnumerable<FourN.Data.Models.Projects>
+
+@{
+    int i = 0, j = 0, k = 0;
+
+    List<Data.Models.Projects> projectNew = ViewBag.viewProjectNew;
+    List<Data.Models.Projects> projectProcess = ViewBag.viewProjectProcess;
+    List<Data.Models.Projects> projectDone = ViewBag.viewProjectDone;
+    List<Data.Models.Projects> projectMaintain = ViewBag.viewProjectMaintain;
+
+    var userid = @Context.Session.GetCurrentAuthentication().UserId;
+    var department = @Context.Session.GetCurrentAuthentication().department;    
+}
+
+<!-- Content Header (Page header) -->
+<!-- /.content-header -->
+<!-- Main content -->
+
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">PROJECTS</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-5">
+            </div>
+            <div class="col-sm-1">
+                @if (department == (int)RoleNumber.PM || department == (int)RoleNumber.Leader)
+                {
+                    <a href="@Url.Action("Create")"><h3><i style="color: deepskyblue" class="far fa-plus-square"></i></h3></a>
+                }
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<div id="showChartProject" style="height: 600px;" class="container">
+    <canvas style="height: 550px;" id="myChartProject">
+    </canvas>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-body">
+                <ul class="nav nav-pills form-row">
+                    <li class="nav-item form-group col-md-3">
+                        <a onclick="hideChart()" href="#tab1" data-toggle="tab" class="nav-link active">BID OPENING</a>
+                    </li>
+                    <li class="nav-item form-group col-md-3">
+                        <a onclick="showProjectChart()" href="#tab2" data-toggle="tab" class="nav-link">PROCESS</a>
+                    </li>
+                    <li class="nav-item form-group col-md-3">
+                        <a onclick="hideChart()" href="#tab3" data-toggle="tab" class="nav-link">DONE</a>
+                    </li>
+                    <li class="nav-item form-group col-md-3">
+                        <a onclick="hideChart()" href="#tab4" data-toggle="tab" class="nav-link">MAINTAIN</a>
+                    </li>
+                </ul>
+                <br /><br />
+                <!-- Nội dung -->
+                <div class="tab-content">
+                    <div class="tab-pane container active" id="tab1">
+                        <table id="" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>List</th>
+                                    <th>CODE</th>
+                                    <th>Name</th>
+                                    <th>Leader</th>
+                                    <th>Affairs</th>
+                                    <th>Start Day (Plan)</th>
+                                    <th>End Day (Plan)</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            @foreach (var item in projectNew)
+                            {
+                                int countAffair = 0;
+                                <tbody>
+                                    <tr>
+
+                                        <th>
+                                            <p>
+                                                @(++i)
+                                            </p>
+                                        </th>
+                                        <th>
+                                            <p>
+                                                @item.projectcode
+                                            </p>
+                                        </th>
+                                        <td>
+                                            <a href="/ProjectManagement/Affair/Index/@item.projectid">
+                                                @item.projectname
+                                            </a>
+                                        </td>
+                                        <td>
+                                            @foreach (var leadid in ViewBag.viewUser)
+                                            {
+                                                if (item.leaderid == leadid.userid)
+                                                {
+                                                    @leadid.username
+                                                }
+                                            }
+                                        </td>
+                                        <th>
+                                            @foreach (var affair in ViewBag.viewAffairs)
+                                            {
+                                                if (item.projectid == affair.projectid)
+                                                {
+                                                    countAffair = countAffair + 1;
+                                                }
+                                            }
+                                            @countAffair
+                                        </th>
+                                        <td>
+                                            @item.startplan.ToString(string.Format("dd/MM/yyyy HH:mm:ss"))
+                                        </td>
+                                        <td>
+                                            @item.endplan.ToString(string.Format("dd/MM/yyyy HH:mm:ss"))
+                                        </td>
+                                        <td style="float: right;">
+                                            <a style="margin: 0px; padding-left: 10px; padding-right: 10px;" href="/ProjectManagement/Project/Detail/@item.projectid">
+                                                <i class="fas fa-info-circle"></i>
+                                            </a>
+                                            @if (department == (int)RoleNumber.PM || department == (int)RoleNumber.Leader)
+                                            {
+                                                <a onclick="return confirm('ARE YOU SURE ???');" style="margin: 0px; padding-left: 10px; padding-right: 10px;" href="/ProjectManagement/Project/Delete/@item.projectid">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            }
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            }
+                        </table>
+                    </div>
+                    <div class="tab-pane container fade" id="tab2">
+
+                        <table id="" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>List</th>
+                                    <th>CODE</th>
+                                    <th>Name</th>
+                                    <th>Leader</th>
+                                    <th>Affairs</th>
+                                    <th>Start Day (Plan)</th>
+                                    <th>End Day (Plan)</th>
+                                    <th>Status</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            @foreach (var item in projectProcess)
+                            {
+
+                                string statusProject = "";
+                                int progress = 0;
+                                int countAffair = 0;
+                                <tbody>
+                                    <tr>
+
+                                        <th>
+                                            <p>
+                                                @(++j)
+                                            </p>
+                                        </th>
+                                        <th>
+                                            <p>
+                                                @item.projectcode
+                                            </p>
+                                        </th>
+                                        <td>
+                                            <a href="/ProjectManagement/Affair/Index/@item.projectid">
+                                                @item.projectname
+                                            </a>
+                                        </td>
+                                        <td>
+                                            @foreach (var leadid in ViewBag.viewUser)
+                                            {
+                                                if (item.leaderid == leadid.userid)
+                                                {
+                                                    @leadid.username
+                                                }
+                                            }
+                                        </td>
+                                        <th>
+                                            @foreach (var affair in ViewBag.viewAffairs)
+                                            {
+                                                if (item.projectid == affair.projectid)
+                                                {
+                                                    countAffair = countAffair + 1;
+                                                }
+                                            }
+                                            @countAffair
+                                        </th>
+                                        <td>
+                                            @item.startplan.ToString(string.Format("dd/MM/yyyy HH:mm:ss"))
+                                        </td>
+                                        <td>
+                                            @item.endplan.ToString(string.Format("dd/MM/yyyy HH:mm:ss"))
+                                        </td>
+                                        <td>
+                                            @foreach (var affair in ViewBag.viewAffair)
+                                            {
+                                                if (item.projectid == affair.projectid)
+                                                {
+                                                    progress = progress + affair.affairtag;
+                                                }
+                                            }
+                                            @if (progress == 0)
+                                            {
+                                                <div style="padding: 0px 5px 2px 5px; margin-bottom: 5px" class="btn btn-outline-warning">NEW</div>
+                                            }
+                                            else if (progress > 100)
+                                            {
+                                                <div style="padding: 0px 5px 2px 5px; margin-bottom: 5px" class="btn btn-outline-warning">DONE</div>
+                                            }
+                                            else
+                                            {
+                                                <div style="padding: 0px 5px 2px 5px; margin-bottom: 5px" class="btn btn-warning">
+                                                    @switch (item.status)
+                                                    {
+                                                        case 1: statusProject = "New"; break;
+                                                        case 2: statusProject = "Design and Analisys"; break;
+                                                        case 3: statusProject = "Implementation"; break;
+                                                        case 4: statusProject = "Testing"; break;
+                                                        case 5: statusProject = "Deployment"; break;
+                                                    }
+                                                    <span> @statusProject </span>
+                                                </div>
+                                                <div class="progress progress-sm">
+                                                    <div class="progress-bar bg-green" role="progressbar" aria-valuenow="77" aria-valuemin="0" aria-valuemax="100" style="width: @progress%">
+                                                    </div>
+                                                </div>
+                                                <small>
+                                                    @progress % Complete
+                                                </small>
+                                            }
+                                        </td>
+                                        <td style="float: right;">
+                                            <a style="margin: 0px; padding-left: 10px; padding-right: 10px;" href="/ProjectManagement/Project/Detail/@item.projectid">
+                                                <i class="fas fa-info-circle"></i>
+                                            </a>
+                                            @if (department == (int)RoleNumber.PM || department == (int)RoleNumber.Leader)
+                                            {
+                                                <a onclick="return confirm('ARE YOU SURE ???');" style="margin: 0px; padding-left: 10px; padding-right: 10px;" href="/ProjectManagement/Project/Delete/@item.projectid">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            }
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            }
+                        </table>
+                    </div>
+                    <div class="tab-pane container fade" id="tab3">
+
+                        <table id="" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>List</th>
+                                    <th>CODE</th>
+                                    <th>Name</th>
+                                    <th>Leader</th>
+                                    <th>Affairs</th>
+                                    <th>Start Day (Actual)</th>
+                                    <th>End Day (Actual)</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            @foreach (var item in projectDone)
+                            {
+                                int countAffair = 0;
+                                <tbody>
+                                    <tr>
+
+                                        <th>
+                                            <p>
+                                                @(++k)
+                                            </p>
+                                        </th>
+                                        <th>
+                                            <p>
+                                                @item.projectcode
+                                            </p>
+                                        </th>
+                                        <td>
+                                            <a href="/ProjectManagement/Affair/Index/@item.projectid">
+                                                @item.projectname
+                                            </a>
+                                        </td>
+                                        <td>
+                                            @foreach (var leadid in ViewBag.viewUser)
+                                            {
+                                                if (item.leaderid == leadid.userid)
+                                                {
+                                                    @leadid.username
+                                                }
+                                            }
+                                        </td>
+                                        <th>
+                                            @foreach (var affair in ViewBag.viewAffairs)
+                                            {
+                                                if (item.projectid == affair.projectid)
+                                                {
+                                                    countAffair = countAffair + 1;
+                                                }
+                                            }
+                                            @countAffair
+                                        </th>
+                                        <td>
+                                            @item.startactual?.ToString(string.Format("dd/MM/yyyy HH:mm:ss"))
+                                        </td>
+                                        <td>
+                                            @item.endactual?.ToString(string.Format("dd/MM/yyyy HH:mm:ss"))
+                                        </td>
+                                        <td style="float: right;">
+                                            <a style="margin: 0px; padding-left: 10px; padding-right: 10px;" href="/ProjectManagement/Project/Detail/@item.projectid">
+                                                <i class="fas fa-info-circle"></i>
+                                            </a>
+                                            @if (department == (int)RoleNumber.PM || department == (int)RoleNumber.Leader)
+                                            {
+                                                <a onclick="return confirm('ARE YOU SURE ???');" style="margin: 0px; padding-left: 10px; padding-right: 10px;" href="/ProjectManagement/Project/Delete/@item.projectid">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            }
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            }
+                        </table>
+                    </div>
+                    <div class="tab-pane container fade" id="tab4">
+
+                        <table id="" class="table table-bordered table-striped">
+                            <thead>
+                                <tr>
+                                    <th>List</th>
+                                    <th>CODE</th>
+                                    <th>Name</th>
+                                    <th>Leader</th>
+                                    <th>Affairs</th>
+                                    <th>Start Day (Actual)</th>
+                                    <th>End Day (Actual)</th>
+                                </tr>
+                            </thead>
+                            @foreach (var item in projectMaintain)
+                            {
+                                int countAffair = 0;
+                                <tbody>
+                                    <tr>
+
+                                        <th>
+                                            <p>
+                                                @(++k)
+                                            </p>
+                                        </th>
+                                        <th>
+                                            <p>
+                                                @item.projectcode
+                                            </p>
+                                        </th>
+                                        <td>
+                                            <a href="/ProjectManagement/Affair/Index/@item.projectid">
+                                                @item.projectname
+                                            </a>
+                                        </td>
+                                        <td>
+                                            @foreach (var leadid in ViewBag.viewUser)
+                                            {
+                                                if (item.leaderid == leadid.userid)
+                                                {
+                                                    @leadid.username
+                                                }
+                                            }
+                                        </td>
+                                        <th>
+                                            @foreach (var affair in ViewBag.viewAffairs)
+                                            {
+                                                if (item.projectid == affair.projectid)
+                                                {
+                                                    countAffair = countAffair + 1;
+                                                }
+                                            }
+                                            @countAffair
+                                        </th>
+                                        <td>
+                                            @item.startactual?.ToString(string.Format("dd/MM/yyyy HH:mm:ss"))
+                                        </td>
+
+                                        <td>
+                                            @item.endactual?.ToString(string.Format("dd/MM/yyyy HH:mm:ss"))
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            }
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+</div>
+<script src="~/js/notify.js"></script>
+<script>
+    $(document).ready(function () {
+        //add color background
+        $('li.Project').css('background-color', 'azure');
+    });
+</script>

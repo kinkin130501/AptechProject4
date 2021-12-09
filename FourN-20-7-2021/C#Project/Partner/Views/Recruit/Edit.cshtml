@@ -1,0 +1,133 @@
+﻿@model DepartmentModel
+<div class="container">
+  <div id="createPartial">
+    <div class="row">
+        <!-- left column -->
+        <div class="col-md-12">
+            <!-- general form elements -->
+            <div class="card card-primary">
+                <div class="card-header">
+                    <h3 class="card-title">Create new Department</h3>
+                </div>
+                <!-- /.card-header -->
+                <!-- form start -->
+                <form method="post" id="editPostForm" enctype="multipart/form-data">
+                    <input type="hidden" asp-for="DepartmentId" />
+                    <div style="padding: 10px">
+                        <label><i>(<span style="color: red">*</span>): Information require.</i></label>
+                    </div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label>Title of Department (<span style="color: red">*</span>)</label>
+                            <input type="text" class="form-control" asp-for="Title">
+                        </div>
+                        <div class="form-group">
+                            <label>Department</label>
+                            <select asp-for="DepartmentInt" class="form-control">
+                                <option value="@((int)Department.Dev)">Developer</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Quantity (<span style="color: red">*</span>)</label>
+                            <input type="number" asp-for="Quantity" class="form-control" />
+                        </div>
+                        <div id="chooseExamination">
+                            <label>Choose examination</label>
+                            <select asp-for="ExaminatinId" class="form-control">
+                                @foreach (var item in Model.Examinations)
+                                {
+                                    <option value="@item.ExamId">@item.Name</option>
+                                }
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Short Description (<span style="color: red">*</span>)</label>
+                            <textarea asp-for="ShortDesc" class="form-control summerynote"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Description (<span style="color: red">*</span>)</label>
+                            <textarea asp-for="Desc" class="form-control summerynote"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <div class="form-group">
+                                <label asp-for="Image" class="control-label">Image (<span style="color: red">*</span>)</label>
+                                <input type="file" asp-for="Image" class="form-control"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Time end Recruit (<span style="color: red">*</span>)</label>
+                            <br />
+                            <label><i>format(mm/dd/yyyy)</i></label>
+                            <input type="text" class="form-control" asp-for="TimeEnd">
+                        </div>
+                    </div>
+                    <!-- /.card-body -->
+
+                    <div class="card-footer">
+                        <button type="submit" class="btn btn-primary" id="btnSubmit">Submit</button>
+                        <a type="submit" class="btn btn-warning" asp-action="Index">Back</a>
+                    </div>
+                </form>
+            </div>
+            <!-- /.card -->
+        </div>
+    </div>
+  </div>
+</div>
+<script>
+    Date.prototype.addDays = function (days) {
+        var date = new Date(this.valueOf());
+        date.setDate(date.getDate() + days);
+        return date;
+    }
+    $(document).ready(function () {
+        var date = new Date();
+        var startdate = date.addDays(1)
+
+        var maxdate = date.addDays(60)
+
+        var mindate = date.addDays(1)
+
+
+        $('input#TimeEnd').daterangepicker({
+            singleDatePicker: true,
+            startDate: startdate,
+            maxDate: maxdate,
+            minDate: mindate,
+        });
+    });
+    function showAll() {
+        $.ajax({
+            url: "/Recruit/IndexPartial",
+            method: "get",
+            success: function (res) {
+                $("#createPartial").html("");
+                $("#createPartial").html(res.html);
+            },
+        })
+    }
+    $("#editPostForm").submit(function () {
+        var count = 0;
+        $(".Error").remove();
+        if ($("#Title").val().trim() == "" || $("#Title").val() == null) {
+            $("<div><i style='color:red' class='Error'>Can't not blank title</div>").insertAfter("#Title");
+            count++;
+        }
+        if ($("#Quantity").val().trim() == "" || $("#Quantity").val() == null || $("#Quantity").val() < 1 || $("#Quantity").val() >= 30) {
+            $("<div><i style='color:red' class='Error'>Can't not blank quantity</div>").insertAfter("#Quantity");
+            count++;
+        }
+        if ($("#ShortDesc").val().trim() == "" || $("#ShortDesc").val() == null) {
+            $("<div><i style='color:red' class='Error'>Can't not blank short description</div>").insertAfter("#ShortDesc");
+            count++;
+        }
+        if ($("#Desc").val().trim() == "" || $("#Desc").val() == null) {
+            $("<div><i style='color:red' class='Error'>Can't not blank description</div>").insertAfter("#Desc");
+            count++;
+        }
+        if (count > 0) {
+            toastr.error("Form is not validate, please check and try again.")
+            return false;
+        }
+    });
+</script>

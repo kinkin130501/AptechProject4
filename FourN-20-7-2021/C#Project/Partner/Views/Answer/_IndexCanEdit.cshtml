@@ -1,0 +1,52 @@
+﻿@model IEnumerable<AnswerViewModel>
+@{
+    var ans = "";
+    int startNumber = 65;
+    char prefix;
+}
+@if (Model.Any())
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>
+                    Answer
+                </th>
+                <th>Is Correct</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+                @foreach (var item in Model)
+                {
+                    prefix = (char)startNumber;
+                    startNumber++;
+                    <tr>
+                        <td>@prefix</td>
+                        <td id="answer-content-@prefix" style="white-space: pre-line">
+                            @Html.DisplayFor(modelItem => item.Content)
+                        </td>
+                        <td id="answer-correct-@prefix">
+                            @if (item.IsCorrect)
+                            {
+                                ans = "Correct";
+                            }
+                            else
+                            {
+                                ans = "";
+                            }
+                            @ans
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-danger" onclick="removeAnswer('@prefix')">Delete</button>
+                        </td>
+                    </tr>
+                }
+        </tbody>
+    </table>
+}
+
+
+

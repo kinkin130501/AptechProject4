@@ -1,0 +1,83 @@
+﻿@model IEnumerable<QuestionViewModel>
+@{ 
+    var ans = "";
+}
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+               Question
+            </th>
+            <th>
+                Type
+            </th>
+            <th>
+                Mark
+            </th>
+            <th>
+                Allow random answer
+            </th>
+            <th>
+                Status
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Content)
+                </td>
+                <td>
+                    
+                    @{ 
+                        var type = HelperViewData.GetEnumDisplayName((QuestionTypes)item.QuestionType);
+                        if(item.IsGroupQuestion == null)
+                        {
+                            item.IsGroupQuestion = false;
+                        }
+                    }
+                    @((bool)item.IsGroupQuestion ? "Bộ câu hỏi " : "")
+                    @type
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Score)
+                </td>
+                <td>
+                    @(item.IsRandom? "Allow": "Not Allow")
+                    
+                </td>
+                <td>
+                    @if (item.IsActive)
+                    {
+                        <span class="badge badge-pill badge-success">Active</span>
+                    }
+                    else
+                    {
+                        <span class="badge badge-pill badge-default">Deactive</span>
+                    }
+                </td>
+                <td>
+                    @if (item.IsGroupQuestion == true)
+                    {
+                    }
+                    else
+                    {
+                        <button type="button" class="btn btn-outline-primary" onclick="showEdit(@item.QuestionId)">Edit</button>
+                    }
+                    @if ((bool)item.IsGroupQuestion)
+                    {
+                        <button type="button" class="btn btn-outline-primary" onclick="showQuestionListDetails(@item.QuestionId)">View</button>
+                    }
+                    else
+                    {
+                        <button type="button" class="btn btn-outline-primary" onclick="showDetails(@item.QuestionId)">View</button>
+                    }
+                    <button type="button" class="btn btn-outline-primary" onclick="showDelete(@item.QuestionId)">Delete</button>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

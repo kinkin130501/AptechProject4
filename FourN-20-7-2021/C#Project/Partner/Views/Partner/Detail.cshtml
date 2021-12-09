@@ -1,0 +1,54 @@
+﻿@model DepartmentViewModel
+<div class="container">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-4">
+            <img src="@Model.Image" style="margin: 15px auto; width: 300px; height: 250px" />
+        </div>
+        <div class="col-md-4">
+            <div style="padding: 20px">
+                <h3>@Model.Title</h3>
+            </div>    
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <h4>Description: </h4>
+                <div>
+                    @Html.Raw(Model.ShortDesc)
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <h4>Require: </h4>
+                <div>
+                    @Html.Raw(Model.Desc)
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <h4>Quantity: </h4>
+                <div>
+                    @Model.Quantity
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <h4>Expire at: </h4>
+                <div>
+                    @Model.TimeEnd
+                </div>
+            </div>
+        </div>
+    </div>
+    <a href="~/Partner/Apply/@Model.DepartmentId" class="btn btn-primary" style="margin: 15px auto">Apply</a>
+    <a href="~/Partner/Index" class="btn btn-primary" style="margin: 15px auto">Back</a>
+
+</div>

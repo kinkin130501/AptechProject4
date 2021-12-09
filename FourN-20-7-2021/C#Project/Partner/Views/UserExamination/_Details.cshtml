@@ -1,0 +1,95 @@
+﻿@model ExaminationViewModel
+@{
+    var stt = 0;
+    var type = HelperViewData.GetEnumDisplayName((ExamTypes)Model.ExamType);
+}
+<div class="container">
+    <div>
+    <h5><b>Examination: </b>@Model.Name </h5>
+    <h5><b>Total question: </b>@Model.TotalQuestion</h5>
+    <h5><b>Total mark: </b>@Model.MaxScore</h5>
+    <h5><b>Mark: </b>@ViewBag.CurrentScore</h5>
+
+</div>
+<hr />
+@if (Model.ExaminationQuestionsActives.Any())
+{
+    @foreach (var item in Model.ExaminationQuestionsActives.OrderBy(no => no.OrderNo))
+    {
+        stt++;
+        <div class="form-group">
+            <label><b>Question @stt: (<span class="text-success">@item.Score</span>) </b>@item.Content</label>
+            <div class="b-double" style="padding:7px; margin-bottom:6px">
+                @if (item.AnswerActive.Any())
+                {
+                    <ul style="list-style-type:none">
+
+                        @foreach (var ans in item.AnswerActive)
+                        {
+                            @foreach (var rightAnswer in ViewBag.UserExamRightAnswerList)
+                            {
+                                if (int.Parse(rightAnswer.AnswerContent) == ans.AnswerId)
+                                {
+                                    <li style="color: green">
+                                        <input type="radio" id="answer-id-@ans.AnswerId" name="answer-id-@stt" value="@ans.AnswerId" checked>
+                                        <label for="answer-id-@ans.AnswerId">
+                                            <span>
+                                                @ans.Content
+                                            </span>
+                                        </label>
+                                    </li>
+                                    goto label1;
+                                }
+
+                            }
+
+                            @foreach (var unRightAnswer in ViewBag.UserExamUnRightAnswerList)
+                            {
+                                if (int.Parse(unRightAnswer.AnswerContent) == ans.AnswerId)
+                                {
+                                    <li style="color: red">
+                                        <input type="radio" id="answer-id-@ans.AnswerId" name="answer-id-@stt" value="@ans.AnswerId" checked>
+                                        <label for="answer-id-@ans.AnswerId">
+                                            <span>
+                                                @ans.Content
+                                            </span>
+                                        </label>
+                                    </li>
+                                    goto label1;
+                                }
+
+                            }
+
+                            <li>
+                                <input type="radio" id="answer-id-@ans.AnswerId" name="answer-id-@stt" value="@ans.AnswerId">
+                                <label for="answer-id-@ans.AnswerId">
+                                    <span>
+                                        @ans.Content
+                                    </span>
+                                </label>
+                            </li>
+                            label1:;
+
+                            }
+
+                    </ul>
+                }
+                else
+                {
+                    <p>Không có đáp án, bạn được trọn điểm, liên hệ Giảng viên để báo cáo</p>
+                }
+
+            </div>
+        </div>
+
+    }
+
+    <div class="form-group">
+        <button type="button" class="btn btn-warning" onclick="showAll()">Back</button>
+    </div>
+
+}
+</div>
+
+
+

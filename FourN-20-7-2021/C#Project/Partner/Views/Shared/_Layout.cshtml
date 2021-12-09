@@ -1,0 +1,135 @@
+﻿@using Microsoft.AspNetCore.Http
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>FourN</title>
+
+    <!-- Google Font: Source Sans Pro -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="~/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Tempusdominus Bootstrap 4 -->
+    <link rel="stylesheet" href="~/css/tempusdominus-bootstrap-4.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="~/css/icheck-bootstrap.min.css">
+    <!-- JQVMap -->
+    <link rel="stylesheet" href="~/css/jqvmap.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="~/css/adminlte.css">
+    <!-- DataTables -->
+    <link rel="stylesheet" href="~/plugins/datatables-bs4/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/plugins/datatables-responsive/css/responsive.bootstrap4.min.css">
+    <link rel="stylesheet" href="~/plugins/datatables-buttons/css/buttons.bootstrap4.min.css">
+    <!-- Daterange picker -->
+    <link rel="stylesheet" href="~/css/daterangepicker.css">
+    <!-- jquery -->
+    <script src='/js/jquery-3.6.0.min.js'></script>
+    <link rel="stylesheet" href="~/plugins/bootstrap/js/bootstrap.js" />
+
+    <link rel="stylesheet" href="~/plugins/toastr/toastr.min.css" />
+    <link rel="stylesheet" href="~/css/select2.min.css">
+    <link rel="stylesheet" href="~/css/select2-bootstrap4.min.css">
+    <!--bootstrap-->
+    <link rel="stylesheet" href="~/plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css" />
+    <link href="~/css/main.css" rel="stylesheet" />
+    <!-- summernote -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-lite.css" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/summernote/0.8.12/summernote-lite.js"></script>
+
+    <link rel="stylesheet" href="~/css/site.css" />
+    @*<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">*@
+</head>
+<body>
+    <header>
+        <div class="container main-menu mt-0" id="main-menu">
+            <div class="row align-items-center justify-content-between">
+                <nav id="nav-menu-container">
+                    <ul class="nav-menu">
+                        <li><a href="~/Partner/Index">Department</a></li>
+                        <li><a href="~/Recruit/Index">Post</a></li>
+                        <li><a href="~/Question">Question</a></li>
+                        <li><a href="~/Examination">Examination Management</a></li>
+                        <li><a href="~/CandidateExamination">Examination For Candidate</a></li>
+                    </ul>
+                </nav><!-- #nav-menu-container -->
+            </div>
+        </div>
+    </header>
+    <div class="site-main-container">
+        @RenderBody()
+    </div>
+
+    <!-- start footer Area -->
+    <footer class="footer-area section-gap">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3 col-md-6 single-footer-widget">
+                    <h4>About us</h4>
+                    <ul>
+                        <li><a href="#">About Us</a></li>
+                        <li><a href="#">Operational Regulations</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 single-footer-widget">
+                    <h4>Contact</h4>
+                    <ul>
+                        <li><a href="#">For Candidate</a></li>
+                        <li><a href="#">Department</a></li>
+                        <li><a href="#">Job Handbook</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 single-footer-widget">
+                    <h4>Interview Processing</h4>
+                    <ul>
+                        <li><a href="#">Processing</a></li>
+                        <li><a href="#">Mark</a></li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 col-md-6 single-footer-widget">
+                    <h4>Image</h4>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="~/js/main.js"></script>
+    <script src="~/js/summernote-bs4.min.js"></script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <!-- daterangepicker -->
+    <script src="~/js/moment.min.js"></script>
+    <script src="~/plugins/daterangepicker/daterangepicker.js"></script>
+    <!-- date-range-picker -->
+    <script src="~/plugins/daterangepicker/daterangepicker.js"></script>
+    <script src="~/plugins/toastr/toastr.min.js"></script>
+    <!-- DataTables  & Plugins -->
+    <script src="~/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="~/plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>
+    <script src="~/plugins/datatables-responsive/js/dataTables.responsive.min.js"></script>
+    <script src="~/plugins/datatables-responsive/js/responsive.bootstrap4.min.js"></script>
+    <script src="~/plugins/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="~/plugins/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="~/plugins/jszip/jszip.min.js"></script>
+    <script src="~/plugins/pdfmake/pdfmake.min.js"></script>
+    <script src="~/plugins/pdfmake/vfs_fonts.js"></script>
+    <script src="~/plugins/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="~/plugins/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="~/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
+    <script>
+        $(function () {
+            $('.summerynote').summernote()
+        });
+    </script>
+    <!-- Summernote -->
+</body>
+</html>

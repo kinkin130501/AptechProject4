@@ -1,0 +1,81 @@
+﻿@model FourN.Data.Models.Projects
+
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">ADD NEW PROJECT</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<div class="card card-primary">
+    <form method="post" asp-controller="Project" asp-action="Create" enctype="multipart/form-data">
+        <div class="card-body">
+            <div class="form-group">
+                <label for="inputEmail4">PROJECT CODE</label>
+                <input required asp-for="projectcode" placeholder="Enter Code Of Project" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label for="inputEmail4">Project Name</label>
+                <input asp-for="projectname" placeholder="Enter Name Of Project" class="form-control" />
+            </div>
+            <input type="hidden" asp-for="status" value="0" class="form-control" />
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Start Day Plan</label>
+                    <input required asp-for="startplan" type="datetime-local" class="form-control" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="txtAuthor">End Day Plan</label>
+                    <div class="input-group date" id="reservationdatetime2" data-target-input="nearest">
+                        <input required asp-for="endplan" type="datetime-local" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-4">
+                    <label for="inputEmail4">Group For Project</label>
+                    <select name="getLeadGroup" id="getLeadGroup" class="custom-select">
+                        <option value="0">Choose Group For Project</option>
+                        @foreach (var group in ViewBag.group)
+                        {
+                            <option value="@group.groupid">@group.groupname</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="txtAuthor">Leader</label>
+                    <select asp-for="leaderid" class="custom-select">
+                    </select>
+                </div>
+                <div class="form-group col-md-4">
+                    <label for="inputEmail4">Document</label>
+                    <select asp-for="docid" class="custom-select">
+                        @foreach (var doc in ViewBag.viewDoc)
+                        {
+                            <option value="@doc.docid">@doc.title</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail4">Required</label>
+                <textarea asp-for="require" placeholder="Enter Required" class="form-control summerynote"></textarea>
+            </div>
+            <div class="form-group">
+                <label for="inputEmail4">Note</label>
+                <textarea asp-for="note" placeholder="Enter Note" class="form-control summerynote"></textarea>
+            </div>
+        </div>
+        <!-- /.card-body -->
+
+        <div class="card-footer">
+            <button onclick="return checkTimeProject()" disabled id="btnProject" type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+    @*}*@
+</div>
+<script src="~/js/notify.js"></script>

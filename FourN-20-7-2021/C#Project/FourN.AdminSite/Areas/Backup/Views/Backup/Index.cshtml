@@ -1,0 +1,38 @@
+﻿@{ 
+    Layout = "_Layout";
+}
+<div class="container">
+    <label><i style="color: forestgreen">Please enter path of your folder to backup. Sorry about inconvenience.</i></label>
+    <br />
+    <div>
+        <input class="form-control" id="pathFolder" placeholder="Enter your path" />
+    </div>
+    <br />
+    <button class="btn btn-primary border-dark" onclick="SumitBackup()">Create a backup database</button>
+</div>
+<script src="~/js/notify.js"></script>
+<script>
+
+    $(document).ready(function () {
+        //add color background
+        $('li.Backup').css('background-color', 'azure');
+    });
+    function SumitBackup() {
+        var pathFolder = $("#pathFolder").val();
+        $.ajax({
+            url: "/Backup/Backup/CreateBackup",
+            method: "POST",
+            data: { pathFolder: pathFolder },
+            success: function (res) {
+                if (res.result) {
+                    toastr.success('Backup is successed.Check your folder')
+                } else {
+                    toastr.error('Processing has error, please try again.')
+                }
+            },
+            error: function () {
+                toastr.error('Processing has error, please try again.')
+            }
+        });
+    }
+</script>

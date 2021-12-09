@@ -1,0 +1,237 @@
+﻿@model List<FourN.Data.ViewModel.ChatUserViewModel>
+@{
+    string groupid = (string)ViewData["groupid"];
+    int userid = (int)ViewData["userid"];
+    string username = (string)ViewData["username"];
+}
+@*<link href='/css/module4_calendar.css' rel='stylesheet' />*@
+<link href='/plugins/toastr/toastr.min.css' rel='stylesheet' />
+<script src='/plugins/toastr/toastr.min.js'></script>
+<div class="row">
+    <label>Go to room: </label>
+    <input type="text" name="to" placeholder="Enter a name room..." class="chatroom-nameroom" id="chat-id-to" data-toggle="dropdown" autocomplete="off" /> <button type="button" class="btn btn-primary" id="chatroom-btn-go" style=" height: 25px; margin-left: 10px; line-height: 0.6;">Go</button> <span class="text-danger error-name"></span>
+    <ul class="dropdown-menu chat-id-to">
+        @*<li class="message-id-to ml-1">Mr Aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</li>
+            <li class="message-id-to ml-1">Mr Baaaaaaaaaaaaaaaaaaaa aaaaaaaaaaaaaaaaaaaaaaaaaaaaa</li>
+            <li class="message-id-to ml-1">Mr Caaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</li>
+            <li class="message-id-to ml-1">Mr Daaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</li>
+            <li class="message-id-to ml-1">Mr Eaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</li>*@
+    </ul>
+    <div class="div-fullchatroom">
+        <div id="chatroom-content" class="col-md-12 chatroom-content">
+            @if (Model.Count > 0)
+            {
+                @foreach (var chat in Model)
+                {
+                    if (chat.Users.userid == userid)
+                    {
+                        <div class="row">
+                            <div class="col-md-12 pull-right">
+                                <span>( @chat.chatusercreateat )</span><span class="mr-1">@chat.chatusercontent</span>:<label class="chat-me">@username</label>
+                            </div>
+                        </div>
+                    }
+                    else
+                    {
+                        <div class="row">
+                            <div class="col-md-12 pull-left div-odd">
+                                <label class="chat-username mr-1">@chat.Users.username</label>:<span class="mr-1">@chat.chatusercontent</span><span>( @chat.chatusercreateat )</span>
+                            </div>
+                        </div>
+                    }
+                }
+            }
+        </div>
+    </div>
+</div>
+<div class="row mt-1 mb-2">
+    <div class="col-md-12 pull-left mt-1">
+        <textarea rows="4" cols="50" placeholder="Enter a message here..." class="form-control" id="chat-text"></textarea>
+    </div>
+    <div class="col-md-1 pull-left mt-1">
+        <button id="btn-send" type="button" class="btn btn-primary btn-send">Send</button>
+    </div>
+</div>
+<div style="display:none">
+    <input type="text" class="username" value="@ViewData["username"]" />
+    @if (groupid != "0")
+    {
+        <input id="hidden-send-to" type="text" value="@groupid" />
+    }
+    else
+    {
+        <input id="hidden-send-to" type="text" value="0" />
+    }
+</div>
+<script>
+    $(document).ready(function () {
+        //add color background
+        $('li.ChatRoom').css('background-color', 'azure');
+        //btn send click
+        $('.btn-send').click(function () {
+            var text = $('#chat-text').val();
+            var username = $('.username').val();
+            var groupid = $('#hidden-send-to').val();
+            if (text.trim() != "") {
+                $.ajax({
+                    url: '/Module4/Message/CreateChatRoom',
+                    dataType: 'json',
+                    data: {
+                        content: text,
+                        groupid: groupid
+                    },
+                    type: "POST",
+                    beforeSend: function () {
+
+                    },
+                    complete: function () {
+                        var user = $('.username').val();
+                        var message = $("#chat-text").val();
+                        connectionChat.invoke("SendMessage", user, message).catch(function (err) {
+                            return console.error(err.toString());
+                        });
+                        $('#chat-text').val("");
+                        event.preventDefault();
+                    },
+                    success: function (json) {
+                        if (json['status'] == true) {
+                            var html = '<div class="row"> <div class="col-md-12 pull-right"><span> (' + json["time"] + ') </span><span class="mr-1">' + text + '</span>:<label class="chat-me">' + username + '</label></div></div>';
+                            $('.chatroom-content').append(html);
+
+                        }
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                    },
+                });//end ajax
+            }//end if
+        });//end click
+        //btn li click to name
+        $('li.message-id-to').click(function () {
+            var text = $(this).text();
+            $('.chatroom-nameroom').val(text);
+            $('ul.message-id-to').hide();
+        });//end click
+        //autocomplete
+        $('input[name=\'to\']').on('focusin', function () {
+            $.ajax({
+                url: '/Module4/Message/ChatAutocomplete?filter_name=all',
+                dataType: 'json',
+                //data: { },
+                type: "GET",
+                beforeSend: function () {
+                    $('ul.chat-id-to').empty();
+                    $('ul.chat-id-to').css("display", "block");
+                },
+                complete: function () {
+                    $('li.chat-id-to').click(function () {
+                        var text = $(this).text();
+                        var id = $(this).attr("data-id");
+                        $('#hidden-send-to').val(id);
+                        $('#chat-id-to').val(text);
+                        $('#chat-id-to').focus();
+                        $('ul.chat-id-to').css("display", "none");
+                        //location = window.location.href + '?groupid=' + id;
+                    });
+                },
+                success: function (json) {
+                    if (json['status'] == true) {
+
+                        $.each(json['result'], function (key, value) {
+                            /**/
+                            //$('ul.chat-id-to').append("<a href='Module4/Message/Message/" + value["groupid"] + "'>" + "<li class='chat-id-to ml-1' data-id='" + value["groupid"] + "' >" + value["groupname"] + " </li>" + "</a>");
+                            /**/
+                            $('ul.chat-id-to').append("<li class='chat-id-to ml-1' data-id='" + value["groupid"] + "' >" + value["groupname"] + "</li>");
+                        });
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                },
+            });//end ajax
+        });
+        $('input[name=\'to\']').on('input', function () {
+            var namelike = $(this).val();
+            if (namelike.trim() != "") {
+                $.ajax({
+                    url: '/Module4/Message/ChatAutocomplete?filter_name=' + namelike,
+                    dataType: 'json',
+                    //data: { },
+                    type: "GET",
+                    beforeSend: function () {
+                        $('ul.chat-id-to').empty();
+                        $('ul.chat-id-to').css("display", "block");
+                    },
+                    complete: function () {
+                        $('li.chat-id-to').click(function () {
+                            var text = $(this).text();
+                            var id = $(this).attr("data-id");
+                            $('#hidden-send-to').val(id);
+                            $('#chat-id-to').val(text);
+                            $('#chat-id-to').focus();
+                            $('ul.chat-id-to').css("display", "none");
+                            //location = window.location.href + '?groupid=' + id;
+                        });
+                    },
+                    success: function (json) {
+                        if (json['status'] == true) {
+
+                            $.each(json['result'], function (key, value) {
+                                /**/
+                                //$('ul.chat-id-to').append("<a href='Module4/Message/Message/" + value["groupid"] + "'>" + "<li class='chat-id-to ml-1' data-id='" + value["groupid"] + "' >" + value["groupname"] + " </li>" + "</a>");
+                                /**/
+                                $('ul.chat-id-to').append("<li class='chat-id-to ml-1' data-id='" + value["groupid"] + "' >" + value["groupname"] + "</li>");
+                            });
+                        }
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                    },
+                });//end ajax
+            }//end if
+            else {
+                $('ul.chat-id-to').css("display", "none");
+            }
+        });//end autocomplete
+        //validate
+        $('#chatroom-btn-go').on('click', function () {
+            var namelike = $('#chat-id-to').val();
+            if (namelike.trim() != "") {
+                $.ajax({
+                    url: '/Module4/Message/ChatValidate?filter_name=' + namelike,
+                    dataType: 'json',
+                    //data: { },
+                    type: "GET",
+                    beforeSend: function () {
+                        $('ul.chat-id-to').empty();
+                        $('ul.chat-id-to').css("display", "block");
+                    },
+                    complete: function () {
+
+                    },
+                    success: function (json) {
+                        if (json['status'] == true) {
+                            $('.error-name').css('display', 'none');
+                            var id = $('#hidden-send-to').val();
+                            location = "https://localhost:44316/Module4/Message/Messenger" + '?groupid=' + id;
+                        }
+                        else {
+                            $('.error-name').text('Can not find this name');
+                            $('.error-name').css('display', 'block');
+                            toastr.error("Something is wrong !!")
+                        }
+                    },
+                    error: function (xhr, ajaxOptions, thrownError) {
+                        alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                    },
+                });//end ajax
+            }//end if
+            else {
+                $('ul.message-id-to').css("display", "none");
+            }
+        });//end validate
+    });
+</script>
+@*<script src="~/plugins/signalr/dist/browser/signalr.js"></script>*@
+<script src="~/js/chat.js"></script>
+<script src="~/js/notify.js"></script>

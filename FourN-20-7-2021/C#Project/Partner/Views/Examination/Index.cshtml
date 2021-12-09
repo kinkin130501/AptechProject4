@@ -1,0 +1,190 @@
+﻿@model IEnumerable<ExaminationViewModel>
+@{
+    ViewData["Title"] = "Quản lý đề thi";
+}
+<div class="container">
+    <br />
+    <div style="margin-top:15px" id="subMenu">
+        <button type="button" class="btn btn-primary" style="margin-right:20px;" onclick="showCreate()">Create</button>
+        <a type="button" class="btn btn-primary" style="margin-right:20px;" href="/UserExamination">View All Examination</a>
+    </div>
+    <div id="IndexPartial" style="display:block; margin-top:15px">
+        <partial name="_IndexPartial" model="Model" />
+    </div>
+</div>
+<script>
+
+
+    function showAll() {
+        $.ajax({
+            url: "/Examination/IndexPartial",
+            method: "get",
+            success: function (res) {
+                $("#IndexPartial").html("");
+                $("#IndexPartial").html(res.html);
+                $("#subMenu").show();
+            },
+        })
+    }
+
+    function showCreate() {
+        $.ajax({
+            url: "/Examination/Create",
+            method: "get",
+            success: function (res) {
+                $("#IndexPartial").html("");
+                $("#IndexPartial").html(res.html);
+                $("#subMenu").hide();
+            },
+            error: function () {
+                toastr.error("Có lỗi xảy ra, vui lòng liên hệ admin")
+            }
+        })
+
+    }
+
+    function showEdit(id) {
+        toastr.error("Chức năng đang được phát triển");
+        return false;
+        $.ajax({
+            url: "/Examination/Edit/" + id,
+            method: "get",
+
+            success: function (res) {
+                $("#IndexPartial").html("");
+                $("#IndexPartial").html(res.html);
+                $("#subMenu").hide();
+                showAnswersInSession(id);
+            },
+        })
+    }
+
+    function showDetails(id) {
+        $.ajax({
+            url: "/Examination/Details",
+            method: "post",
+            data: {
+                id: id
+            },
+            success: function (res) {
+                $("#IndexPartial").html("");
+                $("#IndexPartial").html(res.html);
+                $("#subMenu").hide();
+            },
+            error: function () {
+                toastr.error("Có lỗi xảy ra, vui lòng thử lại sau")
+            }
+        })
+    }
+
+
+
+
+    function showDelete(id) {
+        var isOk = confirm("Are you sure?");
+        if (isOk) {
+            $.ajax({
+                url: "/Examination/Delete/" + id,
+                method: "post",
+                success: function () {
+                    showAll();
+                    toastr.success("Successfully !");
+                }
+            });
+        } else {
+            showAll();
+        }
+
+    }
+
+    function ClearCartQuestionSession() {
+        $.ajax({
+            url: "/Answer/ClearCartQuestionSession",
+            type: "get"
+        });
+    }
+
+    function showExam(examId) {
+        $.ajax({
+            url: "/Examination/MockExam",
+            type: "get",
+            data: {
+                examId: examId,
+            },
+            success: function (res) {
+                $("#IndexPartial").html("");
+                $("#IndexPartial").html(res.html);
+                $("#subMenu").hide();
+            },
+            error: function () {
+                toastr.error("Có lỗi xảy ra, vui lòng liên hệ admin");
+            }
+        });
+    }
+
+    //for assign user marking
+    var userMarkList = [];
+
+    $(".showMarkUser").off().click(function () {
+        var examId = $(this).attr("id");
+        $.ajax({
+            url: "/Examination/GetUserByCompany",
+            method: "get",
+            data: {
+                examId: examId,
+            },
+            success: function (res) {
+                $(".modal-body").html(res.html);
+            },
+        })
+    })
+
+    function assignMarkUser() {
+        var examId = $("#ExamId").val();
+        if (updateArray.length != 0) {
+            userMarkList = updateArray;
+            updateArray = [];
+        }
+
+        $.ajax({
+            url: "/Examination/AssignMarkUser",
+            type: "get",
+            traditional: true,
+            data: {
+                examId: parseInt(examId),
+                userMarkList: [userMarkList]
+            },
+            success: function (res) {
+                userMarkList = [];
+                toastr.success("Cập nhật người chấm thành công")
+            },
+            error: function () {
+                toastr.error("Có lỗi xảy ra, vui lòng liên hệ admin");
+            }
+        });
+    }
+
+    function changeStatus(userId) {
+        if (updateArray.length != 0) {
+            userMarkList = updateArray;
+            updateArray = [];
+        }
+
+        if ($("#user-" + userId).hasClass('added') == false) {
+            $("#user-" + userId).removeClass('btn-outline-info').addClass('btn-success added ');
+            $("#user-" + userId).text('Đang chọn')
+            userMarkList.push(userId);
+        } else {
+            userMarkList = userMarkList.filter(item => item !== userId);
+
+            $("#user-" + userId).removeClass('btn-success added').addClass('btn-outline-info');
+            $("#user-" + userId).text('Chọn')
+        }
+
+    }
+
+    function closeAssignMarkUser() {
+        userMarkList = [];
+    }
+</script>
+

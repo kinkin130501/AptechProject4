@@ -1,0 +1,161 @@
+﻿@model QuestionViewModel
+@{
+    int startNumber = 65;
+    char prefix;
+    var answer = "";
+    var ran = new Random();
+}
+<div>
+    <dl class="row">
+        <dt class="col-sm-2">
+            Question
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Content)
+        </dd>
+
+        <dt class="col-sm-2">
+            Type
+        </dt>
+        <dd class="col-sm-10">
+            @{
+                var type = HelperViewData.GetEnumDisplayName((QuestionTypes)Model.QuestionType);
+            }
+            @type
+        </dd>
+        <dt class="col-sm-2">
+            Mark
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Score) mark
+        </dd>
+        <dt class="col-sm-2">
+            Random answer
+        </dt>
+        <dd class="col-sm-10">
+            @if (Model.IsRandom) { answer = "Allow"; } else { answer = "Not allow"; }
+            @answer
+        </dd>
+        <dt class="col-sm-2">
+            Status
+        </dt>
+        <dd class="col-sm-10">
+            @if (Model.IsActive) { answer = "Active"; } else { answer = "Deactive"; }
+            @answer
+        </dd>
+        @*<dt class="col-sm-2">
+            Người tạo
+        </dt>
+        <dd class="col-sm-10">
+            @ViewBag.UserCreatedName
+        </dd>*@
+        <dt class="col-sm-2">
+            Created day
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CreatedAt)
+        </dd>
+        @if (Model.ModifiedBy != null)
+        {
+            <dt class="col-sm-2">
+                Edited day
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ModifiedAt)
+            </dd>
+        }
+
+
+        @*<dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Course)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Course.CourseName)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Section)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Section.Name)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Lesson)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Lesson.Name)
+        </dd>*@
+        @*<dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Examination)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Examination.ExamId)
+        </dd>*@
+    </dl>
+    @if (Model.Answers.Count != 0)
+    {
+        <div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Answer</th>
+                        <th>Content</th>
+                        <th>Is Correct</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.IsRandom)
+                    {
+                        @foreach (var i in Model.Answers.OrderBy(x => ran.Next()))
+                        {
+                            prefix = (char)startNumber;
+                            startNumber++;
+
+                            @if (i.IsCorrect) { answer = "Correct"; } else { answer = ""; }
+                            <tr>
+
+                                <td>@prefix</td>
+                                <td style="white-space: pre-line">@i.Content</td>
+                                <td>@answer</td>
+
+                            </tr>
+                        }
+                    }
+                    else
+                    {
+                        @foreach (var i in Model.Answers)
+                        {
+                            prefix = (char)startNumber;
+                            startNumber++;
+
+                            @if (i.IsCorrect) { answer = "Correct"; } else { answer = ""; }
+                            <tr>
+
+                                <td>@prefix</td>
+                                <td style="white-space: pre-line">@i.Content</td>
+                                <td>@answer</td>
+
+                            </tr>
+                        }
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
+
+<div class="form-group">
+    <input type="button" id="btnSubmit" value="Edit" class="btn btn-primary" onclick="showEdit(@Model.QuestionId)" />
+    &nbsp;
+    @if (Model.ParentQuestionId == null)
+    {
+        <button type="button" class="btn btn-outline-warm" onclick="showAll()">Back</button>
+    }
+    else
+    {
+        <button type="button" class="btn btn-outline-warm" onclick="showQuestionListDetails(@Model.ParentQuestionId)">Back</button>
+    }
+</div>
+
+

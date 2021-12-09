@@ -1,0 +1,76 @@
+﻿@model ApplyModel
+<div class="container">
+    <div class="row">
+        <div class="col-md-3"></div>
+        <div class="col-md-6 text-center">
+            @if (ViewBag.msg != null)
+            {
+                <h3>@ViewBag.msg</h3>
+            }
+            else
+            {
+                <h3>@ViewBag.error</h3>
+            }
+            <h3 style="margin: 20px">Fill Your Information</h3>
+            <p><i>(<span style="color:red">*</span>): </i><i>Enter the correct information because we, I will use this information to get back to you</i></p>
+            <label><i>(<span style="color:red">*</span>): </i> Information requie</label>
+            <form method="post" enctype="multipart/form-data" asp-action="Apply" id="formApply">
+                <input type="hidden" asp-for="DepartmentId" />
+                <div class="row form-group">
+                    <label>Your Name <i>(<span style="color:red">*</span>): </i> </label>
+                     <input type="text" class="form-control" asp-for="Name" placeholder="Pleaser enter your name..." maxlength="30"/>
+                </div>
+                <div class="row form-group">
+                    <label>Your Phone <i>(<span style="color:red">*</span>): </i> </label>
+                    <input type="number" class="form-control" asp-for="Phone" placeholder="Pleaser enter your phone..." />
+                </div>
+                <div class="row form-group">
+                    <label>Your Email <i>(<span style="color:red">*</span>): </i> </label>
+                    <input type="email" class="form-control" asp-for="Email" placeholder="Pleaser enter your email..." />
+                </div>
+                <div class="row form-group">
+                    <label>Upload your CV here <i>(<span style="color:red">*</span>): </i></label>
+                    <i>File is .pdf, capacity dont greater 1MB</i>
+                    <div>
+                        <input type="file" class="form-group" accept=".pdf" asp-for="File" required />
+                    </div>
+                    
+                </div>
+                <div class="form-group">
+                    <input type="submit" class="btn btn-primary" value="SUBMIT" />
+                    <a href="/Index" class="btn btn-primary">Back</a>
+                </div>
+            </form>
+        </div>
+        <div class="col-md-3"></div>
+    </div> 
+</div>
+<script>
+    function isVietnamesePhoneNumber(number) {
+        return /(03|05|07|08|09|01[2|6|8|9])+([0-9]{7,8})\b/.test(number);
+    }
+    $("#formApply").submit(function () {
+        var count = 0;
+        $(".Error").remove();
+        if ($("#Name").val().trim() == "" || $("#Name").val() == null) {
+            $("<div><i style='color:red' class='Error'>Can't not blank name</div>").insertAfter("#Name");
+            count++;
+        }
+        if ($("#Email").val().trim() == "" || $("#Email").val() == null) {
+            $("<div><i style='color:red' class='Error'>Can't not blank email</div>").insertAfter("#Email");
+            count++;
+        }
+        if ($("#Phone").val().trim() == "" || $("#Phone").val() == null) {
+            $("<div><i style='color:red' class='Error'>Can't not blank phone</div>").insertAfter("#Phone");
+            count++;
+        }
+        if (!isVietnamesePhoneNumber($("#Phone").val())) {
+            $("<div><i style='color:red' class='Error'>Phone is invalid, please enter character 0 - 9.</div>").insertAfter("#Phone");
+            count++;
+        }
+        if (count > 0) {
+            toastr.error("Form is not validate, please check form and try again.")
+            return false;
+        }
+    })
+</script>

@@ -1,0 +1,90 @@
+﻿@model QuestionCrudModel
+@{
+    var ans = "";
+}
+
+<div class="row">
+    <div class="col-12">
+        <form asp-action="Edit" id="myForm">
+            <input type="hidden" asp-for="QuestionId" value="@Model.QuestionId" />
+            <div class="form-group">
+                <label class="control-label">Question</label>
+                <input id="txtQuestion" asp-for="Content" class="form-control" value="@Model.Content" />
+            </div>
+
+            <div class="form-group">
+                <label class="control-label">Type</label>
+                @{ var type = HelperViewData.GetEnumDisplayName((QuestionTypes)Model.QuestionType); }
+                <input type="hidden" asp-for="QuestionType" value="@Model.QuestionType" />
+                <select class="form-control" disabled id="txtQuestionType">
+                    <option value="@Model.QuestionType" selected>@type</option>
+                </select>
+            </div>
+            <div id="showCreateAnswer"></div>
+            <div class="form-group">
+                <label class="control-label">Mark</label>
+                <input type="number" step="0.5" id="txtScore" asp-for="Score" class="form-control" value="@Model.Score" />
+            </div>
+            <div class="form-group form-check">
+                @if (Model.IsRandom)
+                {
+        <input id="random" type="checkbox" class="form-check-input" asp-for="IsRandom" checked /> }
+                    else
+                    {
+        <input id="random" type="checkbox" class="form-check-input" asp-for="IsRandom" />}
+                <label for="random" class="form-check-label">
+                   Random Answer.
+                </label>
+            </div>
+            <input type="hidden" asp-for="IsActive" value="true"/>
+            <input asp-for="ModifiedBy" class="form-control" type="hidden" value="@Model.ModifiedBy" />
+            <div id="showAnswer"></div>
+
+            <div class="form-group">
+                <input type="button" id="btnSubmit" value="Update" class="btn btn-primary" />
+                &nbsp;
+                <input type="button" value="Add answer" onclick="showCreateAnswer(@Model.QuestionId)" class="btn btn-info" />
+                &nbsp;
+                @if (Model.ParentQuestionId == null)
+                {
+        <button type="button" class="btn btn-outline-warm" onclick="showAll()">Back</button> }
+                    else
+                    {
+            <button type="button" class="btn btn-outline-warm" onclick="showQuestionListDetails(@Model.ParentQuestionId)">Back</button>}
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<script>
+
+    $("#btnSubmit").click(function (e) {
+        $("#Error").remove();
+        if ($("#txtQuestion").val().trim() == "") {
+            $("<div><i style='color:red' id='Error'>Not blank</div>").insertAfter("#txtQuestion");
+            return false;
+        }
+        if ($("#txtScore").val().trim() == "") {
+            $("<div><i style='color:red' id='Error'>Not blank</div>").insertAfter("#txtScore");
+            return false;
+        }
+
+        var dataform = $("#myForm").serialize();
+        $.ajax({
+            url: "/Question/Edit",
+            type: "post",
+            data: dataform,
+            success: function (res) {
+                showAll();
+                toastr.success("Edit successed !");
+            },
+            error: function () {
+                toastr.error("Edit failed !");
+            }
+        });
+    })
+
+</script>
+
+

@@ -1,0 +1,49 @@
+﻿@model DocumentModel
+
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">ADD NEW DOCUMENT</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<div class="card card-primary">
+    <form method="post" asp-controller="Document" asp-action="Create" enctype="multipart/form-data">
+        <div class="card-body">
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Title</label>
+                    <input asp-for="title" placeholder="Enter Title Of Document" class="form-control" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="txtAuthor">Author</label>
+                    <select asp-for="authorrole" class="custom-select">
+                        @foreach (var item in ViewBag.listLeader)
+                        {
+                            <option value="@item.userid">@item.username</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                    <label for="inputfile">File</label>
+                    <input type="file" asp-for="files" class="form-control" id="inputfile" />
+            </div>
+        <div class="form-group">
+            <label for="inputEmail4">Note</label>
+            <textarea asp-for="note" placeholder="Enter Note Of Document" class="form-control summerynote"></textarea>
+        </div>
+        </div>
+        <!-- /.card-body -->
+
+        <div class="card-footer">
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+    @*}*@
+</div>
+<script src="~/js/notify.js"></script>

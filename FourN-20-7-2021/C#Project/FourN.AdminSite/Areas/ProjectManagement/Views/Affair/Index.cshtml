@@ -1,0 +1,556 @@
+﻿@model IEnumerable<FourN.Data.Models.Affairs>
+@{
+    int i = 0;
+
+    var userId = Context.Session.GetCurrentAuthentication().UserId;
+    var department = Context.Session.GetCurrentAuthentication().department;
+    var userName = Context.Session.GetCurrentAuthentication().UserName;
+}
+
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-7">
+                <input type="hidden" value="@ViewData["projectid"]" id="getProjectID" />
+                <h1 class="m-0">@ViewData["projectname"]</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-5">
+                <p>Format date time: <i style="color:darkgreen; font-weight: bold">dd/MM/yyyy HH:mm:ss</i></p>
+                <p>Percentage Of Project: <i style="color:darkgreen; font-weight: bold">This affair accounts for <b style="color:orangered">N%</b> of the project</i></p>
+            </div>
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<div class="row">
+    <div class="form-group col-md-3">
+        <div>
+            <p style="margin: 0px; padding: 0px;"><b>FROM: </b><i id="weekstart" style="font-size: 20px;">@ViewData["start"]</i></p>
+            <p style="margin: 0px; padding: 0px;"><b>TO: </b><i id="weekend" style="font-size: 20px;">@ViewData["end"]</i></p>
+        </div>
+        <div>
+            <div id="getWeekTime" class="row">
+                <div class="form-group col-md-4">
+                    <div class="inputWeekTime" style="margin: 10px;padding-top: 20px; padding-right: 5px; border-radius: 5px; width: 70px; height: 70px; background-color: yellow; border: 1px solid gray">W: 30</div>
+                </div>;
+            </div>
+        </div>
+    </div>
+    <div class="form-group col-md-9">
+        <div id="showChart" style="height: 500px;" class="container">
+            <canvas style="height: 400px;" id="myChartAffair">
+            </canvas>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <ul class="nav nav-pills form-row">
+                <li class="nav-item form-group col-md-1">
+                </li>
+                <li class="nav-item form-group col-md-2">
+                    <a href="#tab0" data-toggle="tab" class="nav-link active">Analisys</a>
+                </li>
+                <li class="nav-item form-group col-md-2">
+                    <a href="#tab1" data-toggle="tab" class="nav-link ">Design</a>
+                </li>
+                <li class="nav-item form-group col-md-2">
+                    <a href="#tab2" data-toggle="tab" class="nav-link">Implementation</a>
+                </li>
+                <li class="nav-item form-group col-md-2">
+                    <a href="#tab3" data-toggle="tab" class="nav-link">Testing</a>
+                </li>
+                <li class="nav-item form-group col-md-2">
+                    <a href="#tab4" data-toggle="tab" class="nav-link">Deployment</a>
+                </li>
+                <li class="nav-item form-group col-md-1">
+                </li>
+            </ul>
+            <div class="tab-content">
+                <div class="tab-pane container active" id="tab0">
+                    @if (department == (int)RoleNumber.PM || department == (int)RoleNumber.Leader)
+                    {
+                        <h3>
+                            <a style="float: right;" href="/ProjectManagement/Affair/Create?id=@ViewData["id"]&type=0"><i style="color: deepskyblue" class="far fa-plus-square"></i></a>
+                            <br />
+                        </h3>
+                    }
+
+                    <div class="card-body table-responsive p-0" style="max-height: 425px;">
+                        <table class="table table-head-fixed text-nowrap table-hover">
+                            <thead>
+                                <tr>
+                                    <th style="width: 50px;">List</th>
+                                    <th>Name</th>
+                                    @if (department == (int)RoleNumber.PM || department == (int)RoleNumber.Leader)
+                                    {
+                                        <th>Member</th>
+                                    }
+                                    <th>Percentage <br />Of Project</th>
+                                    <th>Status</th>
+                                    <th>Start Time (Plan)</th>
+                                    <th>End Time (Plan)</th>
+                                    <th>Start Time (Actual)</th>
+                                    <th>End Time (Actual)</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            @foreach (var item in @ViewBag.viewAnalisys)
+                            {
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <p>
+                                                @(++i)
+                                            </p>
+                                        </td>
+                                        <td>
+                                            @item.affairname
+                                        </td>
+                                        @if (department == (int)RoleNumber.PM || department == (int)RoleNumber.Leader)
+                                        {
+                                            <td>
+                                                @foreach (var user in ViewBag.user)
+                                                {
+                                                    if (item.userid == user.userid)
+                                                    {
+                                                        @user.username
+                                                    }
+                                                }
+                                            </td>
+                                        }
+                                        <th>
+                                            @item.affairtag %
+                                        </th>
+
+                                        <td>
+                                            @switch (item.status)
+                                            {
+                                                case 0:<span>New</span>; break;
+                                                case 1: <span>Processing</span>; break;
+                                                case 2: <span>Debugging</span>; break;
+                                                case 3: <span>Checking</span>; break;
+                                                case 4: <span>Done</span>; break;
+                                                case 5: <span>Restart</span>; break;
+                                            }
+                                        </td>
+                                        <td>
+                                            @item.starttimeplan.ToString(string.Format("dd/MM/yyyy HH:mm:ss"))
+                                        </td>
+                                        <td>
+                                            @item.endtimeplan.ToString(string.Format("dd/MM/yyyy HH:mm:ss"))
+                                        </td>
+                                        <td>
+                                            @item.starttimeactual?.ToString(string.Format("dd/MM/yyyy HH:mm:ss"))
+                                        </td>
+                                        <td>
+                                            @item.endtimeactual?.ToString(string.Format("dd/MM/yyyy HH:mm:ss"))
+                                        </td>
+                                        <td style="float: right;">
+                                            <a style="margin: 0px; padding-left: 10px; padding-right: 10px;" href="/ProjectManagement/Affair/Detail/@item.affairid">
+                                                <i class="fas fa-info-circle"></i>
+                                            </a>
+                                            @if (department == (int)RoleNumber.PM || department == (int)RoleNumber.Leader)
+                                            {
+                                                <a onclick="return confirm('ARE YOU SURE ???');" style="margin: 0px; padding-left: 10px; padding-right: 10px;" href="/ProjectManagement/Affair/Delete/@item.affairid">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            }
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            }
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane container fade" id="tab1">
+                    @if (department == (int)RoleNumber.PM || department == (int)RoleNumber.Leader)
+                    {
+                        <h3>
+                            <a style="float: right;" href="/ProjectManagement/Affair/Create?id=@ViewData["id"]&type=1"><i style="color: deepskyblue" class="far fa-plus-square"></i></a>
+                            <br />
+                        </h3>
+                    }
+                    <div class="card-body table-responsive p-0" style="max-height: 425px;">
+                        <table class="table table-head-fixed text-nowrap table-hover">
+                            <thead>
+                                <tr>
+                                    <th style="width: 50px;">List</th>
+                                    <th>Name</th>
+                                    @if (department == (int)RoleNumber.PM || department == (int)RoleNumber.Leader)
+                                    {
+                                        <th>Member</th>
+                                    }
+                                    <th>Percentage <br />Of Project</th>
+                                    <th>Status</th>
+                                    <th>Start Time (Plan)</th>
+                                    <th>End Time (Plan)</th>
+                                    <th>Start Time (Actual)</th>
+                                    <th>End Time (Actual)</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            @foreach (var item in @ViewBag.viewDesign)
+                            {
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <p>
+                                                @(++i)
+                                            </p>
+                                        </td>
+                                        <td>
+                                            @item.affairname
+                                        </td>
+                                        @if (department == (int)RoleNumber.PM || department == (int)RoleNumber.Leader)
+                                        {
+                                            <td>
+                                                @foreach (var user in ViewBag.user)
+                                                {
+                                                    if (item.userid == user.userid)
+                                                    {
+                                                        @user.username
+                                                    }
+                                                }
+                                            </td>
+                                        }
+                                        <th>
+                                            @item.affairtag %
+                                        </th>
+
+                                        <td>
+                                            @switch (item.status)
+                                            {
+                                                case 0:<span>New</span>; break;
+                                                case 1: <span>Processing</span>; break;
+                                                case 2: <span>Debugging</span>; break;
+                                                case 3: <span>Checking</span>; break;
+                                                case 4: <span>Done</span>; break;
+                                                case 5: <span>Restart</span>; break;
+                                            }
+                                        </td>
+                                        <td>
+                                            @item.starttimeplan.ToString(string.Format("dd/MM/yyyy HH:mm:ss"))
+                                        </td>
+                                        <td>
+                                            @item.endtimeplan.ToString(string.Format("dd/MM/yyyy HH:mm:ss"))
+                                        </td>
+                                        <td>
+                                            @item.starttimeactual?.ToString(string.Format("dd/MM/yyyy HH:mm:ss"))
+                                        </td>
+                                        <td>
+                                            @item.endtimeactual?.ToString(string.Format("dd/MM/yyyy HH:mm:ss"))
+                                        </td>
+                                        <td style="float: right;">
+                                            <a style="margin: 0px; padding-left: 10px; padding-right: 10px;" href="/ProjectManagement/Affair/Detail/@item.affairid">
+                                                <i class="fas fa-info-circle"></i>
+                                            </a>
+                                            @if (department == (int)RoleNumber.PM || department == (int)RoleNumber.Leader)
+                                            {
+                                                <a onclick="return confirm('ARE YOU SURE ???');" style="margin: 0px; padding-left: 10px; padding-right: 10px;" href="/ProjectManagement/Affair/Delete/@item.affairid">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            }
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            }
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane container fade" id="tab2">
+                    @if (department == (int)RoleNumber.PM || department == (int)RoleNumber.Leader)
+                    {
+                        <h3>
+                            <a style="float: right;" href="/ProjectManagement/Affair/Create?id=@ViewData["id"]&type=2"><i style="color: deepskyblue" class="far fa-plus-square"></i></a>
+                            <br />
+                        </h3>
+                    }
+                    <div class="card-body table-responsive p-0" style="max-height: 425px;">
+                        <table class="table table-head-fixed text-nowrap table-hover">
+                            <thead>
+                                <tr>
+                                    <th style="width: 50px;">List</th>
+                                    <th>Name</th>
+                                    @if (department == (int)RoleNumber.PM || department == (int)RoleNumber.Leader)
+                                    {
+                                        <th>Member</th>
+                                    }
+                                    <th>Percentage <br />Of Project</th>
+                                    <th>Status</th>
+                                    <th>Start Time (Plan)</th>
+                                    <th>End Time (Plan)</th>
+                                    <th>Start Time (Actual)</th>
+                                    <th>End Time (Actual)</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            @foreach (var item in @ViewBag.viewImple)
+                            {
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <p>
+                                                @(++i)
+                                            </p>
+                                        </td>
+                                        <td>
+                                            @item.affairname
+                                        </td>
+                                        @if (department == (int)RoleNumber.PM || department == (int)RoleNumber.Leader)
+                                        {
+                                            <td>
+                                                @foreach (var user in ViewBag.user)
+                                                {
+                                                    if (item.userid == user.userid)
+                                                    {
+                                                        @user.username
+                                                    }
+                                                }
+                                            </td>
+                                        }
+                                        <th>
+                                            @item.affairtag %
+                                        </th>
+                                        <td>
+                                            @switch (item.status)
+                                            {
+                                                case 0:<span>New</span>; break;
+                                                case 1: <span>Processing</span>; break;
+                                                case 2: <span>Debugging</span>; break;
+                                                case 3: <span>Checking</span>; break;
+                                                case 4: <span>Done</span>; break;
+                                                case 5: <span>Restart</span>; break;
+                                            }
+                                        </td>
+                                        <td>
+                                            @item.starttimeplan.ToString(string.Format("dd/MM/yyyy HH:mm:ss"))
+                                        </td>
+                                        <td>
+                                            @item.endtimeplan.ToString(string.Format("dd/MM/yyyy HH:mm:ss"))
+                                        </td>
+                                        <td>
+                                            @item.starttimeactual?.ToString(string.Format("dd/MM/yyyy HH:mm:ss"))
+                                        </td>
+                                        <td>
+                                            @item.endtimeactual?.ToString(string.Format("dd/MM/yyyy HH:mm:ss"))
+                                        </td>
+                                        <td style="float: right;">
+                                            <a style="margin: 0px; padding-left: 10px; padding-right: 10px;" href="/ProjectManagement/Affair/Detail/@item.affairid">
+                                                <i class="fas fa-info-circle"></i>
+                                            </a>
+                                            @if (department == (int)RoleNumber.PM || department == (int)RoleNumber.Leader)
+                                            {
+                                                <a onclick="return confirm('ARE YOU SURE ???');" style="margin: 0px; padding-left: 10px; padding-right: 10px;" href="/ProjectManagement/Affair/Delete/@item.affairid">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            }
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            }
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane container fade" id="tab3">
+                    @if (department == (int)RoleNumber.PM || department == (int)RoleNumber.Leader)
+                    {
+                        <h3>
+                            <a style="float: right;" href="/ProjectManagement/Affair/Create?id=@ViewData["id"]&type=3"><i style="color: deepskyblue" class="far fa-plus-square"></i></a>
+                            <br />
+                        </h3>
+                    }
+                    <div class="card-body table-responsive p-0" style="max-height: 425px;">
+                        <table class="table table-head-fixed text-nowrap table-hover">
+                            <thead>
+                                <tr>
+                                    <th style="width: 50px;">List</th>
+                                    <th>Name</th>
+                                    @if (department == (int)RoleNumber.PM || department == (int)RoleNumber.Leader)
+                                    {
+                                        <th>Member</th>
+                                    }
+                                    <th>Percentage <br />Of Project</th>
+                                    <th>Status</th>
+                                    <th>Start Time (Plan)</th>
+                                    <th>End Time (Plan)</th>
+                                    <th>Start Time (Actual)</th>
+                                    <th>End Time (Actual)</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            @foreach (var item in @ViewBag.viewTest)
+                            {
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <p>
+                                                @(++i)
+                                            </p>
+                                        </td>
+                                        <td>
+                                            @item.affairname
+                                        </td>
+                                        @if (department == (int)RoleNumber.PM || department == (int)RoleNumber.Leader)
+                                        {
+                                            <td>
+                                                @foreach (var user in ViewBag.user)
+                                                {
+                                                    if (item.userid == user.userid)
+                                                    {
+                                                        @user.username
+                                                    }
+                                                }
+                                            </td>
+                                        }
+                                        <th>
+                                            @item.affairtag %
+                                        </th>
+                                        <td>
+                                            @switch (item.status)
+                                            {
+                                                case 0:<span>New</span>; break;
+                                                case 1: <span>Processing</span>; break;
+                                                case 2: <span>Debugging</span>; break;
+                                                case 3: <span>Checking</span>; break;
+                                                case 4: <span>Done</span>; break;
+                                                case 5: <span>Restart</span>; break;
+                                            }
+                                        </td>
+                                        <td>
+                                            @item.starttimeplan.ToString(string.Format("dd/MM/yyyy HH:mm:ss"))
+                                        </td>
+                                        <td>
+                                            @item.endtimeplan.ToString(string.Format("dd/MM/yyyy HH:mm:ss"))
+                                        </td>
+                                        <td>
+                                            @item.starttimeactual?.ToString(string.Format("dd/MM/yyyy HH:mm:ss"))
+                                        </td>
+                                        <td>
+                                            @item.endtimeactual?.ToString(string.Format("dd/MM/yyyy HH:mm:ss"))
+                                        </td>
+                                        <td style="float: right;">
+                                            <a style="margin: 0px; padding-left: 10px; padding-right: 10px;" href="/ProjectManagement/Affair/Detail/@item.affairid">
+                                                <i class="fas fa-info-circle"></i>
+                                            </a>
+                                            @if (department == (int)RoleNumber.PM || department == (int)RoleNumber.Leader)
+                                            {
+                                                <a onclick="return confirm('ARE YOU SURE ???');" style="margin: 0px; padding-left: 10px; padding-right: 10px;" href="/ProjectManagement/Affair/Delete/@item.affairid">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            }
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            }
+                        </table>
+                    </div>
+                </div>
+                <div class="tab-pane container fade" id="tab4">
+                    @if (department == (int)RoleNumber.PM || department == (int)RoleNumber.Leader)
+                    {
+                        <h3>
+                            <a style="float: right;" href="/ProjectManagement/Affair/Create?id=@ViewData["id"]&type=4"><i style="color: deepskyblue" class="far fa-plus-square"></i></a>
+                            <br />
+                        </h3>
+                    }
+                    <div class="card-body table-responsive p-0" style="max-height: 425px;">
+                        <table class="table table-head-fixed text-nowrap table-hover">
+                            <thead>
+                                <tr>
+                                    <th style="width: 50px;">List</th>
+                                    <th>Name</th>
+                                    @if (department == (int)RoleNumber.PM || department == (int)RoleNumber.Leader)
+                                    {
+                                        <th>Member</th>
+                                    }
+                                    <th>Percentage <br />Of Project</th>
+                                    <th>Status</th>
+                                    <th>Start Time (Plan)</th>
+                                    <th>End Time (Plan)</th>
+                                    <th>Start Time (Actual)</th>
+                                    <th>End Time (Actual)</th>
+                                    <th></th>
+                                </tr>
+                            </thead>
+                            @foreach (var item in @ViewBag.viewDeploy)
+                            {
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <p>
+                                                @(++i)
+                                            </p>
+                                        </td>
+                                        <td>
+                                            @item.affairname
+                                        </td>
+                                        @if (department == (int)RoleNumber.PM || department == (int)RoleNumber.Leader)
+                                        {
+                                            <td>
+                                                @foreach (var user in ViewBag.user)
+                                                {
+                                                    if (item.userid == user.userid)
+                                                    {
+                                                        @user.username
+                                                    }
+                                                }
+                                            </td>
+                                        }
+                                        <th>
+                                            @item.affairtag %
+                                        </th>
+                                        <td>
+                                            @switch (item.status)
+                                            {
+                                                case 0:<span>New</span>; break;
+                                                case 1: <span>Processing</span>; break;
+                                                case 2: <span>Debugging</span>; break;
+                                                case 3: <span>Checking</span>; break;
+                                                case 4: <span>Done</span>; break;
+                                                case 5: <span>Restart</span>; break;
+                                            }
+                                        </td>
+                                        <td>
+                                            @item.starttimeplan.ToString(string.Format("dd/MM/yyyy HH:mm:ss"))
+                                        </td>
+                                        <td>
+                                            @item.endtimeplan.ToString(string.Format("dd/MM/yyyy HH:mm:ss"))
+                                        </td>
+                                        <td>
+                                            @item.starttimeactual?.ToString(string.Format("dd/MM/yyyy HH:mm:ss"))
+                                        </td>
+                                        <td>
+                                            @item.endtimeactual?.ToString(string.Format("dd/MM/yyyy HH:mm:ss"))
+                                        </td>
+                                        <td style="float: right;">
+                                            <a style="margin: 0px; padding-left: 10px; padding-right: 10px;" href="/ProjectManagement/Affair/Detail/@item.affairid">
+                                                <i class="fas fa-info-circle"></i>
+                                            </a>
+                                            @if (department == (int)RoleNumber.PM || department == (int)RoleNumber.Leader)
+                                            {
+                                                <a onclick="return confirm('ARE YOU SURE ???');" style="margin: 0px; padding-left: 10px; padding-right: 10px;" href="/ProjectManagement/Affair/Delete/@item.affairid">
+                                                    <i class="fas fa-trash"></i>
+                                                </a>
+                                            }
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            }
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+</div>
+<script src="~/js/notify.js"></script>
+<script>
+    $(document).ready(function () {
+        //add color background
+        $('li.Affair').css('background-color', 'azure');
+    });
+</script>

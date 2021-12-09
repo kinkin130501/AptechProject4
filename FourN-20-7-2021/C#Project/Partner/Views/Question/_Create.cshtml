@@ -1,0 +1,120 @@
+﻿@model QuestionCrudModel
+
+<div class="row">
+    <div class="col-12">
+        <form asp-action="Edit" id="myForm">
+            <input type="hidden" asp-for="QuestionId" />
+            <div class="form-group">
+                <label class="control-label">Question<span class="text-danger">*</span></label>
+                <input asp-for="Content" class="form-control" required data-validation-required-message="Please enter information" id="txtQuestion" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Type<span class="text-danger">*</span></label>
+                <select id="txtQuestionType" asp-for="QuestionType" asp-items="Html.GetEnumSelectList<QuestionTypes>()" class="form-control" onchange="return showButtonAddAnswer()"></select>
+            </div>
+            <div id="showCreateAnswer"></div>
+            <div class="form-group">
+                <label class="control-label">Mark<span class="text-danger">*</span></label>
+                <input type="number" step="0.25" asp-for="Score" class="form-control" id="txtScore" min="0" required data-validation-required-message="Enter information" />
+            </div>
+            <div class="form-group form-check">
+                <input id="random" type="checkbox" class="form-check-input" asp-for="IsRandom" checked />
+                <label class="form-check-label" for="random">
+                    Random answer.
+                </label>
+            </div>
+            <input type="hidden" asp-for="IsActive" value="true" />
+            <div id="showAnswer"></div>
+
+            <input asp-for="CreatedBy" class="form-control" type="hidden" value="@Model.CreatedBy" />
+
+            <div class="form-group">
+                <input type="button" id="btnSubmit" value="Create" class="btn btn-primary" />
+                &nbsp;
+                <input id="btnAddAnswer" type="button" value="Add answer" onclick="showCreateAnswer(@Model.QuestionId)" class="btn btn-info" />
+                &nbsp;
+                <button type="button" class="btn btn-outline-warm" onclick="showAll()">Back</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+
+<script>
+    $("#btnSubmit").click(function (e) {
+        console.log("submit");
+        $("#Error").remove();
+        if ($("#txtQuestion").val().trim() == "") {
+            $("<div><i style='color:red' id='Error'>Not blank</div>").insertAfter("#txtQuestion");
+            return false;
+        }
+        if ($("#txtScore").val().trim() == "" || $("#txtScore").val().trim() < 0) {
+            $("<div><i style='color:red' id='Error'>Not blank</div>").insertAfter("#txtScore");
+            return false;
+        }
+
+        var dataform = $("#myForm").serialize();
+        $.ajax({
+            url: "/Question/Create",
+            type: "post",
+            data: dataform,
+            success: function (res) {
+                if (res.isSuccess == false) {
+                    toastr.error(res.message);
+                    return;
+                }
+                showAll();
+                toastr.success("Create successed !");
+            },
+            error: function () {
+                toastr.error("Create successed !");
+            }
+        });
+    })
+
+    
+
+    function searchSection() {
+        var courseId = $("#txtCourse option:selected").val();
+        var sectionId = $("#txtSection option:selected").val();
+        if (parseInt(sectionId) == 0) {
+            searchLesson();
+        }
+        $.ajax({
+            url: "/Question/SearchSection",
+            type: "get",
+            data: {
+                courseId: parseInt(courseId)
+            },
+            success: function (res) {
+                $("#SectionView").html("");
+                $("#SectionView").html(res.html);
+            }
+        });
+    }
+
+    function searchLesson() {
+        var sectionId = $("#txtSection option:selected").val();
+        $.ajax({
+            url: "/Question/SearchLesson/",
+            type: "get",
+            data: {
+                sectionId: parseInt(sectionId)
+            },
+            success: function (res) {
+                $("#LessonView").html("");
+                $("#LessonView").html(res.html);
+            }
+        });
+    }
+
+    function showButtonAddAnswer() {
+        hideCreateAnswer();
+        clearAnswerSession();
+        $("#showAnswer").html("");
+    }
+    
+</script>
+
+
+

@@ -1,0 +1,207 @@
+﻿@model FourN.Data.Models.Affairs
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">@ViewData["nameProject"]</</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<div class="card card-primary">
+    <form method="post" asp-controller="Affair" id="form-submit" asp-action="Create">
+        <div class="card-body">
+            <div class="form-row">
+                <input type="hidden" value="@ViewData["projectid"]" asp-for="projectid" />
+                <input value="@ViewData["type"]" type="hidden" asp-for="typeofaffair" />
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Start Time Project: &nbsp;&nbsp;&nbsp;</label><i style="font-size: 20px">@ViewData["startformat"]</i>
+                    <input value="@ViewData["start"]" readonly type="hidden" id="timestartplan" />
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">End Time Project:  &nbsp;&nbsp;&nbsp;</label><i style="font-size: 20px">@ViewData["endformat"]</i>
+                    <input value="@ViewData["end"]" readonly type="hidden" id="timeendplan" />
+                </div>
+
+                <div class="form-group col-md-12">
+                    <label for="inputEmail4">Affair Name</label>
+                    <input asp-for="affairname" placeholder="Enter Name" class="form-control" required />
+                </div>
+            </div>
+            <div class="form-row">
+                @if (Int32.Parse(ViewData["type"].ToString()) == 2)
+                {
+                    <div class="form-group col-md-8">
+                        <label>Design</label>
+                        <div class="row" style="max-height: 200px; overflow-y: scroll;">
+                            <div class="col-md-12">
+                                <table class="table" style="border: none;">
+                                    @foreach (var affair in ViewBag.viewDesign)
+                                    {
+                                        foreach (var user in ViewBag.viewUser)
+                                        {
+                                            if (affair.userid == user.userid)
+                                            {
+
+                                                <tr>
+                                                    <td>@affair.affairname</td>
+                                                    <td>@user.username</td>
+                                                    <td>@affair.endtimeplan.ToString(string.Format("dd/MM/yyyy HH:mm:ss"))</td>
+                                                </tr>
+
+                                            }
+                                        }
+                                    }
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Member</label>
+                        <select asp-for="userid" class="custom-select">
+                            <option value="0">Choose Member </option>
+                            @foreach (var u in ViewBag.viewUser)
+                            {
+                                <option value="@u.userid" alt="check option">@u.username </option>
+                            }
+                        </select>
+                    </div>
+                }
+                else if (Int32.Parse(ViewData["type"].ToString()) == 3)
+                {
+                    <div class="form-group col-md-8">
+                        <label>Implementation</label>
+                        <div class="row" style="max-height: 200px; overflow-y: scroll;">
+                            <div class="col-md-12">
+                                <table class="table" style="border: none;">
+                                    @foreach (var affair in ViewBag.viewImplement)
+                                    {
+                                        foreach (var user in ViewBag.viewUser)
+                                        {
+                                            if (affair.userid == user.userid)
+                                            {
+                                                <tr>
+                                                    <td>@affair.affairname</td>
+                                                    <td>@user.username</td>
+                                                    <td>@affair.endtimeplan.ToString(string.Format("dd/MM/yyyy HH:mm:ss"))</td>
+                                                </tr>
+                                            }
+                                        }
+                                    }
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Member</label>
+                        <select asp-for="userid" class="custom-select">
+                            <option value="0">Choose Member </option>
+                            @foreach (var u in ViewBag.viewUser)
+                            {
+                                <option value="@u.userid" alt="check option">@u.username </option>
+                            }
+                        </select>
+                    </div>
+                }
+                else if (Int32.Parse(ViewData["type"].ToString()) == 4)
+                {
+                    <div class="form-group col-md-8">
+                        <label>Testing</label>
+                        <div class="row" style="max-height: 200px; overflow-y: scroll;">
+                            <div class="col-md-12">
+                                <table class="table" style="border: none;">
+                                    @foreach (var affair in ViewBag.viewTest)
+                                    {
+                                        foreach (var user in ViewBag.viewUser)
+                                        {
+                                            if (affair.userid == user.userid)
+                                            {
+                                                <tr>
+                                                    <td>@affair.affairname</td>
+                                                    <td>@user.username</td>
+                                                    <td>@affair.endtimeplan.ToString(string.Format("dd/MM/yyyy HH:mm:ss"))</td>
+                                                </tr>
+                                            }
+                                        }
+                                    }
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col-md-4">
+                        <label>Member</label>
+                        <select asp-for="userid" class="custom-select">
+                            <option value="0">Choose Member </option>
+                            @foreach (var u in ViewBag.viewUser)
+                            {
+                                <option value="@u.userid" alt="check option">@u.username </option>
+                            }
+                        </select>
+                    </div>
+
+                }
+                else
+                {
+                    <div class="form-group col-md-12">
+                        <label>Member</label>
+                        <select asp-for="userid" class="custom-select">
+                            <option value="0">Choose Member </option>
+                            @foreach (var u in ViewBag.viewUser)
+                            {
+                                <option value="@u.userid" alt="check option">@u.username </option>
+                            }
+                        </select>
+                    </div>
+                }
+                <input asp-for="status" value="0" type="hidden" />
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Start Time (Plan) From: <i id="maxtimeget"></i></label>
+                    <div class="input-group date" data-target-input="nearest">
+                        <input required asp-for="starttimeplan" type="datetime-local" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">End Time (Plan)</label>
+                    <div class="input-group date" data-target-input="nearest">
+                        <input required asp-for="endtimeplan" type="datetime-local" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Note From Member</label>
+                <textarea asp-for="notemember" placeholder="Enter Note Of Document" class="form-control summerynote"></textarea>
+            </div>
+            <div class="form-group">
+                <label>Note From Leader</label>
+                <textarea asp-for="noteleader" placeholder="Enter Note Of Document" class="form-control summerynote"></textarea>
+            </div>
+        </div>
+        <!-- /.card-body -->
+
+        <div class="card-footer">
+            @*<button onclick="return checkTimeAffair()" type="button" class="btn btn-primary" id="btn-submit">Submit</button>*@
+            <button type="button" class="btn btn-primary" id="btn-submit">Submit</button>
+        </div>
+    </form>
+    @*}*@
+</div>
+<script>
+    $(document).ready(function () {
+        //create message
+        $('#btn-submit').click(function () {
+            checkTimeAffair();
+            var user = $("#userid option:selected").text();
+            var message = "task";
+            connectionNotify.invoke("SendNotify", user, message).catch(function (err) {
+                return console.error(err.toString());
+            });
+            event.preventDefault();
+            $('#form-submit').submit();
+        });
+    });
+</script>
+<script src="~/js/notify.js"></script>

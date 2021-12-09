@@ -1,0 +1,26 @@
+﻿@model IEnumerable<DepartmentViewModel>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container mb-5 mt-2">
+    <div class="row">
+        @foreach (var item in Model)
+        {
+            <div class="col-sm-4" style="padding-top:10px;">
+                <div class="card" style="width: 350px;">
+                    <a href="#">
+                        <img class="card-img-top" src="@item.Image" style="width: 350px; height: 165px" alt="Card image cap" />
+                    </a>
+                    <div class="card-body" style="height: 315px">
+                        <a href="Detail/@item.DepartmentId"><h5 class="card-title">@item.Title</h5></a>
+                        <p class="card-text">@Html.Raw(item.ShortDesc)</p>
+                    </div>
+                    <div class="card-body">
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+

@@ -1,0 +1,103 @@
+﻿@model GroupViewModel
+<div class="row">
+    <!-- left column -->
+    <div class="col-md-12">
+        <!-- general form elements -->
+        <div class="card card-primary">
+            <div class="card-header">
+                <h3 class="card-title">Edit</h3>
+            </div>
+            <!-- /.card-header -->
+            <!-- form start -->
+            <form method="post" asp-action="Edit" enctype="multipart/form-data" id="updateGroupForm">
+                <input type="hidden" asp-for="GroupId" />
+                <div class="card-body">
+                    <div class="form-group">
+                        <label>Name (<span style="color:red">*</span>) : </label>
+                        <input type="text" class="form-control" id="txtUsername" asp-for="GroupName">
+                    </div>
+                    <div class="form-group">
+                        <label asp-for="LeaderId">Choose a Leader (<span style="color:red">*</span>) : </label>
+                        <select id="fourn-leaderid" asp-for="LeaderId" class="form-control select2-blue">
+                            @foreach (var item in Model.SelectListLeaders)
+                            {
+                                @if (Model.Users.Any() && Model.Users.Where(x => x.Isleader == true).Select(x => x.UserID).Contains(Int32.Parse(item.Value.ToString())))
+                                {
+                                    <option value="@item.Value" selected>@item.Text</option>
+                                }
+                                else
+                                {
+                                    <option value="@item.Value">@item.Text</option>
+                                }
+                            }
+                        </select>
+                        <div id="fourn-error"></div>
+                    </div>
+                    <div class="form-group">
+                        <label>Members (<span style="color:red">*</span>) : </label>
+                        <div class="select2-purple">
+                            <select class="select2" asp-for="Listmembersid" multiple="multiple" data-placeholder="Select members" data-dropdown-css-class="select2-purple" style="width: 100%;">
+                                @foreach (var item in Model.SelectListStaffs)
+                                {
+                                    @if (Model.Users.Any() && Model.Users.Where(x => x.Isleader == false).Select(x => x.UserID).Contains(Int32.Parse(item.Value.ToString())))
+                                    {
+                                        <option value="@item.Value" selected>@item.Text</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@item.Value">@item.Text</option>
+                                    }
+                                 }
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <!-- /.card-body -->
+
+                <div class="card-footer">
+                    <button type="submit" class="btn btn-primary" id="btnSubmit">Submit</button>
+                    <a type="submit" class="btn btn-warning" asp-action="Index">Back</a>
+                </div>
+            </form>
+        </div>
+        <!-- /.card -->
+    </div>
+</div>
+<script>
+    $("#updateGroupForm").submit(function () {
+        var count = 0;
+        $(".Error").remove();
+        if ($("#GroupName").val().trim() == "" || $("#GroupName").val() == null) {
+            $("<div><i style='color:red' class='Error'>Can't not blank name</div>").insertAfter("#GroupName");
+            count++;
+        } else {
+            var name = $("#GroupName").val()
+            $.ajax({
+                url: "/Group/Group/checkGroupName",
+                method: "post",
+                data: { name: name },
+                success: function (res) {
+                    if (res.result == false) {
+                        $("<div><i style='color:red' class='Error'>Name is already, please try again.</div>").insertAfter("#GroupName");
+                        count++;
+                    }
+                },
+                error: function () {
+                    toastr.success('Processing has error, please try again.')
+                }
+            });
+        }
+        if ($("#fourn-leaderid :selected")[0].value == "") {
+            $("<div><i style='color:red' class='Error'>Can't not blank leader</div>").insertAfter("#fourn-leaderid");
+            count++;
+        }
+        if ($("#Listmembersid").val().length == 0) {
+            $("<div><i style='color:red' class='Error'>Can't not blank member</div>").insertAfter("#Listmembersid");
+            count++;
+        }
+        if (count > 0) {
+            toastr.error("Form is not validate, please check form and try again.")
+            return false;
+        }
+    });
+</script>

@@ -1,0 +1,83 @@
+﻿@model IEnumerable<FourN.Data.ViewModel.GroupViewModel>
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+            <div class="card-header">
+                <h3 class="card-title">Group</h3>
+
+                <div class="card-tools">
+                    <div class="input-group input-group-sm" style="width: 150px;">
+                    </div>
+                </div>
+            </div>
+            <div class="container text-right" style="padding: 10px">
+                <a class="btn btn-primary btn-rounded" href="@Url.Action("Create")">Create new</a>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body p-0" id="index_partial">
+                <partial name="_Index" />
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+</div>
+<div class="modal fade" id="delete-model">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title">Confirm</h4>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form novalidate asp-action="Delete" data-ajax="true" data-ajax-method="post" data-ajax-success="OnDeleteRecordSuccess" data-ajax-failure="OnCallFailure">
+                <div class="modal-body">
+                    <p>Are your sure ?</p>
+                </div>
+                <input type="hidden" name="id" id="deleteId" />
+                <div class="modal-footer justify-content-between">
+                    <button class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Confirm</button>
+                </div>
+            </form>
+        </div>
+        <!-- /.modal-content -->
+    </div>
+    <!-- /.modal-dialog -->
+</div>
+<script>
+    $(document).ready(function () {
+        //add color background
+        $('li.Group').css('background-color', 'azure');
+    });
+    function showAll() {
+        $.ajax({
+            url: "/Group/Group/IndexPartial",
+            method: "get",
+            success: function (res) {
+                $("#index_partial").html("");
+                $("#index_partial").html(res.html);
+            },
+        })
+    }
+    function DeleteGroup(id) {
+        $('#deleteId').val(id);
+        $('#delete-model').modal("show");
+    }
+    function OnDeleteRecordSuccess(data) {
+        $('#delete-model').modal("hide");
+        if (data.isSuccess == false) {
+            toastr.error("Failed !!!");
+        } else {
+            toastr.success("Completed !!!");
+        }
+    }
+    function OnCallFailure(data) {
+        toastr.error("Failed !!!");
+    }
+</script>
+<script src="~/js/notify.js"></script>

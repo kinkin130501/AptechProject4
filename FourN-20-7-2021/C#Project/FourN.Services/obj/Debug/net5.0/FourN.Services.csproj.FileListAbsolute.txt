@@ -1,0 +1,270 @@
+C:\Users\dungd\OneDrive\Desktop\PRJ4\4N\FourN.Services\obj\Debug\net5.0\FourN.Services.csprojAssemblyReference.cache
+C:\Users\dungd\OneDrive\Desktop\PRJ4\4N\FourN.Services\obj\Debug\net5.0\FourN.Services.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\dungd\OneDrive\Desktop\PRJ4\4N\FourN.Services\obj\Debug\net5.0\FourN.Services.AssemblyInfoInputs.cache
+C:\Users\dungd\OneDrive\Desktop\PRJ4\4N\FourN.Services\obj\Debug\net5.0\FourN.Services.AssemblyInfo.cs
+C:\Users\dungd\OneDrive\Desktop\PRJ4\4N\FourN.Services\obj\Debug\net5.0\FourN.Services.csproj.CoreCompileInputs.cache
+C:\Users\dungd\OneDrive\Desktop\PRJ4\4N\FourN.Services\bin\Debug\net5.0\FourN.Services.deps.json
+C:\Users\dungd\OneDrive\Desktop\PRJ4\4N\FourN.Services\bin\Debug\net5.0\FourN.Services.dll
+C:\Users\dungd\OneDrive\Desktop\PRJ4\4N\FourN.Services\bin\Debug\net5.0\ref\FourN.Services.dll
+C:\Users\dungd\OneDrive\Desktop\PRJ4\4N\FourN.Services\bin\Debug\net5.0\FourN.Services.pdb
+C:\Users\dungd\OneDrive\Desktop\PRJ4\4N\FourN.Services\bin\Debug\net5.0\FourN.Data.dll
+C:\Users\dungd\OneDrive\Desktop\PRJ4\4N\FourN.Services\bin\Debug\net5.0\FourN.Data.pdb
+C:\Users\dungd\OneDrive\Desktop\PRJ4\4N\FourN.Services\obj\Debug\net5.0\FourN.Services.csproj.CopyComplete
+C:\Users\dungd\OneDrive\Desktop\PRJ4\4N\FourN.Services\obj\Debug\net5.0\FourN.Services.dll
+C:\Users\dungd\OneDrive\Desktop\PRJ4\4N\FourN.Services\obj\Debug\net5.0\ref\FourN.Services.dll
+C:\Users\dungd\OneDrive\Desktop\PRJ4\4N\FourN.Services\obj\Debug\net5.0\FourN.Services.pdb
+E:\Project4\L6\FourN.Services\bin\Debug\net5.0\FourN.Services.deps.json
+E:\Project4\L6\FourN.Services\bin\Debug\net5.0\FourN.Services.dll
+E:\Project4\L6\FourN.Services\bin\Debug\net5.0\ref\FourN.Services.dll
+E:\Project4\L6\FourN.Services\bin\Debug\net5.0\FourN.Services.pdb
+E:\Project4\L6\FourN.Services\bin\Debug\net5.0\FourN.Data.dll
+E:\Project4\L6\FourN.Services\bin\Debug\net5.0\FourN.Data.pdb
+E:\Project4\L6\FourN.Services\obj\Debug\net5.0\FourN.Services.csprojAssemblyReference.cache
+E:\Project4\L6\FourN.Services\obj\Debug\net5.0\FourN.Services.GeneratedMSBuildEditorConfig.editorconfig
+E:\Project4\L6\FourN.Services\obj\Debug\net5.0\FourN.Services.AssemblyInfoInputs.cache
+E:\Project4\L6\FourN.Services\obj\Debug\net5.0\FourN.Services.AssemblyInfo.cs
+E:\Project4\L6\FourN.Services\obj\Debug\net5.0\FourN.Services.csproj.CoreCompileInputs.cache
+E:\Project4\L6\FourN.Services\obj\Debug\net5.0\FourN.Services.csproj.CopyComplete
+E:\Project4\L6\FourN.Services\obj\Debug\net5.0\FourN.Services.dll
+E:\Project4\L6\FourN.Services\obj\Debug\net5.0\ref\FourN.Services.dll
+E:\Project4\L6\FourN.Services\obj\Debug\net5.0\FourN.Services.pdb
+E:\Project4\L6\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Services.deps.json
+E:\Project4\L6\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Services.dll
+E:\Project4\L6\C#Project\FourN.Services\bin\Debug\net5.0\ref\FourN.Services.dll
+E:\Project4\L6\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Services.pdb
+E:\Project4\L6\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Data.dll
+E:\Project4\L6\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Data.pdb
+E:\Project4\L6\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.csprojAssemblyReference.cache
+E:\Project4\L6\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.GeneratedMSBuildEditorConfig.editorconfig
+E:\Project4\L6\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.AssemblyInfoInputs.cache
+E:\Project4\L6\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.AssemblyInfo.cs
+E:\Project4\L6\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.csproj.CoreCompileInputs.cache
+E:\Project4\L6\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.csproj.CopyComplete
+E:\Project4\L6\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.dll
+E:\Project4\L6\C#Project\FourN.Services\obj\Debug\net5.0\ref\FourN.Services.dll
+E:\Project4\L6\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.pdb
+D:\5.Aptech\30.Final\code\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Services.deps.json
+D:\5.Aptech\30.Final\code\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Services.dll
+D:\5.Aptech\30.Final\code\C#Project\FourN.Services\bin\Debug\net5.0\ref\FourN.Services.dll
+D:\5.Aptech\30.Final\code\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Services.pdb
+D:\5.Aptech\30.Final\code\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Data.dll
+D:\5.Aptech\30.Final\code\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Data.pdb
+D:\5.Aptech\30.Final\code\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.csprojAssemblyReference.cache
+D:\5.Aptech\30.Final\code\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.GeneratedMSBuildEditorConfig.editorconfig
+D:\5.Aptech\30.Final\code\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.AssemblyInfoInputs.cache
+D:\5.Aptech\30.Final\code\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.AssemblyInfo.cs
+D:\5.Aptech\30.Final\code\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.csproj.CoreCompileInputs.cache
+D:\5.Aptech\30.Final\code\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.csproj.CopyComplete
+D:\5.Aptech\30.Final\code\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.dll
+D:\5.Aptech\30.Final\code\C#Project\FourN.Services\obj\Debug\net5.0\ref\FourN.Services.dll
+D:\5.Aptech\30.Final\code\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.pdb
+E:\backup\code\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Services.deps.json
+E:\backup\code\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Services.dll
+E:\backup\code\C#Project\FourN.Services\bin\Debug\net5.0\ref\FourN.Services.dll
+E:\backup\code\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Services.pdb
+E:\backup\code\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Data.dll
+E:\backup\code\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Data.pdb
+E:\backup\code\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.csprojAssemblyReference.cache
+E:\backup\code\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.GeneratedMSBuildEditorConfig.editorconfig
+E:\backup\code\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.AssemblyInfoInputs.cache
+E:\backup\code\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.AssemblyInfo.cs
+E:\backup\code\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.csproj.CoreCompileInputs.cache
+E:\backup\code\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.csproj.CopyComplete
+E:\backup\code\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.dll
+E:\backup\code\C#Project\FourN.Services\obj\Debug\net5.0\ref\FourN.Services.dll
+E:\backup\code\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.pdb
+C:\Users\dungd\OneDrive\Desktop\FourN (1)\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Services.deps.json
+C:\Users\dungd\OneDrive\Desktop\FourN (1)\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Services.dll
+C:\Users\dungd\OneDrive\Desktop\FourN (1)\C#Project\FourN.Services\bin\Debug\net5.0\ref\FourN.Services.dll
+C:\Users\dungd\OneDrive\Desktop\FourN (1)\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Services.pdb
+C:\Users\dungd\OneDrive\Desktop\FourN (1)\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Data.dll
+C:\Users\dungd\OneDrive\Desktop\FourN (1)\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Data.pdb
+C:\Users\dungd\OneDrive\Desktop\FourN (1)\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.csprojAssemblyReference.cache
+C:\Users\dungd\OneDrive\Desktop\FourN (1)\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\dungd\OneDrive\Desktop\FourN (1)\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.AssemblyInfoInputs.cache
+C:\Users\dungd\OneDrive\Desktop\FourN (1)\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.AssemblyInfo.cs
+C:\Users\dungd\OneDrive\Desktop\FourN (1)\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.csproj.CoreCompileInputs.cache
+C:\Users\dungd\OneDrive\Desktop\FourN (1)\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.csproj.CopyComplete
+C:\Users\dungd\OneDrive\Desktop\FourN (1)\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.dll
+C:\Users\dungd\OneDrive\Desktop\FourN (1)\C#Project\FourN.Services\obj\Debug\net5.0\ref\FourN.Services.dll
+C:\Users\dungd\OneDrive\Desktop\FourN (1)\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.pdb
+E:\backup\FourN\FourN\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Services.deps.json
+E:\backup\FourN\FourN\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Services.dll
+E:\backup\FourN\FourN\C#Project\FourN.Services\bin\Debug\net5.0\ref\FourN.Services.dll
+E:\backup\FourN\FourN\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Services.pdb
+E:\backup\FourN\FourN\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Data.dll
+E:\backup\FourN\FourN\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Data.pdb
+E:\backup\FourN\FourN\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.csprojAssemblyReference.cache
+E:\backup\FourN\FourN\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.GeneratedMSBuildEditorConfig.editorconfig
+E:\backup\FourN\FourN\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.AssemblyInfoInputs.cache
+E:\backup\FourN\FourN\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.AssemblyInfo.cs
+E:\backup\FourN\FourN\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.csproj.CoreCompileInputs.cache
+E:\backup\FourN\FourN\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.csproj.CopyComplete
+E:\backup\FourN\FourN\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.dll
+E:\backup\FourN\FourN\C#Project\FourN.Services\obj\Debug\net5.0\ref\FourN.Services.dll
+E:\backup\FourN\FourN\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.pdb
+F:\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Services.deps.json
+F:\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Services.dll
+F:\C#Project\FourN.Services\bin\Debug\net5.0\ref\FourN.Services.dll
+F:\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Services.pdb
+F:\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Data.dll
+F:\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Data.pdb
+F:\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.csprojAssemblyReference.cache
+F:\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.GeneratedMSBuildEditorConfig.editorconfig
+F:\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.AssemblyInfoInputs.cache
+F:\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.AssemblyInfo.cs
+F:\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.csproj.CoreCompileInputs.cache
+F:\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.csproj.CopyComplete
+F:\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.dll
+F:\C#Project\FourN.Services\obj\Debug\net5.0\ref\FourN.Services.dll
+F:\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.pdb
+C:\Users\dungd\OneDrive\Desktop\C#Project\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.csprojAssemblyReference.cache
+C:\Users\dungd\OneDrive\Desktop\C#Project\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\dungd\OneDrive\Desktop\C#Project\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.AssemblyInfoInputs.cache
+C:\Users\dungd\OneDrive\Desktop\C#Project\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.AssemblyInfo.cs
+C:\Users\dungd\OneDrive\Desktop\C#Project\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.csproj.CoreCompileInputs.cache
+C:\Users\dungd\OneDrive\Desktop\C#Project\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Services.deps.json
+C:\Users\dungd\OneDrive\Desktop\C#Project\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Services.dll
+C:\Users\dungd\OneDrive\Desktop\C#Project\C#Project\FourN.Services\bin\Debug\net5.0\ref\FourN.Services.dll
+C:\Users\dungd\OneDrive\Desktop\C#Project\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Services.pdb
+C:\Users\dungd\OneDrive\Desktop\C#Project\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Data.dll
+C:\Users\dungd\OneDrive\Desktop\C#Project\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Data.pdb
+C:\Users\dungd\OneDrive\Desktop\C#Project\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.csproj.CopyComplete
+C:\Users\dungd\OneDrive\Desktop\C#Project\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.dll
+C:\Users\dungd\OneDrive\Desktop\C#Project\C#Project\FourN.Services\obj\Debug\net5.0\ref\FourN.Services.dll
+C:\Users\dungd\OneDrive\Desktop\C#Project\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.pdb
+E:\JLPT\07-2021\xong\C#Project\C#Project\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Services.deps.json
+E:\JLPT\07-2021\xong\C#Project\C#Project\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Services.dll
+E:\JLPT\07-2021\xong\C#Project\C#Project\C#Project\FourN.Services\bin\Debug\net5.0\ref\FourN.Services.dll
+E:\JLPT\07-2021\xong\C#Project\C#Project\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Services.pdb
+E:\JLPT\07-2021\xong\C#Project\C#Project\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Data.dll
+E:\JLPT\07-2021\xong\C#Project\C#Project\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Data.pdb
+E:\JLPT\07-2021\xong\C#Project\C#Project\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.csprojAssemblyReference.cache
+E:\JLPT\07-2021\xong\C#Project\C#Project\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.GeneratedMSBuildEditorConfig.editorconfig
+E:\JLPT\07-2021\xong\C#Project\C#Project\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.AssemblyInfoInputs.cache
+E:\JLPT\07-2021\xong\C#Project\C#Project\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.AssemblyInfo.cs
+E:\JLPT\07-2021\xong\C#Project\C#Project\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.csproj.CoreCompileInputs.cache
+E:\JLPT\07-2021\xong\C#Project\C#Project\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.csproj.CopyComplete
+E:\JLPT\07-2021\xong\C#Project\C#Project\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.dll
+E:\JLPT\07-2021\xong\C#Project\C#Project\C#Project\FourN.Services\obj\Debug\net5.0\ref\FourN.Services.dll
+E:\JLPT\07-2021\xong\C#Project\C#Project\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.pdb
+E:\Project4\L9\FourN\FourN\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Services.deps.json
+E:\Project4\L9\FourN\FourN\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Services.dll
+E:\Project4\L9\FourN\FourN\C#Project\FourN.Services\bin\Debug\net5.0\ref\FourN.Services.dll
+E:\Project4\L9\FourN\FourN\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Services.pdb
+E:\Project4\L9\FourN\FourN\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Data.dll
+E:\Project4\L9\FourN\FourN\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Data.pdb
+E:\Project4\L9\FourN\FourN\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.csprojAssemblyReference.cache
+E:\Project4\L9\FourN\FourN\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.GeneratedMSBuildEditorConfig.editorconfig
+E:\Project4\L9\FourN\FourN\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.AssemblyInfoInputs.cache
+E:\Project4\L9\FourN\FourN\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.AssemblyInfo.cs
+E:\Project4\L9\FourN\FourN\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.csproj.CoreCompileInputs.cache
+E:\Project4\L9\FourN\FourN\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.csproj.CopyComplete
+E:\Project4\L9\FourN\FourN\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.dll
+E:\Project4\L9\FourN\FourN\C#Project\FourN.Services\obj\Debug\net5.0\ref\FourN.Services.dll
+E:\Project4\L9\FourN\FourN\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.pdb
+C:\Users\dungd\OneDrive\Desktop\FourN 19-7\FourN\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Services.deps.json
+C:\Users\dungd\OneDrive\Desktop\FourN 19-7\FourN\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Services.dll
+C:\Users\dungd\OneDrive\Desktop\FourN 19-7\FourN\C#Project\FourN.Services\bin\Debug\net5.0\ref\FourN.Services.dll
+C:\Users\dungd\OneDrive\Desktop\FourN 19-7\FourN\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Services.pdb
+C:\Users\dungd\OneDrive\Desktop\FourN 19-7\FourN\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Data.dll
+C:\Users\dungd\OneDrive\Desktop\FourN 19-7\FourN\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Data.pdb
+C:\Users\dungd\OneDrive\Desktop\FourN 19-7\FourN\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.csprojAssemblyReference.cache
+C:\Users\dungd\OneDrive\Desktop\FourN 19-7\FourN\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\dungd\OneDrive\Desktop\FourN 19-7\FourN\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.AssemblyInfoInputs.cache
+C:\Users\dungd\OneDrive\Desktop\FourN 19-7\FourN\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.AssemblyInfo.cs
+C:\Users\dungd\OneDrive\Desktop\FourN 19-7\FourN\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.csproj.CoreCompileInputs.cache
+C:\Users\dungd\OneDrive\Desktop\FourN 19-7\FourN\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.csproj.CopyComplete
+C:\Users\dungd\OneDrive\Desktop\FourN 19-7\FourN\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.dll
+C:\Users\dungd\OneDrive\Desktop\FourN 19-7\FourN\C#Project\FourN.Services\obj\Debug\net5.0\ref\FourN.Services.dll
+C:\Users\dungd\OneDrive\Desktop\FourN 19-7\FourN\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.pdb
+E:\JLPT\07-2021\xong\FourN-20-7-2021\FourN-20-7-2021\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Services.deps.json
+E:\JLPT\07-2021\xong\FourN-20-7-2021\FourN-20-7-2021\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Services.dll
+E:\JLPT\07-2021\xong\FourN-20-7-2021\FourN-20-7-2021\C#Project\FourN.Services\bin\Debug\net5.0\ref\FourN.Services.dll
+E:\JLPT\07-2021\xong\FourN-20-7-2021\FourN-20-7-2021\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Services.pdb
+E:\JLPT\07-2021\xong\FourN-20-7-2021\FourN-20-7-2021\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Data.dll
+E:\JLPT\07-2021\xong\FourN-20-7-2021\FourN-20-7-2021\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Data.pdb
+E:\JLPT\07-2021\xong\FourN-20-7-2021\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.csprojAssemblyReference.cache
+E:\JLPT\07-2021\xong\FourN-20-7-2021\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.GeneratedMSBuildEditorConfig.editorconfig
+E:\JLPT\07-2021\xong\FourN-20-7-2021\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.AssemblyInfoInputs.cache
+E:\JLPT\07-2021\xong\FourN-20-7-2021\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.AssemblyInfo.cs
+E:\JLPT\07-2021\xong\FourN-20-7-2021\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.csproj.CoreCompileInputs.cache
+E:\JLPT\07-2021\xong\FourN-20-7-2021\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.csproj.CopyComplete
+E:\JLPT\07-2021\xong\FourN-20-7-2021\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.dll
+E:\JLPT\07-2021\xong\FourN-20-7-2021\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\ref\FourN.Services.dll
+E:\JLPT\07-2021\xong\FourN-20-7-2021\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.pdb
+C:\Users\dungd\OneDrive\Desktop\FourN-21-7-2021\FourN-20-7-2021\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Services.deps.json
+C:\Users\dungd\OneDrive\Desktop\FourN-21-7-2021\FourN-20-7-2021\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Services.dll
+C:\Users\dungd\OneDrive\Desktop\FourN-21-7-2021\FourN-20-7-2021\C#Project\FourN.Services\bin\Debug\net5.0\ref\FourN.Services.dll
+C:\Users\dungd\OneDrive\Desktop\FourN-21-7-2021\FourN-20-7-2021\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Services.pdb
+C:\Users\dungd\OneDrive\Desktop\FourN-21-7-2021\FourN-20-7-2021\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Data.dll
+C:\Users\dungd\OneDrive\Desktop\FourN-21-7-2021\FourN-20-7-2021\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Data.pdb
+C:\Users\dungd\OneDrive\Desktop\FourN-21-7-2021\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.csprojAssemblyReference.cache
+C:\Users\dungd\OneDrive\Desktop\FourN-21-7-2021\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\dungd\OneDrive\Desktop\FourN-21-7-2021\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.AssemblyInfoInputs.cache
+C:\Users\dungd\OneDrive\Desktop\FourN-21-7-2021\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.AssemblyInfo.cs
+C:\Users\dungd\OneDrive\Desktop\FourN-21-7-2021\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.csproj.CoreCompileInputs.cache
+C:\Users\dungd\OneDrive\Desktop\FourN-21-7-2021\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.csproj.CopyComplete
+C:\Users\dungd\OneDrive\Desktop\FourN-21-7-2021\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.dll
+C:\Users\dungd\OneDrive\Desktop\FourN-21-7-2021\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\ref\FourN.Services.dll
+C:\Users\dungd\OneDrive\Desktop\FourN-21-7-2021\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.pdb
+C:\Users\dungd\OneDrive\Desktop\FourN-23-7-2021\FourN-20-7-2021\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Services.deps.json
+C:\Users\dungd\OneDrive\Desktop\FourN-23-7-2021\FourN-20-7-2021\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Services.dll
+C:\Users\dungd\OneDrive\Desktop\FourN-23-7-2021\FourN-20-7-2021\C#Project\FourN.Services\bin\Debug\net5.0\ref\FourN.Services.dll
+C:\Users\dungd\OneDrive\Desktop\FourN-23-7-2021\FourN-20-7-2021\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Services.pdb
+C:\Users\dungd\OneDrive\Desktop\FourN-23-7-2021\FourN-20-7-2021\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Data.dll
+C:\Users\dungd\OneDrive\Desktop\FourN-23-7-2021\FourN-20-7-2021\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Data.pdb
+C:\Users\dungd\OneDrive\Desktop\FourN-23-7-2021\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.csprojAssemblyReference.cache
+C:\Users\dungd\OneDrive\Desktop\FourN-23-7-2021\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\dungd\OneDrive\Desktop\FourN-23-7-2021\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.AssemblyInfoInputs.cache
+C:\Users\dungd\OneDrive\Desktop\FourN-23-7-2021\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.AssemblyInfo.cs
+C:\Users\dungd\OneDrive\Desktop\FourN-23-7-2021\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.csproj.CoreCompileInputs.cache
+C:\Users\dungd\OneDrive\Desktop\FourN-23-7-2021\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.csproj.CopyComplete
+C:\Users\dungd\OneDrive\Desktop\FourN-23-7-2021\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.dll
+C:\Users\dungd\OneDrive\Desktop\FourN-23-7-2021\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\ref\FourN.Services.dll
+C:\Users\dungd\OneDrive\Desktop\FourN-23-7-2021\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.pdb
+C:\Users\dungd\OneDrive\Desktop\FourN-25-7-2021\FourN-20-7-2021\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Services.deps.json
+C:\Users\dungd\OneDrive\Desktop\FourN-25-7-2021\FourN-20-7-2021\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Services.dll
+C:\Users\dungd\OneDrive\Desktop\FourN-25-7-2021\FourN-20-7-2021\C#Project\FourN.Services\bin\Debug\net5.0\ref\FourN.Services.dll
+C:\Users\dungd\OneDrive\Desktop\FourN-25-7-2021\FourN-20-7-2021\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Services.pdb
+C:\Users\dungd\OneDrive\Desktop\FourN-25-7-2021\FourN-20-7-2021\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Data.dll
+C:\Users\dungd\OneDrive\Desktop\FourN-25-7-2021\FourN-20-7-2021\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Data.pdb
+C:\Users\dungd\OneDrive\Desktop\FourN-25-7-2021\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.csprojAssemblyReference.cache
+C:\Users\dungd\OneDrive\Desktop\FourN-25-7-2021\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\dungd\OneDrive\Desktop\FourN-25-7-2021\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.AssemblyInfoInputs.cache
+C:\Users\dungd\OneDrive\Desktop\FourN-25-7-2021\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.AssemblyInfo.cs
+C:\Users\dungd\OneDrive\Desktop\FourN-25-7-2021\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.csproj.CoreCompileInputs.cache
+C:\Users\dungd\OneDrive\Desktop\FourN-25-7-2021\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.csproj.CopyComplete
+C:\Users\dungd\OneDrive\Desktop\FourN-25-7-2021\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.dll
+C:\Users\dungd\OneDrive\Desktop\FourN-25-7-2021\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\ref\FourN.Services.dll
+C:\Users\dungd\OneDrive\Desktop\FourN-25-7-2021\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.pdb
+C:\Users\dungd\OneDrive\Desktop\FourN-27-7-2021\FourN-20-7-2021\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Services.deps.json
+C:\Users\dungd\OneDrive\Desktop\FourN-27-7-2021\FourN-20-7-2021\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Services.dll
+C:\Users\dungd\OneDrive\Desktop\FourN-27-7-2021\FourN-20-7-2021\C#Project\FourN.Services\bin\Debug\net5.0\ref\FourN.Services.dll
+C:\Users\dungd\OneDrive\Desktop\FourN-27-7-2021\FourN-20-7-2021\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Services.pdb
+C:\Users\dungd\OneDrive\Desktop\FourN-27-7-2021\FourN-20-7-2021\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Data.dll
+C:\Users\dungd\OneDrive\Desktop\FourN-27-7-2021\FourN-20-7-2021\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Data.pdb
+C:\Users\dungd\OneDrive\Desktop\FourN-27-7-2021\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.csprojAssemblyReference.cache
+C:\Users\dungd\OneDrive\Desktop\FourN-27-7-2021\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\dungd\OneDrive\Desktop\FourN-27-7-2021\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.AssemblyInfoInputs.cache
+C:\Users\dungd\OneDrive\Desktop\FourN-27-7-2021\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.AssemblyInfo.cs
+C:\Users\dungd\OneDrive\Desktop\FourN-27-7-2021\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.csproj.CoreCompileInputs.cache
+C:\Users\dungd\OneDrive\Desktop\FourN-27-7-2021\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.csproj.CopyComplete
+C:\Users\dungd\OneDrive\Desktop\FourN-27-7-2021\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.dll
+C:\Users\dungd\OneDrive\Desktop\FourN-27-7-2021\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\ref\FourN.Services.dll
+C:\Users\dungd\OneDrive\Desktop\FourN-27-7-2021\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.pdb
+E:\FPT-Aptech\Project Sem4\FourN-final\FourN-final\FourN-20-7-2021\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Services.deps.json
+E:\FPT-Aptech\Project Sem4\FourN-final\FourN-final\FourN-20-7-2021\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Services.dll
+E:\FPT-Aptech\Project Sem4\FourN-final\FourN-final\FourN-20-7-2021\C#Project\FourN.Services\bin\Debug\net5.0\ref\FourN.Services.dll
+E:\FPT-Aptech\Project Sem4\FourN-final\FourN-final\FourN-20-7-2021\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Services.pdb
+E:\FPT-Aptech\Project Sem4\FourN-final\FourN-final\FourN-20-7-2021\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Data.dll
+E:\FPT-Aptech\Project Sem4\FourN-final\FourN-final\FourN-20-7-2021\C#Project\FourN.Services\bin\Debug\net5.0\FourN.Data.pdb
+E:\FPT-Aptech\Project Sem4\FourN-final\FourN-final\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.csprojAssemblyReference.cache
+E:\FPT-Aptech\Project Sem4\FourN-final\FourN-final\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.GeneratedMSBuildEditorConfig.editorconfig
+E:\FPT-Aptech\Project Sem4\FourN-final\FourN-final\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.AssemblyInfoInputs.cache
+E:\FPT-Aptech\Project Sem4\FourN-final\FourN-final\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.AssemblyInfo.cs
+E:\FPT-Aptech\Project Sem4\FourN-final\FourN-final\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.csproj.CoreCompileInputs.cache
+E:\FPT-Aptech\Project Sem4\FourN-final\FourN-final\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.csproj.CopyComplete
+E:\FPT-Aptech\Project Sem4\FourN-final\FourN-final\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.dll
+E:\FPT-Aptech\Project Sem4\FourN-final\FourN-final\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\ref\FourN.Services.dll
+E:\FPT-Aptech\Project Sem4\FourN-final\FourN-final\FourN-20-7-2021\C#Project\FourN.Services\obj\Debug\net5.0\FourN.Services.pdb

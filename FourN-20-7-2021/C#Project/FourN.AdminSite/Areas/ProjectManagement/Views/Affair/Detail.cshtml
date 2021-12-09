@@ -1,0 +1,123 @@
+﻿@model FourN.Data.Models.Affairs
+
+@namespace System.DateTime
+@{
+    long startactual, endactual, duration;
+    var userId = Context.Session.GetCurrentAuthentication().UserId;
+    var department = Context.Session.GetCurrentAuthentication().department;
+}
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">DETAIL</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<div class="card">
+    <div class="card-header border-0">
+        <div class="card-tools">
+            <a href="/ProjectManagement/Affair/Edit/@Model.affairid" class="btn btn-tool btn-sm">
+                <i class="fas fa-pencil-alt"></i>
+            </a>
+        </div>
+    </div>
+    <div class="card-body table-responsive p-0">
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th colspan="2">
+                        <h3>@ViewData["projectname"]</h3>
+                    </th>
+                </tr>
+                <tr>
+                    <th style="width: 150px;">
+                        Name
+                    </th>
+                    <td><h3><b>@Model.affairname</b></h3></td>
+                </tr>
+                <tr>
+                    <th style="width: 150px;">
+                        Percentage of Project
+                    </th>
+                    <td>@Model.affairtag %</td>
+                </tr>
+                <tr>
+                    <th style="width: 150px;">
+                        Start Time (Plan)
+                    </th>
+                    <td>@Model.starttimeplan.ToString(string.Format("dd/MM/yyyy HH:mm:ss"))</td>
+                </tr>
+                <tr>
+                    <th style="width: 150px;">
+                        End Time (Plan)
+                    </th>
+                    <td>@Model.endtimeplan.ToString(string.Format("dd/MM/yyyy HH:mm:ss"))</td>
+                </tr>
+                <tr>
+                    <th style="width: 150px;">
+                        Start Time (Actual)
+                    </th>
+                    <td>@Model.starttimeactual?.ToString(string.Format("dd/MM/yyyy HH:mm:ss"))</td>
+                </tr>
+                <tr>
+                    <th style="width: 150px;">
+                        End Time (Actual)
+                    </th>
+                    <td>@Model.endtimeactual?.ToString(string.Format("dd/MM/yyyy HH:mm:ss"))</td>
+                </tr>
+                <tr>
+                    <th style="width: 150px;">
+                        Status
+                    </th>
+                    <td>
+                        @switch (Model.status)
+                        {
+                            case 0:<span>New</span>; break;
+                            case 1: <span>Processing</span>; break;
+                            case 2: <span>Debugging</span>; break;
+                            case 3: <span>Checking</span>; break;
+                            case 4: <span>Done</span>; break;
+                            case 5: <span>Restart</span>; break;
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <th>Members</th>
+                    <td>
+                        @if (Model.userid != null)
+                        {
+                            @foreach (var user in ViewBag.user)
+                            {
+                                if (user.userid == Model.userid)
+                                {
+                                    <a style="margin-right: 5px;" href="../../User/Detail/@user.userid">@user.username</a>
+                                }
+                            }
+                        }
+                        else
+                        {
+                            <i>No Member</i>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <th style="width: 150px;">
+                        Note From Member
+                    </th>
+                    <td>@Html.Raw(Model.notemember)</td>
+                <tr>
+                <tr>
+                    <th style="width: 150px;">
+                        Note From Leader
+                    </th>
+                    <td>@Html.Raw(Model.noteleader)</td>
+                <tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script src="~/js/notify.js"></script>

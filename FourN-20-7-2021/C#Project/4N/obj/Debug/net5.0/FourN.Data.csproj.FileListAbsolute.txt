@@ -1,0 +1,267 @@
+C:\Users\dungd\OneDrive\Desktop\PRJ4\4N\4N\bin\Debug\net5.0\FourN.Data.deps.json
+C:\Users\dungd\OneDrive\Desktop\PRJ4\4N\4N\bin\Debug\net5.0\FourN.Data.dll
+C:\Users\dungd\OneDrive\Desktop\PRJ4\4N\4N\bin\Debug\net5.0\ref\FourN.Data.dll
+C:\Users\dungd\OneDrive\Desktop\PRJ4\4N\4N\bin\Debug\net5.0\FourN.Data.pdb
+C:\Users\dungd\OneDrive\Desktop\PRJ4\4N\4N\obj\Debug\net5.0\FourN.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\dungd\OneDrive\Desktop\PRJ4\4N\4N\obj\Debug\net5.0\FourN.Data.AssemblyInfoInputs.cache
+C:\Users\dungd\OneDrive\Desktop\PRJ4\4N\4N\obj\Debug\net5.0\FourN.Data.AssemblyInfo.cs
+C:\Users\dungd\OneDrive\Desktop\PRJ4\4N\4N\obj\Debug\net5.0\FourN.Data.csproj.CoreCompileInputs.cache
+C:\Users\dungd\OneDrive\Desktop\PRJ4\4N\4N\obj\Debug\net5.0\FourN.Data.dll
+C:\Users\dungd\OneDrive\Desktop\PRJ4\4N\4N\obj\Debug\net5.0\ref\FourN.Data.dll
+C:\Users\dungd\OneDrive\Desktop\PRJ4\4N\4N\obj\Debug\net5.0\FourN.Data.pdb
+C:\Users\dungd\OneDrive\Desktop\PRJ4\4N\4N\bin\Debug\net5.0\FourN.Data.runtimeconfig.json
+C:\Users\dungd\OneDrive\Desktop\PRJ4\4N\4N\bin\Debug\net5.0\FourN.Data.runtimeconfig.dev.json
+C:\Users\dungd\OneDrive\Desktop\PRJ4\4N\4N\obj\Debug\net5.0\FourN.Data.genruntimeconfig.cache
+C:\Users\dungd\OneDrive\Desktop\PRJ4\4N\4N\obj\Debug\net5.0\FourN.Data.csprojAssemblyReference.cache
+E:\Project4\L6\4N\bin\Debug\net5.0\FourN.Data.deps.json
+E:\Project4\L6\4N\bin\Debug\net5.0\FourN.Data.runtimeconfig.json
+E:\Project4\L6\4N\bin\Debug\net5.0\FourN.Data.runtimeconfig.dev.json
+E:\Project4\L6\4N\bin\Debug\net5.0\FourN.Data.dll
+E:\Project4\L6\4N\bin\Debug\net5.0\ref\FourN.Data.dll
+E:\Project4\L6\4N\bin\Debug\net5.0\FourN.Data.pdb
+E:\Project4\L6\4N\obj\Debug\net5.0\FourN.Data.csprojAssemblyReference.cache
+E:\Project4\L6\4N\obj\Debug\net5.0\FourN.Data.GeneratedMSBuildEditorConfig.editorconfig
+E:\Project4\L6\4N\obj\Debug\net5.0\FourN.Data.AssemblyInfoInputs.cache
+E:\Project4\L6\4N\obj\Debug\net5.0\FourN.Data.AssemblyInfo.cs
+E:\Project4\L6\4N\obj\Debug\net5.0\FourN.Data.csproj.CoreCompileInputs.cache
+E:\Project4\L6\4N\obj\Debug\net5.0\FourN.Data.dll
+E:\Project4\L6\4N\obj\Debug\net5.0\ref\FourN.Data.dll
+E:\Project4\L6\4N\obj\Debug\net5.0\FourN.Data.pdb
+E:\Project4\L6\4N\obj\Debug\net5.0\FourN.Data.genruntimeconfig.cache
+E:\Project4\L6\C#Project\4N\bin\Debug\net5.0\FourN.Data.deps.json
+E:\Project4\L6\C#Project\4N\bin\Debug\net5.0\FourN.Data.runtimeconfig.json
+E:\Project4\L6\C#Project\4N\bin\Debug\net5.0\FourN.Data.runtimeconfig.dev.json
+E:\Project4\L6\C#Project\4N\bin\Debug\net5.0\FourN.Data.dll
+E:\Project4\L6\C#Project\4N\bin\Debug\net5.0\ref\FourN.Data.dll
+E:\Project4\L6\C#Project\4N\bin\Debug\net5.0\FourN.Data.pdb
+E:\Project4\L6\C#Project\4N\obj\Debug\net5.0\FourN.Data.csprojAssemblyReference.cache
+E:\Project4\L6\C#Project\4N\obj\Debug\net5.0\FourN.Data.GeneratedMSBuildEditorConfig.editorconfig
+E:\Project4\L6\C#Project\4N\obj\Debug\net5.0\FourN.Data.AssemblyInfoInputs.cache
+E:\Project4\L6\C#Project\4N\obj\Debug\net5.0\FourN.Data.AssemblyInfo.cs
+E:\Project4\L6\C#Project\4N\obj\Debug\net5.0\FourN.Data.csproj.CoreCompileInputs.cache
+E:\Project4\L6\C#Project\4N\obj\Debug\net5.0\FourN.Data.dll
+E:\Project4\L6\C#Project\4N\obj\Debug\net5.0\ref\FourN.Data.dll
+E:\Project4\L6\C#Project\4N\obj\Debug\net5.0\FourN.Data.pdb
+E:\Project4\L6\C#Project\4N\obj\Debug\net5.0\FourN.Data.genruntimeconfig.cache
+D:\5.Aptech\30.Final\code\C#Project\4N\bin\Debug\net5.0\FourN.Data.deps.json
+D:\5.Aptech\30.Final\code\C#Project\4N\bin\Debug\net5.0\FourN.Data.runtimeconfig.json
+D:\5.Aptech\30.Final\code\C#Project\4N\bin\Debug\net5.0\FourN.Data.runtimeconfig.dev.json
+D:\5.Aptech\30.Final\code\C#Project\4N\bin\Debug\net5.0\FourN.Data.dll
+D:\5.Aptech\30.Final\code\C#Project\4N\bin\Debug\net5.0\ref\FourN.Data.dll
+D:\5.Aptech\30.Final\code\C#Project\4N\bin\Debug\net5.0\FourN.Data.pdb
+D:\5.Aptech\30.Final\code\C#Project\4N\obj\Debug\net5.0\FourN.Data.GeneratedMSBuildEditorConfig.editorconfig
+D:\5.Aptech\30.Final\code\C#Project\4N\obj\Debug\net5.0\FourN.Data.AssemblyInfoInputs.cache
+D:\5.Aptech\30.Final\code\C#Project\4N\obj\Debug\net5.0\FourN.Data.AssemblyInfo.cs
+D:\5.Aptech\30.Final\code\C#Project\4N\obj\Debug\net5.0\FourN.Data.csproj.CoreCompileInputs.cache
+D:\5.Aptech\30.Final\code\C#Project\4N\obj\Debug\net5.0\FourN.Data.dll
+D:\5.Aptech\30.Final\code\C#Project\4N\obj\Debug\net5.0\ref\FourN.Data.dll
+D:\5.Aptech\30.Final\code\C#Project\4N\obj\Debug\net5.0\FourN.Data.pdb
+D:\5.Aptech\30.Final\code\C#Project\4N\obj\Debug\net5.0\FourN.Data.genruntimeconfig.cache
+D:\5.Aptech\30.Final\code\C#Project\4N\obj\Debug\net5.0\FourN.Data.csprojAssemblyReference.cache
+E:\backup\code\C#Project\4N\bin\Debug\net5.0\FourN.Data.deps.json
+E:\backup\code\C#Project\4N\bin\Debug\net5.0\FourN.Data.runtimeconfig.json
+E:\backup\code\C#Project\4N\bin\Debug\net5.0\FourN.Data.runtimeconfig.dev.json
+E:\backup\code\C#Project\4N\bin\Debug\net5.0\FourN.Data.dll
+E:\backup\code\C#Project\4N\bin\Debug\net5.0\ref\FourN.Data.dll
+E:\backup\code\C#Project\4N\bin\Debug\net5.0\FourN.Data.pdb
+E:\backup\code\C#Project\4N\obj\Debug\net5.0\FourN.Data.csprojAssemblyReference.cache
+E:\backup\code\C#Project\4N\obj\Debug\net5.0\FourN.Data.GeneratedMSBuildEditorConfig.editorconfig
+E:\backup\code\C#Project\4N\obj\Debug\net5.0\FourN.Data.AssemblyInfoInputs.cache
+E:\backup\code\C#Project\4N\obj\Debug\net5.0\FourN.Data.AssemblyInfo.cs
+E:\backup\code\C#Project\4N\obj\Debug\net5.0\FourN.Data.csproj.CoreCompileInputs.cache
+E:\backup\code\C#Project\4N\obj\Debug\net5.0\FourN.Data.dll
+E:\backup\code\C#Project\4N\obj\Debug\net5.0\ref\FourN.Data.dll
+E:\backup\code\C#Project\4N\obj\Debug\net5.0\FourN.Data.pdb
+E:\backup\code\C#Project\4N\obj\Debug\net5.0\FourN.Data.genruntimeconfig.cache
+C:\Users\dungd\OneDrive\Desktop\FourN (1)\C#Project\4N\bin\Debug\net5.0\FourN.Data.deps.json
+C:\Users\dungd\OneDrive\Desktop\FourN (1)\C#Project\4N\bin\Debug\net5.0\FourN.Data.runtimeconfig.json
+C:\Users\dungd\OneDrive\Desktop\FourN (1)\C#Project\4N\bin\Debug\net5.0\FourN.Data.runtimeconfig.dev.json
+C:\Users\dungd\OneDrive\Desktop\FourN (1)\C#Project\4N\bin\Debug\net5.0\FourN.Data.dll
+C:\Users\dungd\OneDrive\Desktop\FourN (1)\C#Project\4N\bin\Debug\net5.0\ref\FourN.Data.dll
+C:\Users\dungd\OneDrive\Desktop\FourN (1)\C#Project\4N\bin\Debug\net5.0\FourN.Data.pdb
+C:\Users\dungd\OneDrive\Desktop\FourN (1)\C#Project\4N\obj\Debug\net5.0\FourN.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\dungd\OneDrive\Desktop\FourN (1)\C#Project\4N\obj\Debug\net5.0\FourN.Data.AssemblyInfoInputs.cache
+C:\Users\dungd\OneDrive\Desktop\FourN (1)\C#Project\4N\obj\Debug\net5.0\FourN.Data.AssemblyInfo.cs
+C:\Users\dungd\OneDrive\Desktop\FourN (1)\C#Project\4N\obj\Debug\net5.0\FourN.Data.csproj.CoreCompileInputs.cache
+C:\Users\dungd\OneDrive\Desktop\FourN (1)\C#Project\4N\obj\Debug\net5.0\FourN.Data.dll
+C:\Users\dungd\OneDrive\Desktop\FourN (1)\C#Project\4N\obj\Debug\net5.0\ref\FourN.Data.dll
+C:\Users\dungd\OneDrive\Desktop\FourN (1)\C#Project\4N\obj\Debug\net5.0\FourN.Data.pdb
+C:\Users\dungd\OneDrive\Desktop\FourN (1)\C#Project\4N\obj\Debug\net5.0\FourN.Data.genruntimeconfig.cache
+E:\backup\FourN\FourN\C#Project\4N\bin\Debug\net5.0\FourN.Data.deps.json
+E:\backup\FourN\FourN\C#Project\4N\bin\Debug\net5.0\FourN.Data.runtimeconfig.json
+E:\backup\FourN\FourN\C#Project\4N\bin\Debug\net5.0\FourN.Data.runtimeconfig.dev.json
+E:\backup\FourN\FourN\C#Project\4N\bin\Debug\net5.0\FourN.Data.dll
+E:\backup\FourN\FourN\C#Project\4N\bin\Debug\net5.0\ref\FourN.Data.dll
+E:\backup\FourN\FourN\C#Project\4N\bin\Debug\net5.0\FourN.Data.pdb
+E:\backup\FourN\FourN\C#Project\4N\obj\Debug\net5.0\FourN.Data.csprojAssemblyReference.cache
+E:\backup\FourN\FourN\C#Project\4N\obj\Debug\net5.0\FourN.Data.GeneratedMSBuildEditorConfig.editorconfig
+E:\backup\FourN\FourN\C#Project\4N\obj\Debug\net5.0\FourN.Data.AssemblyInfoInputs.cache
+E:\backup\FourN\FourN\C#Project\4N\obj\Debug\net5.0\FourN.Data.AssemblyInfo.cs
+E:\backup\FourN\FourN\C#Project\4N\obj\Debug\net5.0\FourN.Data.csproj.CoreCompileInputs.cache
+E:\backup\FourN\FourN\C#Project\4N\obj\Debug\net5.0\FourN.Data.dll
+E:\backup\FourN\FourN\C#Project\4N\obj\Debug\net5.0\ref\FourN.Data.dll
+E:\backup\FourN\FourN\C#Project\4N\obj\Debug\net5.0\FourN.Data.pdb
+E:\backup\FourN\FourN\C#Project\4N\obj\Debug\net5.0\FourN.Data.genruntimeconfig.cache
+F:\C#Project\4N\bin\Debug\net5.0\FourN.Data.deps.json
+F:\C#Project\4N\bin\Debug\net5.0\FourN.Data.runtimeconfig.json
+F:\C#Project\4N\bin\Debug\net5.0\FourN.Data.runtimeconfig.dev.json
+F:\C#Project\4N\bin\Debug\net5.0\FourN.Data.dll
+F:\C#Project\4N\bin\Debug\net5.0\ref\FourN.Data.dll
+F:\C#Project\4N\bin\Debug\net5.0\FourN.Data.pdb
+F:\C#Project\4N\obj\Debug\net5.0\FourN.Data.csprojAssemblyReference.cache
+F:\C#Project\4N\obj\Debug\net5.0\FourN.Data.GeneratedMSBuildEditorConfig.editorconfig
+F:\C#Project\4N\obj\Debug\net5.0\FourN.Data.AssemblyInfoInputs.cache
+F:\C#Project\4N\obj\Debug\net5.0\FourN.Data.AssemblyInfo.cs
+F:\C#Project\4N\obj\Debug\net5.0\FourN.Data.csproj.CoreCompileInputs.cache
+F:\C#Project\4N\obj\Debug\net5.0\FourN.Data.dll
+F:\C#Project\4N\obj\Debug\net5.0\ref\FourN.Data.dll
+F:\C#Project\4N\obj\Debug\net5.0\FourN.Data.pdb
+F:\C#Project\4N\obj\Debug\net5.0\FourN.Data.genruntimeconfig.cache
+C:\Users\dungd\OneDrive\Desktop\C#Project\C#Project\4N\bin\Debug\net5.0\FourN.Data.deps.json
+C:\Users\dungd\OneDrive\Desktop\C#Project\C#Project\4N\bin\Debug\net5.0\FourN.Data.runtimeconfig.json
+C:\Users\dungd\OneDrive\Desktop\C#Project\C#Project\4N\bin\Debug\net5.0\FourN.Data.runtimeconfig.dev.json
+C:\Users\dungd\OneDrive\Desktop\C#Project\C#Project\4N\bin\Debug\net5.0\FourN.Data.dll
+C:\Users\dungd\OneDrive\Desktop\C#Project\C#Project\4N\bin\Debug\net5.0\ref\FourN.Data.dll
+C:\Users\dungd\OneDrive\Desktop\C#Project\C#Project\4N\bin\Debug\net5.0\FourN.Data.pdb
+C:\Users\dungd\OneDrive\Desktop\C#Project\C#Project\4N\obj\Debug\net5.0\FourN.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\dungd\OneDrive\Desktop\C#Project\C#Project\4N\obj\Debug\net5.0\FourN.Data.AssemblyInfoInputs.cache
+C:\Users\dungd\OneDrive\Desktop\C#Project\C#Project\4N\obj\Debug\net5.0\FourN.Data.AssemblyInfo.cs
+C:\Users\dungd\OneDrive\Desktop\C#Project\C#Project\4N\obj\Debug\net5.0\FourN.Data.csproj.CoreCompileInputs.cache
+C:\Users\dungd\OneDrive\Desktop\C#Project\C#Project\4N\obj\Debug\net5.0\FourN.Data.dll
+C:\Users\dungd\OneDrive\Desktop\C#Project\C#Project\4N\obj\Debug\net5.0\ref\FourN.Data.dll
+C:\Users\dungd\OneDrive\Desktop\C#Project\C#Project\4N\obj\Debug\net5.0\FourN.Data.pdb
+C:\Users\dungd\OneDrive\Desktop\C#Project\C#Project\4N\obj\Debug\net5.0\FourN.Data.genruntimeconfig.cache
+C:\Users\dungd\OneDrive\Desktop\C#Project\C#Project\4N\obj\Debug\net5.0\FourN.Data.csprojAssemblyReference.cache
+E:\JLPT\07-2021\xong\C#Project\C#Project\C#Project\4N\bin\Debug\net5.0\FourN.Data.deps.json
+E:\JLPT\07-2021\xong\C#Project\C#Project\C#Project\4N\bin\Debug\net5.0\FourN.Data.runtimeconfig.json
+E:\JLPT\07-2021\xong\C#Project\C#Project\C#Project\4N\bin\Debug\net5.0\FourN.Data.runtimeconfig.dev.json
+E:\JLPT\07-2021\xong\C#Project\C#Project\C#Project\4N\bin\Debug\net5.0\FourN.Data.dll
+E:\JLPT\07-2021\xong\C#Project\C#Project\C#Project\4N\bin\Debug\net5.0\ref\FourN.Data.dll
+E:\JLPT\07-2021\xong\C#Project\C#Project\C#Project\4N\bin\Debug\net5.0\FourN.Data.pdb
+E:\JLPT\07-2021\xong\C#Project\C#Project\C#Project\4N\obj\Debug\net5.0\FourN.Data.GeneratedMSBuildEditorConfig.editorconfig
+E:\JLPT\07-2021\xong\C#Project\C#Project\C#Project\4N\obj\Debug\net5.0\FourN.Data.AssemblyInfoInputs.cache
+E:\JLPT\07-2021\xong\C#Project\C#Project\C#Project\4N\obj\Debug\net5.0\FourN.Data.AssemblyInfo.cs
+E:\JLPT\07-2021\xong\C#Project\C#Project\C#Project\4N\obj\Debug\net5.0\FourN.Data.csproj.CoreCompileInputs.cache
+E:\JLPT\07-2021\xong\C#Project\C#Project\C#Project\4N\obj\Debug\net5.0\FourN.Data.dll
+E:\JLPT\07-2021\xong\C#Project\C#Project\C#Project\4N\obj\Debug\net5.0\ref\FourN.Data.dll
+E:\JLPT\07-2021\xong\C#Project\C#Project\C#Project\4N\obj\Debug\net5.0\FourN.Data.pdb
+E:\JLPT\07-2021\xong\C#Project\C#Project\C#Project\4N\obj\Debug\net5.0\FourN.Data.genruntimeconfig.cache
+E:\Project4\L9\FourN\FourN\C#Project\4N\bin\Debug\net5.0\FourN.Data.deps.json
+E:\Project4\L9\FourN\FourN\C#Project\4N\bin\Debug\net5.0\FourN.Data.runtimeconfig.json
+E:\Project4\L9\FourN\FourN\C#Project\4N\bin\Debug\net5.0\FourN.Data.runtimeconfig.dev.json
+E:\Project4\L9\FourN\FourN\C#Project\4N\bin\Debug\net5.0\FourN.Data.dll
+E:\Project4\L9\FourN\FourN\C#Project\4N\bin\Debug\net5.0\ref\FourN.Data.dll
+E:\Project4\L9\FourN\FourN\C#Project\4N\bin\Debug\net5.0\FourN.Data.pdb
+E:\Project4\L9\FourN\FourN\C#Project\4N\obj\Debug\net5.0\FourN.Data.GeneratedMSBuildEditorConfig.editorconfig
+E:\Project4\L9\FourN\FourN\C#Project\4N\obj\Debug\net5.0\FourN.Data.AssemblyInfoInputs.cache
+E:\Project4\L9\FourN\FourN\C#Project\4N\obj\Debug\net5.0\FourN.Data.AssemblyInfo.cs
+E:\Project4\L9\FourN\FourN\C#Project\4N\obj\Debug\net5.0\FourN.Data.csproj.CoreCompileInputs.cache
+E:\Project4\L9\FourN\FourN\C#Project\4N\obj\Debug\net5.0\FourN.Data.dll
+E:\Project4\L9\FourN\FourN\C#Project\4N\obj\Debug\net5.0\ref\FourN.Data.dll
+E:\Project4\L9\FourN\FourN\C#Project\4N\obj\Debug\net5.0\FourN.Data.pdb
+E:\Project4\L9\FourN\FourN\C#Project\4N\obj\Debug\net5.0\FourN.Data.genruntimeconfig.cache
+C:\Users\dungd\OneDrive\Desktop\FourN 19-7\FourN\C#Project\4N\bin\Debug\net5.0\FourN.Data.deps.json
+C:\Users\dungd\OneDrive\Desktop\FourN 19-7\FourN\C#Project\4N\bin\Debug\net5.0\FourN.Data.runtimeconfig.json
+C:\Users\dungd\OneDrive\Desktop\FourN 19-7\FourN\C#Project\4N\bin\Debug\net5.0\FourN.Data.runtimeconfig.dev.json
+C:\Users\dungd\OneDrive\Desktop\FourN 19-7\FourN\C#Project\4N\bin\Debug\net5.0\FourN.Data.dll
+C:\Users\dungd\OneDrive\Desktop\FourN 19-7\FourN\C#Project\4N\bin\Debug\net5.0\ref\FourN.Data.dll
+C:\Users\dungd\OneDrive\Desktop\FourN 19-7\FourN\C#Project\4N\bin\Debug\net5.0\FourN.Data.pdb
+C:\Users\dungd\OneDrive\Desktop\FourN 19-7\FourN\C#Project\4N\obj\Debug\net5.0\FourN.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\dungd\OneDrive\Desktop\FourN 19-7\FourN\C#Project\4N\obj\Debug\net5.0\FourN.Data.AssemblyInfoInputs.cache
+C:\Users\dungd\OneDrive\Desktop\FourN 19-7\FourN\C#Project\4N\obj\Debug\net5.0\FourN.Data.AssemblyInfo.cs
+C:\Users\dungd\OneDrive\Desktop\FourN 19-7\FourN\C#Project\4N\obj\Debug\net5.0\FourN.Data.csproj.CoreCompileInputs.cache
+C:\Users\dungd\OneDrive\Desktop\FourN 19-7\FourN\C#Project\4N\obj\Debug\net5.0\FourN.Data.dll
+C:\Users\dungd\OneDrive\Desktop\FourN 19-7\FourN\C#Project\4N\obj\Debug\net5.0\ref\FourN.Data.dll
+C:\Users\dungd\OneDrive\Desktop\FourN 19-7\FourN\C#Project\4N\obj\Debug\net5.0\FourN.Data.pdb
+C:\Users\dungd\OneDrive\Desktop\FourN 19-7\FourN\C#Project\4N\obj\Debug\net5.0\FourN.Data.genruntimeconfig.cache
+C:\Users\dungd\OneDrive\Desktop\FourN 19-7\FourN\C#Project\4N\obj\Debug\net5.0\FourN.Data.csprojAssemblyReference.cache
+E:\JLPT\07-2021\xong\FourN-20-7-2021\FourN-20-7-2021\C#Project\4N\bin\Debug\net5.0\FourN.Data.deps.json
+E:\JLPT\07-2021\xong\FourN-20-7-2021\FourN-20-7-2021\C#Project\4N\bin\Debug\net5.0\FourN.Data.runtimeconfig.json
+E:\JLPT\07-2021\xong\FourN-20-7-2021\FourN-20-7-2021\C#Project\4N\bin\Debug\net5.0\FourN.Data.runtimeconfig.dev.json
+E:\JLPT\07-2021\xong\FourN-20-7-2021\FourN-20-7-2021\C#Project\4N\bin\Debug\net5.0\FourN.Data.dll
+E:\JLPT\07-2021\xong\FourN-20-7-2021\FourN-20-7-2021\C#Project\4N\bin\Debug\net5.0\ref\FourN.Data.dll
+E:\JLPT\07-2021\xong\FourN-20-7-2021\FourN-20-7-2021\C#Project\4N\bin\Debug\net5.0\FourN.Data.pdb
+E:\JLPT\07-2021\xong\FourN-20-7-2021\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\FourN.Data.csprojAssemblyReference.cache
+E:\JLPT\07-2021\xong\FourN-20-7-2021\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\FourN.Data.GeneratedMSBuildEditorConfig.editorconfig
+E:\JLPT\07-2021\xong\FourN-20-7-2021\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\FourN.Data.AssemblyInfoInputs.cache
+E:\JLPT\07-2021\xong\FourN-20-7-2021\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\FourN.Data.AssemblyInfo.cs
+E:\JLPT\07-2021\xong\FourN-20-7-2021\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\FourN.Data.csproj.CoreCompileInputs.cache
+E:\JLPT\07-2021\xong\FourN-20-7-2021\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\FourN.Data.dll
+E:\JLPT\07-2021\xong\FourN-20-7-2021\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\ref\FourN.Data.dll
+E:\JLPT\07-2021\xong\FourN-20-7-2021\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\FourN.Data.pdb
+E:\JLPT\07-2021\xong\FourN-20-7-2021\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\FourN.Data.genruntimeconfig.cache
+C:\Users\dungd\OneDrive\Desktop\FourN-21-7-2021\FourN-20-7-2021\C#Project\4N\bin\Debug\net5.0\FourN.Data.deps.json
+C:\Users\dungd\OneDrive\Desktop\FourN-21-7-2021\FourN-20-7-2021\C#Project\4N\bin\Debug\net5.0\FourN.Data.runtimeconfig.json
+C:\Users\dungd\OneDrive\Desktop\FourN-21-7-2021\FourN-20-7-2021\C#Project\4N\bin\Debug\net5.0\FourN.Data.runtimeconfig.dev.json
+C:\Users\dungd\OneDrive\Desktop\FourN-21-7-2021\FourN-20-7-2021\C#Project\4N\bin\Debug\net5.0\FourN.Data.dll
+C:\Users\dungd\OneDrive\Desktop\FourN-21-7-2021\FourN-20-7-2021\C#Project\4N\bin\Debug\net5.0\ref\FourN.Data.dll
+C:\Users\dungd\OneDrive\Desktop\FourN-21-7-2021\FourN-20-7-2021\C#Project\4N\bin\Debug\net5.0\FourN.Data.pdb
+C:\Users\dungd\OneDrive\Desktop\FourN-21-7-2021\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\FourN.Data.csprojAssemblyReference.cache
+C:\Users\dungd\OneDrive\Desktop\FourN-21-7-2021\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\FourN.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\dungd\OneDrive\Desktop\FourN-21-7-2021\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\FourN.Data.AssemblyInfoInputs.cache
+C:\Users\dungd\OneDrive\Desktop\FourN-21-7-2021\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\FourN.Data.AssemblyInfo.cs
+C:\Users\dungd\OneDrive\Desktop\FourN-21-7-2021\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\FourN.Data.csproj.CoreCompileInputs.cache
+C:\Users\dungd\OneDrive\Desktop\FourN-21-7-2021\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\FourN.Data.dll
+C:\Users\dungd\OneDrive\Desktop\FourN-21-7-2021\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\ref\FourN.Data.dll
+C:\Users\dungd\OneDrive\Desktop\FourN-21-7-2021\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\FourN.Data.pdb
+C:\Users\dungd\OneDrive\Desktop\FourN-21-7-2021\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\FourN.Data.genruntimeconfig.cache
+C:\Users\dungd\OneDrive\Desktop\FourN-23-7-2021\FourN-20-7-2021\C#Project\4N\bin\Debug\net5.0\FourN.Data.deps.json
+C:\Users\dungd\OneDrive\Desktop\FourN-23-7-2021\FourN-20-7-2021\C#Project\4N\bin\Debug\net5.0\FourN.Data.runtimeconfig.json
+C:\Users\dungd\OneDrive\Desktop\FourN-23-7-2021\FourN-20-7-2021\C#Project\4N\bin\Debug\net5.0\FourN.Data.runtimeconfig.dev.json
+C:\Users\dungd\OneDrive\Desktop\FourN-23-7-2021\FourN-20-7-2021\C#Project\4N\bin\Debug\net5.0\FourN.Data.dll
+C:\Users\dungd\OneDrive\Desktop\FourN-23-7-2021\FourN-20-7-2021\C#Project\4N\bin\Debug\net5.0\ref\FourN.Data.dll
+C:\Users\dungd\OneDrive\Desktop\FourN-23-7-2021\FourN-20-7-2021\C#Project\4N\bin\Debug\net5.0\FourN.Data.pdb
+C:\Users\dungd\OneDrive\Desktop\FourN-23-7-2021\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\FourN.Data.csprojAssemblyReference.cache
+C:\Users\dungd\OneDrive\Desktop\FourN-23-7-2021\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\FourN.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\dungd\OneDrive\Desktop\FourN-23-7-2021\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\FourN.Data.AssemblyInfoInputs.cache
+C:\Users\dungd\OneDrive\Desktop\FourN-23-7-2021\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\FourN.Data.AssemblyInfo.cs
+C:\Users\dungd\OneDrive\Desktop\FourN-23-7-2021\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\FourN.Data.csproj.CoreCompileInputs.cache
+C:\Users\dungd\OneDrive\Desktop\FourN-23-7-2021\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\FourN.Data.dll
+C:\Users\dungd\OneDrive\Desktop\FourN-23-7-2021\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\ref\FourN.Data.dll
+C:\Users\dungd\OneDrive\Desktop\FourN-23-7-2021\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\FourN.Data.pdb
+C:\Users\dungd\OneDrive\Desktop\FourN-23-7-2021\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\FourN.Data.genruntimeconfig.cache
+C:\Users\dungd\OneDrive\Desktop\FourN-25-7-2021\FourN-20-7-2021\C#Project\4N\bin\Debug\net5.0\FourN.Data.deps.json
+C:\Users\dungd\OneDrive\Desktop\FourN-25-7-2021\FourN-20-7-2021\C#Project\4N\bin\Debug\net5.0\FourN.Data.runtimeconfig.json
+C:\Users\dungd\OneDrive\Desktop\FourN-25-7-2021\FourN-20-7-2021\C#Project\4N\bin\Debug\net5.0\FourN.Data.runtimeconfig.dev.json
+C:\Users\dungd\OneDrive\Desktop\FourN-25-7-2021\FourN-20-7-2021\C#Project\4N\bin\Debug\net5.0\FourN.Data.dll
+C:\Users\dungd\OneDrive\Desktop\FourN-25-7-2021\FourN-20-7-2021\C#Project\4N\bin\Debug\net5.0\ref\FourN.Data.dll
+C:\Users\dungd\OneDrive\Desktop\FourN-25-7-2021\FourN-20-7-2021\C#Project\4N\bin\Debug\net5.0\FourN.Data.pdb
+C:\Users\dungd\OneDrive\Desktop\FourN-25-7-2021\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\FourN.Data.csprojAssemblyReference.cache
+C:\Users\dungd\OneDrive\Desktop\FourN-25-7-2021\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\FourN.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\dungd\OneDrive\Desktop\FourN-25-7-2021\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\FourN.Data.AssemblyInfoInputs.cache
+C:\Users\dungd\OneDrive\Desktop\FourN-25-7-2021\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\FourN.Data.AssemblyInfo.cs
+C:\Users\dungd\OneDrive\Desktop\FourN-25-7-2021\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\FourN.Data.csproj.CoreCompileInputs.cache
+C:\Users\dungd\OneDrive\Desktop\FourN-25-7-2021\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\FourN.Data.dll
+C:\Users\dungd\OneDrive\Desktop\FourN-25-7-2021\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\ref\FourN.Data.dll
+C:\Users\dungd\OneDrive\Desktop\FourN-25-7-2021\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\FourN.Data.pdb
+C:\Users\dungd\OneDrive\Desktop\FourN-25-7-2021\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\FourN.Data.genruntimeconfig.cache
+C:\Users\dungd\OneDrive\Desktop\FourN-27-7-2021\FourN-20-7-2021\C#Project\4N\bin\Debug\net5.0\FourN.Data.deps.json
+C:\Users\dungd\OneDrive\Desktop\FourN-27-7-2021\FourN-20-7-2021\C#Project\4N\bin\Debug\net5.0\FourN.Data.runtimeconfig.json
+C:\Users\dungd\OneDrive\Desktop\FourN-27-7-2021\FourN-20-7-2021\C#Project\4N\bin\Debug\net5.0\FourN.Data.runtimeconfig.dev.json
+C:\Users\dungd\OneDrive\Desktop\FourN-27-7-2021\FourN-20-7-2021\C#Project\4N\bin\Debug\net5.0\FourN.Data.dll
+C:\Users\dungd\OneDrive\Desktop\FourN-27-7-2021\FourN-20-7-2021\C#Project\4N\bin\Debug\net5.0\ref\FourN.Data.dll
+C:\Users\dungd\OneDrive\Desktop\FourN-27-7-2021\FourN-20-7-2021\C#Project\4N\bin\Debug\net5.0\FourN.Data.pdb
+C:\Users\dungd\OneDrive\Desktop\FourN-27-7-2021\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\FourN.Data.csprojAssemblyReference.cache
+C:\Users\dungd\OneDrive\Desktop\FourN-27-7-2021\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\FourN.Data.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\dungd\OneDrive\Desktop\FourN-27-7-2021\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\FourN.Data.AssemblyInfoInputs.cache
+C:\Users\dungd\OneDrive\Desktop\FourN-27-7-2021\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\FourN.Data.AssemblyInfo.cs
+C:\Users\dungd\OneDrive\Desktop\FourN-27-7-2021\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\FourN.Data.csproj.CoreCompileInputs.cache
+C:\Users\dungd\OneDrive\Desktop\FourN-27-7-2021\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\FourN.Data.dll
+C:\Users\dungd\OneDrive\Desktop\FourN-27-7-2021\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\ref\FourN.Data.dll
+C:\Users\dungd\OneDrive\Desktop\FourN-27-7-2021\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\FourN.Data.pdb
+C:\Users\dungd\OneDrive\Desktop\FourN-27-7-2021\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\FourN.Data.genruntimeconfig.cache
+E:\FPT-Aptech\Project Sem4\FourN-final\FourN-final\FourN-20-7-2021\C#Project\4N\bin\Debug\net5.0\FourN.Data.deps.json
+E:\FPT-Aptech\Project Sem4\FourN-final\FourN-final\FourN-20-7-2021\C#Project\4N\bin\Debug\net5.0\FourN.Data.runtimeconfig.json
+E:\FPT-Aptech\Project Sem4\FourN-final\FourN-final\FourN-20-7-2021\C#Project\4N\bin\Debug\net5.0\FourN.Data.runtimeconfig.dev.json
+E:\FPT-Aptech\Project Sem4\FourN-final\FourN-final\FourN-20-7-2021\C#Project\4N\bin\Debug\net5.0\FourN.Data.dll
+E:\FPT-Aptech\Project Sem4\FourN-final\FourN-final\FourN-20-7-2021\C#Project\4N\bin\Debug\net5.0\ref\FourN.Data.dll
+E:\FPT-Aptech\Project Sem4\FourN-final\FourN-final\FourN-20-7-2021\C#Project\4N\bin\Debug\net5.0\FourN.Data.pdb
+E:\FPT-Aptech\Project Sem4\FourN-final\FourN-final\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\FourN.Data.csprojAssemblyReference.cache
+E:\FPT-Aptech\Project Sem4\FourN-final\FourN-final\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\FourN.Data.GeneratedMSBuildEditorConfig.editorconfig
+E:\FPT-Aptech\Project Sem4\FourN-final\FourN-final\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\FourN.Data.AssemblyInfoInputs.cache
+E:\FPT-Aptech\Project Sem4\FourN-final\FourN-final\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\FourN.Data.AssemblyInfo.cs
+E:\FPT-Aptech\Project Sem4\FourN-final\FourN-final\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\FourN.Data.csproj.CoreCompileInputs.cache
+E:\FPT-Aptech\Project Sem4\FourN-final\FourN-final\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\FourN.Data.dll
+E:\FPT-Aptech\Project Sem4\FourN-final\FourN-final\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\ref\FourN.Data.dll
+E:\FPT-Aptech\Project Sem4\FourN-final\FourN-final\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\FourN.Data.pdb
+E:\FPT-Aptech\Project Sem4\FourN-final\FourN-final\FourN-20-7-2021\C#Project\4N\obj\Debug\net5.0\FourN.Data.genruntimeconfig.cache

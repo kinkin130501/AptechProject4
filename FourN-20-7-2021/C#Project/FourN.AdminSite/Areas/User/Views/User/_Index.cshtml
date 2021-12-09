@@ -1,0 +1,46 @@
+﻿@model IEnumerable<UserViewModel>
+@{
+    ViewData["Title"] = "_Index";
+}
+<table id="example1" class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Avatar</th>
+            <th>Email</th>
+            <th>Username</th>
+            <th>Department</th>
+            <th>Group</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+<tr>
+    <td><img src="@item.Avatar" style="width: 70px; height: 70px"/></td>
+    <td>@item.Email</td>
+    <td>@item.Username</td>
+    <td>@item.Department</td>
+    <td>@item.GroupName</td>
+    <td>
+         @if (item.isActive && @Context.Session.GetCurrentAuthentication().UserId != item.UserID
+             && (item.RoleNumber == (int)RoleNumber.Developer || item.RoleNumber == (int)RoleNumber.Partner))
+         {
+             <a class="btn btn-primary btn-sm" href="User/Detail/@item.UserID">
+                 <i class="fas fa-folder">
+                 </i>
+                 View
+             </a>
+             <a class="btn btn-danger btn-sm" onclick="confirmDelete('@item.UserID')">
+                 <i class="fas fa-trash">
+                 </i>
+                 Deactive
+             </a>
+         }
+
+     </td>
+</tr>}
+    </tbody>
+</table>
+<script src="~/js/notify.js"></script>
+

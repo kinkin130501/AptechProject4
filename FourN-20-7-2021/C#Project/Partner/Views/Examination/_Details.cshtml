@@ -1,0 +1,143 @@
+﻿@model ExaminationViewModel
+@{
+    int count = 0;
+    var answer = "";
+    var ran = new Random();
+}
+<div>
+
+    <dl class="row">
+        <dt class="col-sm-2">
+            Examination
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class="col-sm-2">
+            Type
+        </dt>
+        <dd class="col-sm-10">
+            @{
+                var type = HelperViewData.GetEnumDisplayName((ExamTypes)Model.ExamType);
+            }
+            @type
+        </dd>
+        <dt class="col-sm-2">
+            Max mark
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.MaxScore)
+        </dd>
+        <dt class="col-sm-2">
+           Pass Mark
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.PassScore)
+        </dd>
+        <dt class="col-sm-2">
+            Time
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.TotalTime) minute
+        </dd>
+        <dt class="col-sm-2">
+            Status
+        </dt>
+        <dd class="col-sm-10">
+            @if (Model.IsActive) { answer = "Active"; } else { answer = "Deactive"; }
+            @answer
+        </dd>
+        <dt class="col-sm-2">
+            Created day
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CreatedAt)
+        </dd>
+        @if (Model.ModifiedBy != null)
+        {
+            <dt class="col-sm-2">
+                Edited day
+            </dt>
+            <dd class="col-sm-10">
+                @Html.DisplayFor(model => model.ModifiedAt)
+            </dd>
+        }
+
+    </dl>
+    @if (Model.ExaminationQuestionsActives.Count != 0)
+    {
+        <div>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>STT</th>
+                        <th>Question</th>
+                        <th>Mark</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                    @foreach (var i in Model.ExaminationQuestionsActives.OrderBy(no => no.OrderNo))
+                    {
+                        count++;
+                        <tr>
+                            <td>@count</td>
+                            <td>@i.Content</td>
+                            <td>@i.Score</td>
+                            <td>
+                                <button type="button" class="btn btn-outline-infor" onclick="showAnswer(@i.ExaminationQuestionsActiveId)" data-toggle="modal" data-target="#myModal">Chi tiết</button>
+                            </td>
+                        </tr>
+                    }
+
+
+                </tbody>
+            </table>
+        </div>
+    }
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title"></h4>
+            </div>
+            <div class="modal-body">
+                <p>Information</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+<div class="form-group">
+    <input type="button" value="Try" class="btn btn-primary" onclick="showExam(@Model.ExamId)" />
+        &nbsp;
+    <button type="button" class="btn btn-outline-warm" onclick="showAll()">Back</button>
+</div>
+<script>
+    function showAnswer(questionId) {
+        $.ajax({
+            url: "/CourseManager/Answer/GetAnswerActiveByQuestionActiveId",
+            method: "post",
+            data: {
+                questionId: parseInt(questionId)
+            },
+            success: function (res) {
+                $(".modal-body").html(res.html);
+            },
+        })
+        
+    }
+</script>
+
+

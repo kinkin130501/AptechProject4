@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.1" xmlns="http://xmlns.jcp.org/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd">
+  <persistence-unit name="com.example_project_jar_0.0.1-SNAPSHOTPU" transaction-type="RESOURCE_LOCAL">
+    <provider>org.eclipse.persistence.jpa.PersistenceProvider</provider>
+    <class>com.example.entities.Sysdiagrams</class>
+    <class>com.example.entities.EFMigrationsHistory</class>
+    <class>com.example.project.entities.Authapplication</class>
+    <class>com.example.project.entities.Documents</class>
+    <class>com.example.project.entities.Userrole</class>
+    <class>com.example.project.entities.Authcontroller</class>
+    <class>com.example.project.entities.User</class>
+    <class>com.example.project.entities.Affairs</class>
+    <class>com.example.project.entities.Projects</class>
+    <class>com.example.project.entities.Groups</class>
+    <class>com.example.project.entities.Projectcost</class>
+    <class>com.example.project.entities.Otime</class>
+    <class>com.example.project.entities.KPIs</class>
+    <class>com.example.project.entities.Chatroom</class>
+    <class>com.example.project.entities.Zoom</class>
+    <class>com.example.project.entities.Privatemessage</class>
+    <class>com.example.project.entities.Request</class>
+    <class>com.example.project.entities.Notification</class>
+    <class>com.example.project.entities.Projectgroups</class>
+    <class>com.example.project.entities.Groupuser</class>
+    <properties>
+      <property name="javax.persistence.jdbc.url" value="jdbc:sqlserver://localhost:1433;databaseName=fourn"/>
+      <property name="javax.persistence.jdbc.user" value="sa"/>
+      <property name="javax.persistence.jdbc.driver" value="com.microsoft.sqlserver.jdbc.SQLServerDriver"/>
+      <property name="javax.persistence.jdbc.password" value="123"/>
+    </properties>
+  </persistence-unit>
+</persistence>

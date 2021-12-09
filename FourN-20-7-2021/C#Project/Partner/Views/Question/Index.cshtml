@@ -1,0 +1,390 @@
+﻿@model QuestionDisplayViewModel
+@{
+    ViewData["Title"] = "Bộ câu hỏi";
+}
+<div class="container">
+    <br />
+    <div style="margin-top:15px" id="subMenu">
+        <button type="button" class="btn btn-primary" style="margin-right:20px;" onclick="showCreate()">Create Question</button>
+        @*<div class="container row mt-3">
+
+            <div class="col-md-10">
+                <div class="col-md-12 child-inline row">
+
+                    <div class="col-md-6 mt-1">
+                        <select id="QuestionType" class="form-control select2" disabled>
+                            <option value="@((int)QuestionTypes.TracNghiem)">Trắc nghiệm</option>
+                        </select>
+                    </div>
+
+                    <div class="col-md-6 mt-1">
+                        <input id="txtDateStart" class="form-control" type="date" aria-invalid="false">
+                    </div>
+
+                    <div class="col-md-6 mt-1">
+                        <input id="txtDateEnd" class="form-control" type="date" aria-invalid="false">
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-2 p-3 mt-3">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <button class="btn btn-primary" id="btnFilter">Lọc câu hỏi</button>
+                    </div>
+                </div>
+            </div>
+        </div>*@
+    </div>
+
+
+    <div id="IndexPartial" style="display:block; margin-top:15px">
+        <partial name="_IndexPartial" model="Model.Questions" />
+    </div>
+
+</div>
+
+<script>
+    function showAll() {
+        $.ajax({
+            url: "/Question/IndexPartial",
+            method: "get",
+            success: function (res) {
+                $("#IndexPartial").html("");
+                $("#IndexPartial").html(res.html);
+                $("#subMenu").show();
+                clearAnswerSession();
+                clearEditAnswerSession();
+            },
+        })
+    }
+
+    function showCreate() {
+        $.ajax({
+            url: "/Question/Create",
+            method: "get",
+            success: function (res) {
+                $("#IndexPartial").html("");
+                $("#IndexPartial").html(res.html);
+                $("#subMenu").hide();
+                clearAnswerSession();
+            },
+            error: function () {
+                toastr.error("Create is failed !!")
+            }
+        })
+
+    }
+
+    function showCreateGroupQuestion() {
+        $.ajax({
+            url: "/Question/CreateGroupQuestion",
+            method: "get",
+            success: function (res) {
+                $("#IndexPartial").html("");
+                $("#IndexPartial").html(res.html);
+                $("#subMenu").hide();
+                clearAnswerSession();
+            },
+            error: function () {
+                toastr.error("Processing has error, please try again !");
+            }
+        })
+    }
+
+    function showEdit(id) {
+        $.ajax({
+            url: "/Question/Edit/" + id,
+            method: "get",
+
+            success: function (res) {
+                $("#IndexPartial").html("");
+                $("#IndexPartial").html(res.html);
+                $("#subMenu").hide();
+                var checkQuestionType = parseInt($("#txtQuestionType option:selected").val());
+                if (checkQuestionType == 1) { //trac nghiem
+                    showAnswersInSession(id);
+                } else {
+                    showAnswersInSessionTuLuan(id);
+                }
+            },
+        })
+    }
+
+    function showDetails(id) {
+        $.ajax({
+            url: "/Question/Details",
+            method: "post",
+            data: {
+                id: id
+            },
+            success: function (res) {
+                $("#IndexPartial").html("");
+                $("#IndexPartial").html(res.html);
+                $("#subMenu").hide();
+            },
+            error: function () {
+                toastr.error("Processing has error, please try again !")
+            }
+        })
+    }
+
+    function showAnswer(questionId) {
+        $.ajax({
+            url: "/Answer/IndexWithEditColumn/" + questionId,
+            method: "get",
+            success: function (res) {
+                $("#showAnswer").html("");
+                $("#showAnswer").html(res.html);
+            }
+        })
+    }
+
+    function showAnswersInSession() {
+        $.ajax({
+            url: "/Answer/ShowAnswersInSession",
+            method: "get",
+            success: function (res) {
+                $("#showAnswer").html("");
+                $("#showAnswer").html(res.html);
+            }
+        })
+    }
+
+    function showAnswersInSessionTuLuan() {
+        $.ajax({
+            url: "/Answer/ShowAnswersInSessionTuLuan",
+            method: "get",
+            success: function (res) {
+                $("#showAnswer").html("");
+                $("#showAnswer").html(res.html);
+            }
+        })
+    }
+
+    function showCreateAnswer(questionId) {
+        var checkQuestionType = parseInt($("#txtQuestionType option:selected").val());
+        if (checkQuestionType == 1) { //trac nghiem
+            $.ajax({
+                url: "/Answer/CreateAnswer",
+                method: "get",
+                data: {
+                    questionId: parseInt(questionId)
+                },
+                success: function (res) {
+                    $("#showCreateAnswer").html("");
+                    $("#showCreateAnswer").html(res.html);
+                    $("#btnAddAnswer").prop("type", "hidden");
+                },
+                error: function () {
+                    toastr.error("Có lỗi xảy ra, thử lại sau")
+                }
+            })
+        } else {
+            $.ajax({
+                url: "/Answer/CreateAnswerTuLuan",
+                method: "get",
+                data: {
+                    questionId: parseInt(questionId)
+                },
+                success: function (res) {
+                    $("#showCreateAnswer").html("");
+                    $("#showCreateAnswer").html(res.html);
+                    $("#btnAddAnswer").prop("type", "hidden");
+                },
+                error: function () {
+                    toastr.error("Có lỗi xảy ra, thử lại sau")
+                }
+            })
+        }
+
+    }
+
+    function addAnswer(questionId) {
+        if ($("#txtAnswerContent").val().trim() == "") {
+            $("<div><i style='color:red' id='Error'>Not blank</div>").insertAfter("#txtAnswerContent");
+            return false;
+        }
+        $.ajax({
+            url: "/Answer/AddItemToSession",
+            type: "post",
+            data: {
+                txtAnswerContent: $("#txtAnswerContent").val(),
+                txtAnswerIsCorrect: $("#txtAnswerIsCorrect:checked").length > 0,
+                txtAnswerQuestionId: parseInt(questionId)
+            },
+            success: function (res) {
+                toastr.success("Successed !!");
+                showAnswersInSession();
+                showCreateAnswer(questionId);
+            },
+            error: function () {
+                toastr.error("Failed !!");
+            }
+        });
+    }
+
+    function addAnswerTuLuan(questionId) {
+        if ($("#txtAnswerContent").val().trim() == "") {
+            $("<div><i style='color:red' id='Error'>Not blank</div>").insertAfter("#txtAnswerContent");
+            return false;
+        }
+        $.ajax({
+            url: "/Answer/AddItemToSessionTuLuan",
+            type: "post",
+            data: {
+                txtAnswerContent: $("#txtAnswerContent").val(),
+                txtAnswerIsCorrect: $("#txtAnswerIsCorrect:checked").length > 0,
+                txtAnswerQuestionId: parseInt(questionId)
+            },
+            success: function (res) {
+                toastr.success("Successed !!!");
+                showAnswersInSessionTuLuan();
+                showCreateAnswer(questionId);
+            },
+            error: function () {
+                toastr.error("Failed !!");
+            }
+        });
+    }
+
+    function removeAnswer(prefix) {
+
+
+        $.ajax({
+            url: "/Answer/RemoveItemFromSession",
+            type: "post",
+            data: {
+                txtAnswerContent: $("#answer-content-" + prefix).text().trim(),
+                txtAnswerIsCorrect: $("#answer-correct-" + prefix).text().trim() == "" ? false : true,
+            },
+            success: function (res) {
+                toastr.success("Successed !!!");
+                showAnswersInSession()
+            },
+            error: function () {
+                toastr.error("Failed !!");
+            }
+        });
+    }
+
+
+    function showDelete(id) {
+
+        var isOk = confirm("Are you sure ?");
+        var location = $("#location").val();
+        var txtQuestionId = parseInt($("#txtGroupId").val());
+
+        if (isOk) {
+            $.ajax({
+                url: "/Question/Delete/" + id,
+                method: "post",
+                success: function () {
+                    if (location == 'QuestionListDeTails') {
+                        showQuestionListDetails(txtQuestionId);
+                    } else {
+                        showAll();
+                    }
+                    toastr.success("Question number " + id + " is deleted !");
+                }
+            });
+        } else {
+            if (location == 'QuestionListDeTails') {
+                showQuestionListDetails(txtQuestionId);
+            } else {
+                showAll();
+            }
+        }
+
+    }
+
+    function clearAnswerSession() {
+        $.ajax({
+            url: "/Answer/ClearAnswerSession",
+            type: "get"
+        });
+    }
+
+    function clearEditAnswerSession() {
+        $.ajax({
+            url: "/Answer/ClearEditAnswerSession",
+            type: "get"
+        });
+    }
+
+    //bo cau hoi
+    function showCreateQuestion() {
+        $.ajax({
+            url: "/Question/CreateQuestionInGroup",
+            method: "get",
+            success: function (res) {
+                $("#showCreateQuestion").html("");
+                $("#showCreateQuestion").html(res.html);
+                $("#btnAddQuestion").prop("type", "hidden");
+            },
+            error: function () {
+                toastr.error("Processing has error, please try again.")
+            }
+        })
+    }
+
+    function rollBack(id) {
+        var isOk = confirm("Các thay đổi chưa được lưu! Bạn có chắc muốn hoàn thành tác vụ này?");
+        if (isOk) {
+            $.ajax({
+                url: "/Question/DeleteQuestionGroup",
+                data: {
+                    id: parseInt(id)
+                },
+                method: "post",
+                success: function () {
+                    showAll();
+                }
+            });
+        } else {
+            return false;
+        }
+    }
+
+    function showQuestionListDetails(id) {
+        $.ajax({
+            url: "/Question/QuestionListDetails",
+            method: "post",
+            data: {
+                id: id
+            },
+            success: function (res) {
+                $("#IndexPartial").html("");
+                $("#IndexPartial").html(res.html);
+                $("#subMenu").hide();
+            },
+            error: function () {
+                toastr.error("Processing has error, please try again.")
+            }
+        })
+    }
+
+    $("#btnFilter").off().click(function () {
+        var dateStart = $("#txtDateStart").val();
+        var dateEnd = $("#txtDateEnd").val();
+        var courseId = $("#CourseId").val();
+        var questionType = $("#QuestionType").val();
+
+        $.ajax({
+            url: "/Question/SearchQuestions",
+            method: "POST",
+            data: {
+                CourseId: courseId,
+                QuestionType: questionType,
+                DateStart: dateStart,
+                DateEnd: dateEnd,
+            },
+            success: function (res) {
+                $("#IndexPartial").html("");
+                $("#IndexPartial").html(res.html);
+                $(".subMenu").show();
+            },
+        })
+    })
+</script>
+

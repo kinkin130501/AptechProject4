@@ -1,0 +1,97 @@
+﻿/* All */
+textarea {
+    resize: none;
+}
+.navbar-badge{
+    display:none;
+}
+.text-danger{
+    display:none;
+}
+/*Calendar*/
+#calendar {
+    width: 100%;
+}
+ul.nav-tabs
+{
+    width:100%;
+}
+.calendar-div-tab-content {
+    width: 100%;
+}
+.calendar-btn-create {
+    margin-left: 0.5em;
+}
+/*Message*/
+.message-li-tab.active {
+    background-color: lightcoral;
+}
+.message-div-tab-content{
+    margin-top:1em;
+}
+.message-li-tab{
+    cursor:pointer;
+    text-align: center;
+}
+.message-li-tab a{
+    color:black;
+    font-weight: 700;
+}
+.message-btn-send{
+    margin-left: 0.5em;
+}
+.background-azure{
+    background-color:azure;
+}
+tr:hover {
+    cursor: pointer;
+}
+.message-btn{
+    margin-left: 1rem;
+}
+ul.dropdown-menu {
+    left: 0.5rem;
+    
+}
+ul.dropdown-menu li:hover {
+    cursor: pointer;
+    background-color: darkgrey;
+}
+/* Chat Room*/
+div.div-fullchatroom {
+    width: 100%;
+    height: 30rem;
+    border: 1px solid black;
+    overflow: auto;
+    padding: 0.3rem 0.6rem;
+}
+div.chatroom-content {
+    width: 100%;
+    height: 40rem;
+}
+.chatroom-nameroom{
+    height:1.5rem;
+    width: 20rem;
+}
+.pull-left {
+    text-align: left;
+}
+.pull-right{
+    text-align:right;
+}
+.chat-username{
+    color: blue;
+    font-weight:700;
+}
+.chat-me {
+    color: red;
+    font-weight: 700;
+}
+.div-odd{
+    background-color:#fff;
+}
+#chatroom-btn-to{
+    height: 25px;
+    margin-left: 10px;
+    line-height: 0.6;
+}

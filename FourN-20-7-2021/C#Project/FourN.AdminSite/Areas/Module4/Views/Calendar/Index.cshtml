@@ -1,0 +1,984 @@
+﻿<link href='/css/fullcalendar/main.css' rel='stylesheet' />
+@*<link href='/css/module4_calendar.css' rel='stylesheet' />*@
+<script src='/css/fullcalendar/main.js'></script>
+@*<script src='/js/jquery-3.6.0.min.js'></script>*@
+<link href='/plugins/toastr/toastr.min.css' rel='stylesheet' />
+<script src='/plugins/toastr/toastr.min.js'></script>
+@*<link href='https://cdn.datatables.net/1.10.25/css/jquery.dataTables.min.css' rel='stylesheet' type="text/css" />*@
+@model List<FourN.Data.ViewModel.CalendarEvent>
+@{
+    List<FourN.Data.ViewModel.TableZoom> myTableZooms = (List<FourN.Data.ViewModel.TableZoom>)ViewData["myTableZoom"];
+}
+<script>
+    var event = JSON.parse('@Html.Raw(Json.Serialize(Model))');
+        //var events = '@Html.Raw(Json.Serialize(Model))';
+    document.addEventListener('DOMContentLoaded', function () {
+        var calendarEl = document.getElementById('calendar');
+        var calendar = new FullCalendar.Calendar(calendarEl, {
+            initialView: 'timeGridWeek',
+            dayHeaderContent: (args) => {
+                return moment(args.date).format('ddd DD/MM')
+            },
+            allDaySlot: false,
+            slotMinTime: '09:00',
+            slotMaxTime: '19:00',
+            slotDuration: "01:00",
+            contentHeight: "auto",
+            firstDay: 1,
+            hiddenDays: [0, 6],
+            editable: false,
+            //// eventContent
+            //eventContent: function (el) {
+            //    console.log(el.event)
+            //    let year = el.event.start.getFullYear();
+            //    let month = el.event.start.getMonth() + 1;
+            //    let dt = el.event.start.getDate();
+            //    if (dt < 10) {
+            //        dt = '0' + dt;
+            //    }
+            //    if (month < 10) {
+            //        month = '0' + month;
+            //    }
+            //    let stringDateStart = year + '-' + month + '-' + dt;
+            //    //today
+            //    let today = new Date();
+            //    year = today.getFullYear();
+            //    month = today.getMonth() + 1;
+            //    dt = today.getDate();
+            //    if (dt < 10) {
+            //        dt = '0' + dt;
+            //    }
+            //    if (month < 10) {
+            //        month = '0' + month;
+            //    }
+            //    let stringDateToday = year + '-' + month + '-' + dt;
+            //    let resultDateStart = new Date(stringDateStart);
+            //    let resultDateToday = new Date(stringDateToday);
+            //    if (resultDateToday > resultDateStart)
+            //    {
+            //        return {
+            //            html: '<div class="fc-event-main-frame fc-day-past expire" style="pointer-events:none"> <div class="fc-event-title-container" style="position: absolute;text-align: center; width: 100%;top: 45%; box-shadow:none;"> <div class="fc-event-title fc-sticky" >' + '<span style="font-size:14px">Hết vé</span>' + '</div></div></div>'
+            //        }
+            //    }
+            //},//end event content
+            eventClick: function (info) {
+                info.jsEvent.preventDefault(); // don't let the browser navigate
+
+                if (info.event.url) {
+                    window.open(info.event.url);
+                }
+            },//end event click
+
+            //events
+            events: event,//end events
+        });//end init calendar
+        calendar.render();
+    });
+</script>
+<div class="row">
+    <ul class="nav nav-tabs">
+        <li class="active col-md-4 message-li-tab tab-inbox" data-id="tab-inbox">
+            <a href="#tab-inbox" data-toggle="tab">Calendar</a>
+        </li>
+        <li class="col-md-4 message-li-tab tab-sent" data-id="tab-sent">
+            <a href="#tab-sent" data-toggle="tab">Task</a>
+        </li>
+        <li class="col-md-4 message-li-tab tab-create" data-id="tab-create">
+            <a href="#tab-create" data-toggle="tab">Create Meeting</a>
+        </li>
+    </ul>
+    <div class="tab-content calendar-div-tab-content mt-2">
+        <div class="tab-pane active message-div-tab" id="tab-inbox">
+            <label>Go to date</label>
+            <input type="date" name="calendar-input-date" id="calendar-input-date" />
+            <div id='calendar'></div>
+            <div class="mt-3">
+                <h3>My meeting</h3>
+                <table id="table_zoom" class="display table-striped" width="100%">
+                    <thead>
+                        <tr>
+                            <th>Action</th>
+                            <th>Meeting title</th>
+                            <th>Meeting description</th>
+                            <th>Meeting partner</th>
+                            <th>Meeting time</th>
+                            <th>Created at</th>
+                            <th>Updated at</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        @foreach (var mytable in myTableZooms)
+                        {
+                            if (mytable.zoomcode == "0")
+                            {
+                                <tr>
+                                    <td width="10%">
+                                        <button type="button" class="btn btn-info zoom_btn" data-id="@mytable.zoomid"> <i class="fa fa-file-alt" aria-hidden="true"></i></button>
+                                    </td>
+                                    <td><span class="title_@mytable.zoomid">@mytable.zoomtitle</span></td>
+                                    <td><span class="agenda_@mytable.zoomid">@mytable.zoomagenda</span></td>
+                                    <td><span class="partner_@mytable.zoomid">@mytable.zoompartner</span></td>
+                                    <td><span class="time_@mytable.zoomid">@mytable.zoomtime</span></td>
+                                    <td><span class="create_@mytable.zoomid">@mytable.zoomcreateat</span></td>
+                                    <td><span class="update_@mytable.zoomid">@mytable.zoomupdateat</span></td>
+                                    <input type="text" style="display:none" class="code_@mytable.zoomid" value="@mytable.zoomcode" />
+                                    <input type="text" style="display:none" class="pass_@mytable.zoomid" value="@mytable.zoompass" />
+                                </tr>
+                            }
+                            else
+                            {
+                                <tr>
+                                    <td width="10%">
+                                        <button type="button" class="btn btn-info zoom_btn" data-id="@mytable.zoomid"> <i class="fa fa-file-alt" aria-hidden="true"></i></button>
+                                    </td>
+                                    <td><span class="title_@mytable.zoomid">@mytable.zoomtitle</span></td>
+                                    <td><span class="agenda_@mytable.zoomid">@mytable.zoomagenda</span></td>
+                                    <td><span class="partner_@mytable.zoomid">@mytable.zoomname</span></td>
+                                    <td><span class="time_@mytable.zoomid">@mytable.zoomtime</span></td>
+                                    <td><span class="create_@mytable.zoomid">@mytable.zoomcreateat</span></td>
+                                    <td><span class="update_@mytable.zoomid">@mytable.zoomupdateat</span></td>
+                                    <input type="text" style="display:none" class="code_@mytable.zoomid" value="@mytable.zoomcode" />
+                                    <input type="text" style="display:none" class="pass_@mytable.zoomid" value="@mytable.zoompass" />
+                                </tr>
+                            }
+
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="tab-pane message-div-tab" id="tab-sent">
+            <table id="tab_task" class="display table-striped" width="100%">
+                <thead>
+                    <tr>
+                        <th>Action</th>
+                        <th>Task Name</th>
+                        <th>Progress</th>
+                        <th>Start time</th>
+                        <th>End time</th>
+                        <th>Note</th>
+                        <th>Status</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (ViewData["checkTask"].ToString() == "0")
+                    {
+                        @foreach (var myTask in (List<FourN.Data.Models.Affairs>)ViewData["listTasks"])
+                        {
+                    <tr>
+                        @*<td width="10%">
+            <button type="button" class="btn btn-info message-btn" data-id="@myTask.affairid"> <i class="fa fa-file-alt" aria-hidden="true"></i></button>
+        </td>*@
+
+                        <td width="10%">
+                            <a class="btn btn-info" href="/ProjectManagement/Affair/Detail/@myTask.affairid"> <i class="fa fa-file-alt" aria-hidden="true"></i></a>
+                        </td>
+                        <td><span id="name_@myTask.affairid">@myTask.affairname</span></td>
+                        <td><span id="tag_@myTask.affairid">@myTask.affairtag %</span></td>
+                        <td><span id="start_@myTask.affairid">@myTask.starttimeplan.ToString("dd/MM/yyyy HH:mm")</span></td>
+                        <td><span id="end_@myTask.affairid">@myTask.endtimeplan.ToString("dd/MM/yyyy HH:mm")</span></td>
+                        <td><span id="note_@myTask.affairid">@myTask.noteleader</span></td>
+                        @if (myTask.status == 0)
+                        {
+                            <td><span id="status_@myTask.affairid">New</span></td>
+                        }
+                        else if (myTask.status == 1)
+                        {
+                            <td><span id="status_@myTask.affairid">Process</span></td>
+                        }
+                        else if (myTask.status == 2)
+                        {
+                            <td><span id="status_@myTask.affairid">Debug</span></td>
+                        }
+                        else if (myTask.status == 3)
+                        {
+                            <td><span id="status_@myTask.affairid">Check</span></td>
+                        }
+                        else if (myTask.status == 4)
+                        {
+                            <td><span id="status_@myTask.affairid">Done</span></td>
+                        }
+                        else if (myTask.status == 5)
+                        {
+                            <td><span id="status_@myTask.affairid">ReStart</span></td>
+                        }
+                    </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="tab-pane message-div-tab row container" id="tab-create">
+            <div class="col-md-8 offset-md-5">
+                <div class="form-group">
+                    <div class="col-md-9">
+                        <label class="control-label label-object">
+                            Meeting with:
+                        </label>
+                        <input type="radio" name="radioobject" value="Member" class="calendar-radio-member" checked /> Member
+                        <input type="radio" name="radioobject" value="Team" class="calendar-radio-team" /> Team
+                    </div>
+                    <div class="col-md-9">
+                        <input type="text" name="to" value="" placeholder="Enter a name.." id="calendar-id-to" class="form-control" autocomplete="off" />
+                        <span class="text-danger error-name"></span>
+                        <ul class="dropdown-menu calendar-id-to">
+                        </ul>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">
+                        Title:
+                    </label>
+                    <div class="col-md-9">
+                        <input type="text" name="title" value="" placeholder="Enter a title.." id="calendar-id-title" class="form-control" />
+                        <span class="text-danger error-title"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">
+                        Description:
+                    </label>
+                    <div class="col-md-9">
+                        <input type="text" name="agenda" id="calendar-id-agenda" placeholder="Enter a description.." value="" class="form-control" />
+                        <span class="text-danger error-des"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">
+                        Password:
+                    </label>
+                    <div class="col-md-9">
+                        <input type="text" name="pass" value="" placeholder="Enter a password.." id="calendar-id-pass" class="form-control" />
+                        <span class="text-danger error-pass"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-md-3 control-label">
+                        Time:
+                    </label>
+                    <div class="col-md-9">
+                        <input type="text" name="date" id="calendar-id-date" class="form-control" />
+                        <span class="text-danger error-time"></span>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="button" class="btn btn-primary calendar-btn-create" id="calendar-btn-create">Create</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Modal confirm zoom -->
+<div class="modal" id="calendar-modal-confirm-zoom" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Create Meeting</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="control-label">
+                        Meeting with:
+                    </label><span id="calendar-modal-span-team"></span>
+                    <div class="">
+                        <input type="text" id="calendar-modal-input-name" name="name" value="" class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">
+                        Title:
+                    </label>
+                    <div class="">
+                        <input type="text" name="title" id="calendar-modal-input-title" value="" class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">
+                        Description:
+                    </label>
+                    <div class="">
+                        <input type="text" name="agenda" id="calendar-modal-input-agenda" value="" class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">
+                        Password:
+                    </label>
+                    <div class="">
+                        <input type="text" name="pass" id="calendar-modal-input-pass" value="" class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">
+                        Time:
+                    </label>
+                    <div class="">
+                        <input type="text" name="date" value="" id="calendar-modal-input-date" class="form-control" readonly />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary calendar-modal-btn-ok">
+                    <div class="spinner-border spinner-border-sm" role="status" hidden>
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <span id="calendar-span-confirm">Confirm</span>
+                </button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end Modal -->
+<!-- Modal zoom details -->
+<div class="modal" id="calendar-modal-details-zoom" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Details Zoom</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label class="control-label">
+                        Meeting with:
+                    </label><span id="calendar-modal-details-team"></span>
+                    <div class="">
+                        <input type="text" id="calendar-modal-details-name" name="name" value="" class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">
+                        Title:
+                    </label>
+                    <div class="">
+                        <input type="text" name="title" id="calendar-modal-details-title" value="" class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">
+                        Description:
+                    </label>
+                    <div class="">
+                        <input type="text" name="agenda" id="calendar-modal-details-agenda" value="" class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">
+                        Password:
+                    </label>
+                    <div class="">
+                        <input type="text" name="pass" id="calendar-modal-details-pass" value="" class="form-control" readonly />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="control-label">
+                        Time:
+                    </label>
+                    <div class="">
+                        <input type="text" name="date" value="" id="calendar-modal-details-date" class="form-control"  />
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary calendar-modal-details-btn-ok">
+                    <div class="spinner-border spinner-border-sm" role="status" hidden>
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                    <span id="calendar-span-confirm">Confirm</span>
+                </button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- end Modal -->
+<input id="hidden-send-to" data-id="0" style="display:none" type="text" />
+<input id="hidden-time-send-to" style="display:none" type="text" />
+<input id="hidden-zoom" style="display:none" type="text" />
+<script>
+    $(document).ready(function () {
+        //date
+        var today = new Date();
+        $('#calendar-input-date').val(today.toISOString().substr(0, 10));
+        $('#calendar-input-date').change(function () {
+            var date_goto = $(this).val();
+            var event = JSON.parse('@Html.Raw(Json.Serialize(Model))');
+            //init calendar
+            var calendarEl = document.getElementById('calendar');
+            var calendar = new FullCalendar.Calendar(calendarEl, {
+                initialView: 'timeGridWeek',
+                dayHeaderContent: (args) => {
+                    return moment(args.date).format('ddd DD/MM')
+                },
+                allDaySlot: false,
+                slotMinTime: '09:00',
+                slotMaxTime: '19:00',
+                slotDuration: "01:00",
+                contentHeight: "auto",
+                firstDay: 1,
+                hiddenDays: [0, 6],
+                editable: false,
+                //// eventContent
+                //eventContent: function (el) {
+                //    console.log(el.event)
+                //    let year = el.event.start.getFullYear();
+                //    let month = el.event.start.getMonth() + 1;
+                //    let dt = el.event.start.getDate();
+                //    if (dt < 10) {
+                //        dt = '0' + dt;
+                //    }
+                //    if (month < 10) {
+                //        month = '0' + month;
+                //    }
+                //    let stringDateStart = year + '-' + month + '-' + dt;
+                //    //today
+                //    let today = new Date();
+                //    year = today.getFullYear();
+                //    month = today.getMonth() + 1;
+                //    dt = today.getDate();
+                //    if (dt < 10) {
+                //        dt = '0' + dt;
+                //    }
+                //    if (month < 10) {
+                //        month = '0' + month;
+                //    }
+                //    let stringDateToday = year + '-' + month + '-' + dt;
+                //    let resultDateStart = new Date(stringDateStart);
+                //    let resultDateToday = new Date(stringDateToday);
+                //    if (resultDateToday > resultDateStart) {
+                //        return {
+                //            html: '<div class="fc-event-main-frame fc-day-past expire" style="pointer-events:none"> <div class="fc-event-title-container" style="position: absolute;text-align: center; width: 100%;top: 45%; box-shadow:none;"> <div class="fc-event-title fc-sticky" >' + '<span style="font-size:14px">Hết vé</span>' + '</div></div></div>'
+                //        }
+                //    }
+                //},//end event content
+                // eventClick
+                eventClick: function (info) {
+                    info.jsEvent.preventDefault(); // don't let the browser navigate
+
+                    if (info.event.url) {
+                        window.open(info.event.url);
+                    }
+                },//end event click
+
+                //events
+                events: event,//end events
+               
+            });//end init calendar
+            calendar.render();
+            calendar.gotoDate(date_goto);
+            //add css
+            $('li.Calendar').css('background-color', 'azure');
+            $('.fc-col-header').css('width', '100%');
+            $('.fc-day-past').css('background-color', 'darkgray');
+            $('.fc-today-button').css('text-transform', 'uppercase');
+            $('.fc-event-past').css('background-color', 'darkgray');
+            $('.fc-event-past').css('border', '1px solid black');
+            $('.fc-event-past').css('cursor', 'context-menu');
+            $('.fc-event-past').click(function () { return false; });
+            //after click
+            $('button.fc-button').click(function () {
+                $('.fc-day-past').css('background-color', 'darkgray');
+                $('.fc-today-button').css('text-transform', 'uppercase');
+                $('.fc-event-past').css('background-color', 'slategrey');
+                $('.fc-event-past').css('border', '1px solid black');
+                $('.fc-event-past').click(function () { return false; });
+                $('.fc-event-past').css('cursor', 'context-menu');
+            });
+            //end calendar
+        });
+        $('li.Calendar').css('background-color', 'azure');
+        $('.fc-col-header').css('width', '100%');
+        $('.fc-day-past').css('background-color', 'darkgray');
+        $('.fc-today-button').css('text-transform', 'uppercase');
+        $('.fc-event-past').css('background-color', 'slategrey');
+        $('.fc-event-past').css('border', '1px solid black');
+        $('.fc-event-past').css('cursor', 'context-menu');
+        $('.fc-event-past').click(function () { return false; });
+        $('div.fc-timegrid-body').css('width', '100%');
+        $('div.fc-timegrid-cols table').css('width', '100%');
+        //after click
+        $('button.fc-button').click(function () {
+            $('.fc-day-past').css('background-color', 'darkgray');
+            $('.fc-today-button').css('text-transform', 'uppercase');
+            $('.fc-event-past').css('background-color', 'slategrey');
+            $('.fc-event-past').css('border', '1px solid black');
+            $('.fc-event-past').css('cursor', 'context-menu');
+            $('.fc-event-past').click(function () { return false; });
+        });
+    });
+
+</script>
+<script>
+    $(document).ready(function () {
+        //add color background
+        $('li.Calendar').css('background-color', 'azure');
+        //add datatable
+        $('#table_sent').DataTable();
+        $('#table_zoom').DataTable();
+        $('#tab_task').DataTable();
+        // event li-tab active
+        $('li.message-li-tab').click(function (event) {
+            $('li.message-li-tab').removeClass('active'); //tab-create
+            $(this).addClass('active');
+            var id = $(this).attr("data-id");
+            $('div.message-div-tab').hide();
+            $('#' + id).show();
+        });//end event li-tab active
+        //click zoom btn
+        $('.zoom_btn').click(function () {
+            var id = $(this).data('id');
+            var title = $('.title_' + id).text();
+            var agenda = $('.agenda_' + id).text();
+            var time = $('.time_' + id).text();
+            var partner = $('.partner_' + id).text();
+            var create = $('.create_' + id).text();
+            var code = $('.code_' + id).val();
+            var pass = $('.pass_' + id).val();
+            //pass param to modal
+            $('#calendar-modal-details-title').val(title);
+            $('#calendar-modal-details-agenda').val(agenda);
+            $('#calendar-modal-details-date').val(time);
+            $('#calendar-modal-details-name').val(partner);
+            $('#calendar-modal-details-date').val(time);
+            $('#calendar-modal-details-pass').val(pass);
+            $('#hidden-zoom').val(id);
+            //show modal
+            $('#calendar-modal-details-zoom').modal('show');
+
+        });
+        //create meeting click
+        $('#calendar-btn-create').click(function () {
+            $('.text-danger').css('display', 'none');
+            //get data from form
+            var member = $('input[name="radioobject"]:checked').val();
+            var to = $('#calendar-id-to').val();
+            var title = $('#calendar-id-title').val();
+            var pass = $('#calendar-id-pass').val();
+            var time = $('#calendar-id-date').val();
+            var agenda = $('#calendar-id-agenda').val();
+            var checkTime = new Date(time);
+            var today = new Date();
+            //validate
+            var flag = true;
+            if (to.trim() == "")
+            {   
+                $('.error-name').text("Name can not blank !!")
+                $('.error-name').css('display', 'block');
+                flag = false;
+            }
+            if (title.trim() == "")
+            {   
+                $('.error-title').text("Title can not blank !!")
+                $('.error-title').css('display', 'block');
+                flag = false;
+            }
+            if (pass.trim() == "")
+            {   
+                $('.error-pass').text("Password can not blank !!")
+                $('.error-pass').css('display', 'block');
+                flag = false;
+            }
+            if (agenda.trim() == "")
+            {   
+                $('.error-des').text("Description can not blank !!")
+                $('.error-des').css('display', 'block');
+                flag = false;
+            }
+            if (Number(today) > Number(checkTime))
+            {   
+                $('.error-time').text("Time must greater than this moment !!")
+                $('.error-time').css('display', 'block');
+                flag = false;
+            }
+            var namelike = to;
+            if (namelike.trim() != "") {
+                if (member == "Member") {
+                    $('#hidden-send-to').data('id', 0);
+                    $.ajax({
+                        url: '/Module4/Calendar/ValidateName?filter_name=' + namelike,
+                        dataType: 'json',
+                        //data: { },
+                        type: "GET",
+                        beforeSend: function () {
+                            $('ul.calendar-id-to').empty();
+                            $('ul.calendar-id-to').css("display", "block");
+                        },
+                        complete: function () {
+
+                        },
+                        success: function (json) {
+                            if (json['status'] == false) {
+                                $('.error-name').text('Can not find this name !!')
+                                $('.error-name').css('display', 'block');
+                                toastr.error("Something is wrong.");
+                                flag = false;
+                            }
+                            else {
+                                $('.error-name').css('display', 'none');
+                            }
+                        },
+                        error: function (xhr, ajaxOptions, thrownError) {
+                            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                            flag = false;
+                        },
+                    });//end ajax
+                }
+                else {
+                    $('#hidden-send-to').data('id', 1);
+                    $.ajax({
+                        url: '/Module4/Calendar/ValidateNameTeam?filter_name=' + namelike,
+                        dataType: 'json',
+                        //data: { },
+                        type: "GET",
+                        beforeSend: function () {
+                            $('ul.calendar-id-to').empty();
+                            $('ul.calendar-id-to').css("display", "block");
+                        },
+                        complete: function () {
+
+                        },
+                        success: function (json) {
+                            if (json['status'] == false) {
+                                $('.error-name').text('Can not find this name !!')
+                                $('.error-name').css('display', 'block');
+                                toastr.error("Something is wrong.")
+                                flag = false;
+                            }
+                            else {
+                                $('.error-name').css('display', 'none');
+                            }
+                        },
+                        error: function (xhr, ajaxOptions, thrownError) {
+                            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                        },
+                    });//end ajax
+                }//end else
+            }
+            else {
+                $('.error-name').text('Name can not blank !!')
+                $('.error-name').css('display', 'block');
+                toastr.error("Something is wrong.")
+                flag = false;
+            }//end if
+            if (flag) {
+                //pass param
+                var arrayTime = time.split(" ");
+                var convertTime = arrayTime[0].split("/");
+                var strTime = convertTime[0] + "-" + convertTime[1] + "-" + convertTime[2] + "T" + arrayTime[1] + ":00";
+                $('#hidden-time-send-to').val(strTime);
+                $('#calendar-modal-span-team').text(member);
+                $('#calendar-modal-input-name').val(to);
+                $('#calendar-modal-input-pass').val(pass);
+                $('#calendar-modal-input-agenda').val(agenda);
+                $('#calendar-modal-input-title').val(title);
+                $('#calendar-modal-input-date').val(time);
+                //show modal
+                $('#calendar-modal-confirm-zoom').modal('show');
+            }
+            else {
+                toastr.error("Something is wrong !!");
+            }
+            
+        });//end create meeting
+        //date ranger picker
+        $('input#calendar-id-date').daterangepicker({
+            timePicker24Hour: true,
+            singleDatePicker: true,
+            autoApply: true,
+            timePicker: true,
+            timePickerIncrement: 15,
+            startDate: moment().startOf('hour'),
+            endDate: moment().startOf('hour').add(32, 'hour'),
+            locale: {
+                format: 'YYYY/MM/DD HH:mm'
+            }
+        });
+
+        
+        $('select.minuteselect').css('disabled', true);//end date ranger picker
+        //date ranger picker
+        $('input#calendar-modal-details-date').daterangepicker({
+            timePicker24Hour: true,
+            singleDatePicker: true,
+            autoApply: true,
+            timePicker: true,
+            timePickerIncrement: 15,
+            startDate: moment().startOf('hour'),
+            endDate: moment().startOf('hour').add(32, 'hour'),
+            locale: {
+                format: 'YYYY/MM/DD HH:mm'
+            }
+        });
+        $('select.minuteselect').css('disabled', true);//end date ranger picker
+        
+        //autocomplete
+        $('input[name=\'to\']').on('input', function () {
+            var namelike = $(this).val();
+            var member = $('input[name="radioobject"]:checked').val();
+            if (namelike.trim() != "") {
+                if (member == "Member") {
+                    $('#hidden-send-to').data('id', 0);
+                    $.ajax({
+                        url: '/Module4/Calendar/Autocomplete?filter_name=' + namelike,
+                        dataType: 'json',
+                        //data: { },
+                        type: "GET",
+                        beforeSend: function () {
+                            $('ul.calendar-id-to').empty();
+                            $('ul.calendar-id-to').css("display", "block");
+                        },
+                        complete: function () {
+                            $('li.calendar-id-to').click(function () {
+                                var text = $(this).text();
+                                var id = $(this).attr("data-id");
+                                $('#hidden-send-to').val(id);
+                                $('#calendar-id-to').val(text);
+                                $('ul.calendar-id-to').css("display", "none");
+                                $('.error-name').css('display', 'none');
+                            });
+                        },
+                        success: function (json) {
+                            if (json['status'] == true) {
+                                //Object.entries(json['result'].forEach(element => {
+
+                                //});
+                                $.each(json['result'], function (key, value) {
+                                    $('ul.calendar-id-to').append("<li class='calendar-id-to ml-1' data-id='" + value["userid"] + "' >" + value["email"] + " </li>");
+                                });
+                            }
+                        },
+                        error: function (xhr, ajaxOptions, thrownError) {
+                            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                        },
+                    });//end ajax
+                }
+                else {
+                    $('#hidden-send-to').data('id', 1);
+                    $.ajax({
+                        url: '/Module4/Calendar/AutocompleteTeam?filter_name=' + namelike,
+                        dataType: 'json',
+                        //data: { },
+                        type: "GET",
+                        beforeSend: function () {
+                            $('ul.calendar-id-to').empty();
+                            $('ul.calendar-id-to').css("display", "block");
+                        },
+                        complete: function () {
+                            $('li.calendar-id-to').click(function () {
+                                var text = $(this).text();
+                                var id = $(this).attr("data-id");
+                                $('#hidden-send-to').val(id);
+                                $('#calendar-id-to').val(text);
+                                $('ul.calendar-id-to').css("display", "none");
+                                $('.error-name').css('display', 'none');
+                            });
+                        },
+                        success: function (json) {
+                            if (json['status'] == true) {
+                                $.each(json['result'], function (key, value) {
+                                    $('ul.calendar-id-to').append("<li class='calendar-id-to ml-1' data-id='" + value["groupid"] + "' >" + value["groupname"] + " </li>");
+                                });
+                            }
+                        },
+                        error: function (xhr, ajaxOptions, thrownError) {
+                            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                        },
+                    });//end ajax
+                }
+
+            }//end if
+            else {
+                $('ul.message-id-to').css("display", "none");
+            }
+        });//end autocomplete
+
+        //create calendar
+        $('.calendar-modal-btn-ok').click(function () {
+            var member = $('#hidden-send-to').data('id');
+            var to = $('#hidden-send-to').val();
+            var title = $('#calendar-id-title').val();
+            var time = $('#hidden-time-send-to').val();
+            var agenda = $('#calendar-id-agenda').val();
+            var pass = $('#calendar-id-pass').val();
+            $.ajax({
+                url: '/Module4/Calendar/CreateZoom',
+                dataType: 'json',
+                data: {
+                    to: to,
+                    title: title,
+                    time: time,
+                    agenda: agenda,
+                    pass: pass,
+                    member: member,
+                },
+                type: "POST",
+                beforeSend: function () {
+                    $('.btn').prop("disabled", true);
+                    $('#calendar-span-confirm').text("Loading..");
+                    $(".spinner-border").prop("hidden", false);
+                },
+                complete: function () {
+                    $('.btn').prop("disabled", false);
+                    $('#calendar-span-confirm').text("Confirm");
+                },
+                success: function (json) {
+                    if (json['status'] == true) {
+                        toastr.success("Successfully");
+                        $(".spinner-border").prop("hidden", true);
+                        $('#calendar-modal-confirm-zoom').modal('hide');
+
+                        if (json['member'] == 0) {
+                            var user = json['username'];
+                            var message = "meeting.";
+                            connectionNotify.invoke("SendNotify", user, message).catch(function (err) {
+                                return console.error(err.toString());
+                            });
+                        }
+                        else {
+                            Object.entries(json['listUser']).forEach(element => {
+                                var user = element[1].username;
+                                var message = "meeting.";
+                                connectionNotify.invoke("SendNotify", user, message).catch(function (err) {
+                                    return console.error(err.toString());
+                                });
+                            });
+                        }
+                        setTimeout(function () {
+                            location.reload();
+                        }, 2000);
+
+                    }
+                    else {
+                        toastr.error("Something is wrong");
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                },
+            });//end ajax
+        });//end create confirm
+        //validate clear input when click radio
+        $('input[name="radioobject"]').click(function ()
+        {
+            $('#calendar-id-to').val("");
+        });
+        $('#calendar-button-create').click(function () {
+            var member = $('input[name="radioobject"]:checked').val();
+            var namelike = $(this).val();
+            if (namelike.trim() != "") {
+                if (member == "Member") {
+                    $('#hidden-send-to').data('id', 0);
+                    $.ajax({
+                        url: '/Module4/Calendar/ValidateName?filter_name=' + namelike,
+                        dataType: 'json',
+                        //data: { },
+                        type: "GET",
+                        beforeSend: function () {
+                            $('ul.calendar-id-to').empty();
+                            $('ul.calendar-id-to').css("display", "block");
+                        },
+                        complete: function () {
+
+                        },
+                        success: function (json) {
+                            if (json['status'] == false) {
+                                $('.error-name').text('Can not find this name !!')
+                                $('.error-name').css('display', 'block');
+                                toastr.error("Something is wrong.")
+                            }
+                            else {
+                                $('.error-name').css('display', 'none');
+                            }
+                        },
+                        error: function (xhr, ajaxOptions, thrownError) {
+                            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                        },
+                    });//end ajax
+                }
+                else {
+                    $('#hidden-send-to').data('id', 1);
+                    $.ajax({
+                        url: '/Module4/Calendar/ValidateNameTeam?filter_name=' + namelike,
+                        dataType: 'json',
+                        //data: { },
+                        type: "GET",
+                        beforeSend: function () {
+                            $('ul.calendar-id-to').empty();
+                            $('ul.calendar-id-to').css("display", "block");
+                        },
+                        complete: function () {
+
+                        },
+                        success: function (json) {
+                            if (json['status'] == false) {
+                                $('.error-name').text('Can not find this name !!')
+                                $('.error-name').css('display', 'block');
+                                toastr.error("Something is wrong.")
+                            }
+                            else {
+                                $('.error-name').css('display', 'none');
+                            }
+                        },
+                        error: function (xhr, ajaxOptions, thrownError) {
+                            alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                        },
+                    });//end ajax
+                }//end else
+            }
+            else
+            {
+                $('.error-name').text('Name can not blank !!')
+                $('.error-name').css('display', 'block');
+                toastr.error("Something is wrong.")
+            }//end if
+        });    
+        //update zoom
+        $('.calendar-modal-details-btn-ok').click(function () {
+            var id = $('#hidden-zoom').val();
+            var timeString = $('#calendar-modal-details-date').val();
+            var arrayTime = timeString.split(" ");
+            var dateString = arrayTime[0].replaceAll("/", "-");
+            var hourString = arrayTime[1] + ":00";
+            var time = dateString + "T" + hourString;
+            $.ajax({
+                url: '/Module4/Calendar/UpdateZoom',
+                dataType: 'json',
+                data: {
+                    id: id,
+                    time: time,
+                },
+                type: "POST",
+                beforeSend: function () {
+                   
+                },
+                complete: function () {
+
+                },
+                success: function (json) {
+                    if (json['status'] == false) {
+                        toastr.error("Something is wrong.")
+                    }
+                    else {
+                        toastr.success("Successfully");
+                        setTimeout(function () {
+                            location.reload();
+                        }, 2000);
+                    }
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                    alert(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+                },
+            });//end ajax
+        });//end update zoom
+    });//end document
+</script>
+<script src="~/js/notify.js"></script>

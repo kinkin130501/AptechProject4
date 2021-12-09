@@ -1,0 +1,181 @@
+﻿@model ExaminationCrudModel
+
+<div class="row">
+    <div class="col-md-12">
+        <form id="myForm">
+            <div class="form-group">
+                <label class="control-label">Examination name</label>
+                <input asp-for="Name" id="txtName" class="form-control" placeholder="Enter examination name" />
+            </div>
+            <div class="form-group">
+                <label class="control-label">Type</label>
+                <select id="txtExamType" asp-for="ExamType" asp-items="Html.GetEnumSelectList<ExamTypes>()" class="form-control" onchange="return changeExamType()"></select>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Total Question</label>
+                <input id="txtTotalQuestion" type="number" step="1" class="form-control" value="0" />
+            </div>
+            <div class="form-group form-check">
+                <input id="random" type="checkbox" class="form-check-input" onchange="return checkRandom()" />
+                <label for="random" class="form-check-label">
+                    Random Question
+                </label>
+            </div>
+            <div class="form-group" id="QuestionRandomView">
+
+            </div>
+            <div class="form-group">
+                <label class="control-label">Time: (minute)</label>
+                <input id="txtTotalTime" asp-for="TotalTime" type="number" min="1" class="form-control" value="1" />
+            </div>
+            <div class="form-group form-check">
+                <input id="active" type="checkbox" class="form-check-input" asp-for="IsActive" checked />
+                <label for="active" class="form-check-label">
+                    Active
+                </label>
+            </div>
+            <div class="form-group">
+                <input type="button" id="btnSubmit" value="Create new" class="btn btn-primary" />
+                &nbsp;
+                <button type="button" class="btn btn-outline-warm" onclick="showAll()">Back</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    $("#btnSubmit").click(function (e) {
+        $("#Error").remove();
+        var isRandom = $("#random").is(':checked');
+
+        if ($("#txtName").val().trim() == "") {
+            $("<div><i style='color:red' id='Error'>Not blank</div>").insertAfter("#txtName");
+            $("#txtName").focus();
+            return false;
+        }
+        if ($("#txtTotalQuestion").val() == "" || $("#txtTotalQuestion").val() <= 0) {
+            $("<div><i style='color:red' id='Error'>Not blank</div>").insertAfter("#txtTotalQuestion");
+            $("#txtTotalQuestion").focus();
+            return false;
+        }
+        if ($("#txtTotalTime").val() == "" || $("#txtTotalTime").val() < 1) {
+            $("<div><i style='color:red' id='Error'>Not blank and greater than 0</div>").insertAfter("#txtTotalTime");
+            $("#txtTotalTime").focus();
+            return false;
+        }
+        if (!isRandom) {
+            toastr.error("Enter Question!")
+            return false;
+        }
+        if ($("#txtPassScore").val().trim() < 0) {
+            $("<div><i style='color:red' id='Error'>Passed mark greater than 0</div>").insertAfter("#txtPassScore");
+            $("#txtPassScore").focus();
+            return false;
+        }
+
+        if ($("#txtPassScore").val().trim() == "") {
+            $("<div><i style='color:red' id='Error'>Not blank</div>").insertAfter("#txtPassScore");
+            $("#txtPassScore").focus();
+            return false;
+        }
+        if (parseFloat($("#txtPassScore").val()) > parseFloat($("#txtMaxScore").val())) {
+            $("<div><i style='color:red' id='Error'>Pass mark can not greater than max mark</div>").insertAfter("#txtPassScore");
+            $("#txtPassScore").focus();
+            return false;
+        }
+
+        
+        var dataform = $("#myForm").serialize();
+        $.ajax({
+            url: "/Examination/Create",
+            type: "post",
+            data: dataform,
+            success: function (res) {
+                showAll();
+                toastr.success("Create Examination successed !");
+                ClearCartQuestionSession();
+            },
+            error: function () {
+                toastr.error("Failed !!");
+            }
+        });
+    })
+
+    function changeExamType() {
+        $("#random").prop('checked', false);
+        $("#QuestionRandomView").html("");
+    }
+
+    function addToCartQuestion(questionId, type) {
+        return
+    }
+
+    function checkRandom() {
+
+        var isRandom = $("#random").is(':checked');
+        
+        if (isRandom) {
+            if ($("#txtTotalQuestion").val() == "" || $("#txtTotalQuestion").val() <= 0) {
+                $("<div><i style='color:red' id='Error'>Total question not blank</div>").insertAfter("#txtTotalQuestion");
+                $("#txtTotalQuestion").focus();
+                $("#random").prop('checked', false);
+                return false;
+            }
+            var checkExamType = parseInt($("#txtExamType option:selected").val());
+
+            $.ajax({
+                url: "/Examination/QuestionRandomView",
+                type: "get",
+                data: {
+                    totalQuestion: parseInt($("#txtTotalQuestion").val()),
+                    examEnumType: checkExamType
+                },
+                success: function (res) {
+                    $("#QuestionRandomView").html("");
+                    $("#QuestionRandomView").html(res.html);
+                },
+                error: function () {
+                    toastr.error("Processing has error, please contact with admin.");
+                }
+            });
+        } else {
+            $("#QuestionRandomView").html("");
+        }
+        return
+    }
+
+    function searchSection() {
+        var courseId = $("#txtCourse option:selected").val();
+        var sectionId = $("#txtSection option:selected").val();
+        if (parseInt(sectionId) == 0) {
+            searchLesson();
+        }
+        $.ajax({
+            url: "/CourseManager/Question/SearchSection",
+            type: "get",
+            data: {
+                courseId: parseInt(courseId)
+            },
+            success: function (res) {
+                $("#SectionView").html("");
+                $("#SectionView").html(res.html);
+            }
+        });
+    }
+
+    function searchLesson() {
+        var sectionId = $("#txtSection option:selected").val();
+        $.ajax({
+            url: "/CourseManager/Question/SearchLesson/",
+            type: "get",
+            data: {
+                sectionId: parseInt(sectionId)
+            },
+            success: function (res) {
+                $("#LessonView").html("");
+                $("#LessonView").html(res.html);
+            }
+        });
+    }
+
+</script>

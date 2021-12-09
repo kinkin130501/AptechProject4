@@ -1,0 +1,1367 @@
+﻿@model FourN.Data.Models.Request
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewData["Title"] = "Request";
+    List<FourN.Data.Models.Request> modelRequest = ViewBag.requestList;
+    List<FourN.Data.Models.User> modelUser = ViewBag.userList;
+    List<FourN.Data.Models.Affairs> modellAffair = ViewBag.affairList;
+    List<FourN.Data.Models.Projects> modelProject = ViewBag.projectList;
+}
+@section css
+{
+    <style>
+        .tab {
+            overflow: hidden;
+            border: 2px solid #ccc;
+            background-color: #f1f1f1;
+        }
+
+            .tab button {
+                background-color: inherit;
+                float: left;
+                border: none;
+                outline: none;
+                cursor: pointer;
+                padding: 14px 30px;
+                transition: 0.3s;
+                font-size: 17px;
+            }
+
+                .tab button:hover {
+                    background-color: #ddd;
+                }
+
+                .tab button.active {
+                    background-color: #ccc;
+                }
+
+        .tabcontent {
+            display: block;
+            padding: 6px 12px;
+            border: 1px solid #ccc;
+            border-top: none;
+        }
+    </style>
+}
+
+@foreach (var userModel in modelUser)
+{
+    if (userModel.islead == true && userModel.isemployee == false && userModel.userid == @Context.Session.GetCurrentAuthentication().UserId)
+    {
+
+        <div class="tab">
+            <button class="tablinks" onclick="openRequest(event, 'RequestOvertime')" id="defaultOpen">Request Overtime</button>
+            <button class="tablinks" onclick="openRequest(event, 'RequestMoney')">Request Money</button>
+            <button class="tablinks" onclick="openRequest(event, 'RequestRecruitment')">Recruitment</button>
+            <button class="tablinks" onclick="openRequest(event, 'SendRequest')">Send Request</button>
+        </div>
+
+        <div id="RequestOvertime" class="tabcontent">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body table-responsive p-0" style="height: 500px;">
+                            <table id="example2" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Receiver</th>
+                                        <th>Send Date</th>
+                                        <th>Project Name</th>
+                                        <th>Task Information</th>
+                                        <th>Time Request</th>
+                                        <th>Total Overtime</th>
+                                        <th>Message sent</th>
+                                        <th>Status</th>
+                                        <th>View Respone</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item1 in modelRequest)
+                                    {
+                                        if (item1.userid == @Context.Session.GetCurrentAuthentication().UserId)
+                                        {
+                                            if (item1.requestname == "Overtime")
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @foreach (var item2 in modelUser)
+                                                        {
+                                                            if (item1.receiverid == item2.userid)
+                                                            {
+                                                                @item2.username
+                                                            }
+                                                        }
+                                                    </td>
+                                                    <td>@item1.sentdate.ToString("dd/MM/yyy HH:mm")</td>
+                                                    <td>
+                                                        @foreach (var item8 in modellAffair)
+                                                        {
+                                                            foreach (var itemProject in modelProject)
+                                                            {
+                                                                if (item1.taskid == item8.affairid)
+                                                                {
+                                                                    if (item8.projectid == itemProject.projectid)
+                                                                    {
+                                                                        <b style="color:red">@itemProject.projectcode</b>
+                                                                        <b>:</b>
+                                                                        <b>@itemProject.projectname</b>
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @foreach (var item7 in modellAffair)
+                                                        {
+                                                            if (item1.taskid == item7.affairid)
+                                                            {
+                                                                @item7.affairname<b> --End on: </b><i>@item7.endtimeplan</i>
+                                                            }
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @item1.moretime
+                                                    </td>
+                                                    <td>
+                                                        @item1.totaltime (hours)
+                                                    </td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#a-@item1.requestid">
+                                                            Details
+                                                        </button>
+                                                        <div class="modal fade" id="a-@item1.requestid" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title">@item1.requestname</h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        @Html.Raw(item1.content)
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        @if (item1.status == 0)
+                                                        {
+                                                            <strong style="color:blue">Not Reply</strong>
+                                                        }
+                                                        else if (item1.status == 1)
+                                                        {
+                                                            <strong style="color:green">Accepted</strong>
+                                                        }
+                                                        else if (item1.status == 2)
+                                                        {
+                                                            <strong style="color:red">Not Accepted</strong>
+                                                        }
+                                                        else if (item1.status == 3)
+                                                        {
+                                                            <strong style="color:yellow">In Process</strong>
+                                                        }
+                                                        else if (item1.status == 4)
+                                                        {
+                                                            <strong style="color:orange">Done</strong>
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @if (item1.reply == true)
+                                                        {
+                                                            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#e-@item1.requestid">
+                                                                View Respone
+                                                            </button>
+                                                            <div class="modal fade" id="e-@item1.requestid" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title">
+                                                                                Response from
+                                                                                @foreach (var iteme in modelUser)
+                                                                                {
+                                                                                    if (item1.receiverid == iteme.userid)
+                                                                                    {
+                                                                                        <b style="color:green">@iteme.username</b>
+                                                                                    }
+                                                                                }
+                                                                            </h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            @Html.Raw(item1.responecontent)
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <button type="button" class="btn btn-secondary" disabled>
+                                                                View Respone
+                                                            </button>
+                                                        }
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+        </div>
+        <div id="RequestMoney" class="tabcontent">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body table-responsive p-0" style="height: 500px;">
+                            <table id="example3" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Receiver</th>
+                                        <th>Send Date</th>
+                                        <th>Project Name</th>
+                                        <th>Task Name</th>
+                                        <th>Amount requested</th>
+                                        <th>Message sent</th>
+                                        <th>Status</th>
+                                        <th>View Respone</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item1 in modelRequest)
+                                    {
+                                        if (item1.userid == @Context.Session.GetCurrentAuthentication().UserId)
+                                        {
+                                            if (item1.requestname == "RequestMoney")
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @foreach (var item2 in modelUser)
+                                                        {
+                                                            if (item1.receiverid == item2.userid)
+                                                            {
+                                                                @item2.username
+                                                            }
+                                                        }
+                                                    </td>
+                                                    <td>@item1.sentdate.ToString("dd/MM/yyy HH:mm")</td>
+                                                    <td>
+                                                        @foreach (var item8 in modellAffair)
+                                                        {
+                                                            foreach (var itemProject in modelProject)
+                                                            {
+                                                                if (item1.taskid == item8.affairid)
+                                                                {
+                                                                    if (item8.projectid == itemProject.projectid)
+                                                                    {
+                                                                        <b style="color:red">@itemProject.projectcode</b>
+                                                                        <b>:</b>
+                                                                        <b>@itemProject.projectname</b>
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @foreach (var item7 in modellAffair)
+                                                        {
+                                                            if (item1.taskid == item7.affairid)
+                                                            {
+                                                                @item7.affairname
+                                                            }
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @string.Format("{0:#,##0.00}", item1.requestmoney) (vnd)
+                                                    </td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#a-@item1.requestid">
+                                                            Details
+                                                        </button>
+                                                        <div class="modal fade" id="a-@item1.requestid" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title">@item1.requestname</h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        @Html.Raw(item1.content)
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        @if (item1.status == 0)
+                                                        {
+                                                            <strong style="color:blue">Not Reply</strong>
+                                                        }
+                                                        else if (item1.status == 1)
+                                                        {
+                                                            <strong style="color:green">Accepted</strong>
+                                                        }
+                                                        else if (item1.status == 2)
+                                                        {
+                                                            <strong style="color:red">Not Accepted</strong>
+                                                        }
+                                                        else if (item1.status == 3)
+                                                        {
+                                                            <strong style="color:yellow">In Process</strong>
+                                                        }
+                                                        else if (item1.status == 4)
+                                                        {
+                                                            <strong style="color:orange">Done</strong>
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @if (item1.reply == true)
+                                                        {
+                                                            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#e-@item1.requestid">
+                                                                View Respone
+                                                            </button>
+                                                            <div class="modal fade" id="e-@item1.requestid" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title">
+                                                                                Response from
+                                                                                @foreach (var iteme in modelUser)
+                                                                                {
+                                                                                    if (item1.receiverid == iteme.userid)
+                                                                                    {
+                                                                                        <b style="color:green">@iteme.username</b>
+                                                                                    }
+                                                                                }
+                                                                            </h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            @Html.Raw(item1.responecontent)
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <button type="button" class="btn btn-secondary" disabled>
+                                                                View Respone
+                                                            </button>
+                                                        }
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="RequestRecruitment" class="tabcontent">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body table-responsive p-0" style="height: 500px;">
+                            <table id="example5" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Receiver</th>
+                                        <th>Send Date</th>
+                                        <th>Project Name</th>
+                                        <th>Task Name</th>
+                                        <th>Message sent</th>
+                                        <th>Status</th>
+                                        <th>View Respone</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item3 in modelRequest)
+                                    {
+                                        if (item3.userid == @Context.Session.GetCurrentAuthentication().UserId)
+                                        {
+                                            if (item3.requestname == "Recruitment")
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @foreach (var item4 in modelUser)
+                                                        {
+                                                            if (item3.receiverid == item4.userid)
+                                                            {
+                                                                @item4.username
+                                                            }
+                                                        }
+                                                    </td>
+                                                    <td>@item3.sentdate.ToString("dd/MM/yyy HH:mm")</td>
+                                                    <td>
+                                                        @foreach (var item8 in modellAffair)
+                                                        {
+                                                            foreach (var itemProject in modelProject)
+                                                            {
+                                                                if (item3.taskid == item8.affairid)
+                                                                {
+                                                                    if (item8.projectid == itemProject.projectid)
+                                                                    {
+                                                                        <b style="color:red">@itemProject.projectcode</b>
+                                                                        <b>:</b>
+                                                                        <b>@itemProject.projectname</b>
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @foreach (var item7 in modellAffair)
+                                                        {
+                                                            if (item3.taskid == item7.affairid)
+                                                            {
+                                                                @item7.affairname
+                                                            }
+                                                        }
+                                                    </td>
+
+                                                    <td>
+                                                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#a-@item3.requestid">
+                                                            Details
+                                                        </button>
+                                                        <div class="modal fade" id="a-@item3.requestid" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title">@item3.requestname</h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        @Html.Raw(item3.content)
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        @if (item3.status == 0)
+                                                        {
+                                                            <strong style="color:blue">Not Reply</strong>
+                                                        }
+                                                        else if (item3.status == 1)
+                                                        {
+                                                            <strong style="color:green">Accepted</strong>
+                                                        }
+                                                        else if (item3.status == 2)
+                                                        {
+                                                            <strong style="color:red">Not Accepted</strong>
+                                                        }
+                                                        else if (item3.status == 3)
+                                                        {
+                                                            <strong style="color:yellow">In Process</strong>
+                                                        }
+                                                        else if (item3.status == 4)
+                                                        {
+                                                            <strong style="color:orange">Done</strong>
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @if (item3.reply == true)
+                                                        {
+                                                            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#e-@item3.requestid">
+                                                                View Respone
+                                                            </button>
+                                                            <div class="modal fade" id="e-@item3.requestid" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                                <div class="modal-dialog" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header">
+                                                                            <h5 class="modal-title">
+                                                                                Response from
+                                                                                @foreach (var iteme in modelUser)
+                                                                                {
+                                                                                    if (item3.receiverid == iteme.userid)
+                                                                                    {
+                                                                                        <b style="color:green">@iteme.username</b>
+                                                                                    }
+                                                                                }
+                                                                            </h5>
+                                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                            @Html.Raw(item3.responecontent)
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        }
+                                                        else
+                                                        {
+                                                            <button type="button" class="btn btn-secondary" disabled>
+                                                                View Respone
+                                                            </button>
+                                                        }
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div id="SendRequest" class="tabcontent">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="row">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4">
+                                <div class="card-header">
+                                    <h3>YOUR REQUEST</h3>
+                                </div>
+                            </div>
+                            <div class="col-md-4"></div>
+                        </div>
+                        <div class="row">
+                            <div class="card-body">
+                                <form asp-action="Create" name="myForm" onsubmit="return validateForm()">
+                                    <input hidden asp-for="userid" class="form-control" value="@Context.Session.GetCurrentAuthentication().UserId" />
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label>Receiver Name <b style="color:red">*</b></label>
+                                                <select id="receivername" asp-for="receiverid" class="form-control select2-blue">
+                                                    <option selected disabled value="0">Choose Receiver</option>
+                                                    @foreach (var item5 in modelUser)
+                                                    {
+                                                        if (item5.isemployee == false && item5.islead == false)
+                                                        {
+                                                            <option value="@item5.userid">@item5.username</option>
+                                                        }
+                                                    }
+                                                </select>
+                                            </div>
+                                            <div><span id="result2" /></div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label">Request Type<b style="color:red">*</b></label>
+                                                <select asp-for="requestname" class="form-control" id="requestname">
+                                                    <option selected disabled value="0">Select One</option>
+                                                    <option value="Overtime">Overtime</option>
+                                                    <option value="RequestMoney">Request Money</option>
+                                                    <option value="Recruitment">Recruitment</option>
+                                                </select>
+                                            </div>
+                                            <div><span id="result3" /></div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label">Choose Project<b style="color:red">*</b></label>
+                                                <select class="form-control" id="chooseProject">
+                                                    @if(modelProject.Count() == 0)
+                                                     {
+                                                        <option selected>No Project</option>
+                                                     }
+                                                    <option selected disabled value="0">Choose Your Project</option>
+                                                    @foreach (var itemProject in modelProject.Where(a => a.status != 6 && a.status != 0 && a.leaderid == Context.Session.GetCurrentAuthentication().UserId))
+                                                    {
+                                                        <option value="@itemProject.projectid">@itemProject.projectcode --- @itemProject.projectname</option>
+                                                    }
+                                                </select>
+                                            </div>
+                                            <span id="resultProject" />
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <label class="control-label">Choose your Task <b style="color:red">*</b></label>
+                                                <select id="chooseTask" asp-for="taskid" class="form-control select2-blue">
+                                                    <option selected disabled value="0">Choose Your Task</option>
+                                                </select>
+                                                <span id="getTime" style="display:none"></span>
+                                                <span style="display:none" id="useridTask" name="useridTask"></span>
+                                            </div>
+                                            <span id="resultTask" />
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="form-group" id="timerequest">
+                                                <label class="control-label">Time Request <b style="color:red">*</b></label>
+                                                <input asp-for="moretime" class="form-control" />
+                                            </div>
+                                            <div><span id="result4" /></div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group" id="totalovertime">
+                                                <label class="control-label">Total Overtime (Hours)</label>
+                                                <input asp-for="totaltime" class="form-control" readonly />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group" id="moneyrequest">
+                                                <label class="control-label">Money Request (vnd) <b style="color:red">*</b></label>
+                                                <input asp-for="requestmoney" class="form-control" type="number" value="0" />
+                                                <span id="result5" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            <div class="form-group">
+                                                <label class="control-label">Message <b style="color:red">*</b></label>
+                                                <textarea asp-for="content" rows="5" class="form-control" id="summernote" name="content"></textarea>
+                                                <span id="result" />
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="submit" value="Submit" id="submit" class="btn btn-primary" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+    else if (userModel.islead == false && userModel.isemployee == false && userModel.userid == @Context.Session.GetCurrentAuthentication().UserId)
+    {
+        <div class="tab">
+            <button class="tablinks" onclick="openRequest(event, 'RequestOvertime')" id="defaultOpen">Request Overtime</button>
+            <button class="tablinks" onclick="openRequest(event, 'RequestMoney')">Request Money</button>
+            <button class="tablinks" onclick="openRequest(event, 'RequestRecruitment')">Recruitment</button>
+        </div>
+
+        <div id="RequestOvertime" class="tabcontent">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body table-responsive p-0" style="height: 500px;">
+                            <table id="example2" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Sender</th>
+                                        <th>Send Date</th>
+                                        <th>Project Name</th>
+                                        <th>Task Information</th>
+                                        <th>Time Request</th>
+                                        <th>Total Overtime</th>
+                                        <th>Message</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item1 in modelRequest)
+                                    {
+                                        if (item1.receiverid == @Context.Session.GetCurrentAuthentication().UserId)
+                                        {
+                                            if (item1.requestname == "Overtime")
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @foreach (var item2 in modelUser)
+                                                        {
+                                                            if (item1.userid == item2.userid)
+                                                            {
+                                                                @item2.username
+                                                            }
+                                                        }
+                                                    </td>
+                                                    <td>@item1.sentdate.ToString("dd/MM/yyy HH:mm")</td>
+                                                    <td>
+                                                        @foreach (var item8 in modellAffair)
+                                                        {
+                                                            foreach (var itemProject in modelProject)
+                                                            {
+                                                                if (item1.taskid == item8.affairid)
+                                                                {
+                                                                    if (item8.projectid == itemProject.projectid)
+                                                                    {
+                                                                        <b style="color:red">@itemProject.projectcode</b>
+                                                                        <b>:</b>
+                                                                        <b>@itemProject.projectname</b>
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @foreach (var item7 in modellAffair)
+                                                        {
+                                                            if (item1.taskid == item7.affairid)
+                                                            {
+                                                                @item7.affairname<b> --End on: </b><i>@item7.endtimeplan</i>
+                                                            }
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @item1.moretime
+                                                    </td>
+                                                    <td>
+                                                        @item1.totaltime (hours)
+                                                    </td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#a-@item1.requestid">
+                                                            Details
+                                                        </button>
+                                                        <div class="modal fade" id="a-@item1.requestid" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title">
+                                                                            Message from
+                                                                            @foreach (var item2 in modelUser)
+                                                                            {
+                                                                                if (item1.userid == item2.userid)
+                                                                                {
+                                                                                    <b style="color:green">@item2.username</b>
+                                                                                }
+                                                                            }
+                                                                        </h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        @Html.Raw(item1.content)
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        @if (item1.reply == false)
+                                                        {
+                                                            <a asp-controller="Requestpm" class="btn btn-info" asp-action="Reply" asp-route-id="@item1.requestid">Reply</a>
+                                                        }
+                                                        else
+                                                        {
+                                                            <a class="btn btn-info disabled">Replied</a>
+                                                        }
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.card-body -->
+                    </div>
+                    <!-- /.card -->
+                </div>
+            </div>
+        </div>
+        <div id="RequestMoney" class="tabcontent">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body table-responsive p-0" style="height: 500px;">
+                            <table id="example1" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Sender</th>
+                                        <th>Send Date</th>
+                                        <th>Project Name</th>
+                                        <th>Task Name</th>
+                                        <th>Amount requested</th>
+                                        <th>Message</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item1 in modelRequest)
+                                    {
+                                        if (item1.receiverid == @Context.Session.GetCurrentAuthentication().UserId)
+                                        {
+                                            if (item1.requestname == "RequestMoney")
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @foreach (var item2 in modelUser)
+                                                        {
+                                                            if (item1.userid == item2.userid)
+                                                            {
+                                                                @item2.username
+                                                            }
+                                                        }
+                                                    </td>
+                                                    <td>@item1.sentdate.ToString("dd/MM/yyy HH:mm")</td>
+                                                    <td>
+                                                        @foreach (var item8 in modellAffair)
+                                                        {
+                                                            foreach (var itemProject in modelProject)
+                                                            {
+                                                                if (item1.taskid == item8.affairid)
+                                                                {
+                                                                    if (item8.projectid == itemProject.projectid)
+                                                                    {
+                                                                        <b style="color:red">@itemProject.projectcode</b>
+                                                                        <b>:</b>
+                                                                        <b>@itemProject.projectname</b>
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @foreach (var item7 in modellAffair)
+                                                        {
+                                                            if (item1.taskid == item7.affairid)
+                                                            {
+                                                                @item7.affairname
+                                                            }
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @string.Format("{0:#,##0.00}", item1.requestmoney)
+                                                    </td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#b-@item1.requestid">
+                                                            Details
+                                                        </button>
+                                                        <div class="modal fade" id="b-@item1.requestid" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title">
+                                                                            Message from
+                                                                            @foreach (var item2 in modelUser)
+                                                                            {
+                                                                                if (item1.userid == item2.userid)
+                                                                                {
+                                                                                    <b style="color:green">@item2.username</b>
+                                                                                }
+                                                                            }
+                                                                        </h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        @Html.Raw(item1.content)
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        @if (item1.reply == false)
+                                                        {
+                                                            <a asp-controller="Requestpm" class="btn btn-info" asp-action="Reply" asp-route-id="@item1.requestid">Reply</a>
+                                                        }
+                                                        else
+                                                        {
+                                                            <a class="btn btn-info disabled">Replied</a>
+                                                        }
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="RequestRecruitment" class="tabcontent">
+            <div class="row">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body table-responsive p-0" style="height: 500px;">
+                            <table id="example3" class="table table-bordered table-striped">
+                                <thead>
+                                    <tr>
+                                        <th>Sender</th>
+                                        <th>Send Date</th>
+                                        <th>Project Name</th>
+                                        <th>Task Name</th>
+                                        <th>Message</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach (var item1 in modelRequest)
+                                    {
+                                        if (item1.receiverid == @Context.Session.GetCurrentAuthentication().UserId)
+                                        {
+                                            if (item1.requestname == "Recruitment")
+                                            {
+                                                <tr>
+                                                    <td>
+                                                        @foreach (var item2 in modelUser)
+                                                        {
+                                                            if (item1.userid == item2.userid)
+                                                            {
+                                                                @item2.username
+                                                            }
+                                                        }
+                                                    </td>
+                                                    <td>@item1.sentdate.ToString("dd/MM/yyy HH:mm")</td>
+                                                    <td>
+                                                        @foreach (var item8 in modellAffair)
+                                                        {
+                                                            foreach (var itemProject in modelProject)
+                                                            {
+                                                                if (item1.taskid == item8.affairid)
+                                                                {
+                                                                    if (item8.projectid == itemProject.projectid)
+                                                                    {
+                                                                        <b style="color:red">@itemProject.projectcode</b>
+                                                                        <b>:</b>
+                                                                        <b>@itemProject.projectname</b>
+                                                                    }
+                                                                }
+                                                            }
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        @foreach (var item7 in modellAffair)
+                                                        {
+                                                            if (item1.taskid == item7.affairid)
+                                                            {
+                                                                @item7.affairname
+                                                            }
+                                                        }
+                                                    </td>
+                                                    <td>
+                                                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#b-@item1.requestid">
+                                                            Details
+                                                        </button>
+                                                        <div class="modal fade" id="b-@item1.requestid" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                            <div class="modal-dialog" role="document">
+                                                                <div class="modal-content">
+                                                                    <div class="modal-header">
+                                                                        <h5 class="modal-title">
+                                                                            Message from
+                                                                            @foreach (var item2 in modelUser)
+                                                                            {
+                                                                                if (item1.userid == item2.userid)
+                                                                                {
+                                                                                    <b style="color:green">@item2.username</b>
+                                                                                }
+                                                                            }
+                                                                        </h5>
+                                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                            <span aria-hidden="true">&times;</span>
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="modal-body">
+                                                                        @Html.Raw(item1.content)
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </td>
+                                                    <td>
+                                                        @if (item1.reply == false)
+                                                        {
+                                                            <a asp-controller="Requestpm" class="btn btn-info" asp-action="Reply" asp-route-id="@item1.requestid">Reply</a>
+                                                        }
+                                                        else
+                                                        {
+                                                    <a asp-controller="Requestpm" class="btn btn-info" asp-action="Reply" asp-route-id="@item1.requestid">Replied</a>
+                                                        }
+                                                    </td>
+                                                </tr>
+                                            }
+                                        }
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+}
+
+
+@section Scripts
+{
+    <script>
+        $(document).ready(function () {
+            //add color background
+            $('li.Requestpm').css('background-color', 'azure');
+        });
+        function openRequest(evt, requestName) {
+            var i, tabcontent, tablinks;
+            tabcontent = document.getElementsByClassName("tabcontent");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+            tablinks = document.getElementsByClassName("tablinks");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+            document.getElementById(requestName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+
+        document.getElementById("defaultOpen").click();
+
+        $(function () {
+            $("#example1").DataTable({
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        });
+
+        $(function () {
+            $("#example2").DataTable({
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+            }).buttons().container().appendTo('#example2_wrapper .col-md-6:eq(0)');
+        });
+
+        $(function () {
+            $("#example3").DataTable({
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+            }).buttons().container().appendTo('#example3_wrapper .col-md-6:eq(0)');
+        });
+
+        $(function () {
+            $("#example4").DataTable({
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+            }).buttons().container().appendTo('#example4_wrapper .col-md-6:eq(0)');
+        });
+
+        $(function () {
+            $("#example5").DataTable({
+                "responsive": true, "lengthChange": false, "autoWidth": false,
+            }).buttons().container().appendTo('#example5_wrapper .col-md-6:eq(0)');
+        });
+
+        $(function () {
+            $("#timerequest").css("display", "none");
+            $("#taskname").css("display", "none");
+            $("#totalovertime").css("display", "none");
+            $("#requestname").change(function () {
+                var item = $("#requestname option:selected").val();
+                if (item != "Overtime") {
+                    $("#timerequest").css("display", "none");
+                    $("#taskname").css("display", "none");
+                    $("#totalovertime").css("display", "none");
+                }
+                else {
+                    $("#timerequest").css("display", "block");
+                    $("#taskname").css("display", "block");
+                    $("#totalovertime").css("display", "block");
+                }
+            });
+        });
+
+        $(function () {
+            $("#moneyrequest").css("display", "none");
+            $("#nametask").css("display", "none");
+            $("#requestname").change(function () {
+                var item = $("#requestname option:selected").val();
+                if (item != "RequestMoney") {
+                    $("#moneyrequest").css("display", "none");
+                    $("#nametask").css("display", "none");
+                }
+                else {
+                    $("#moneyrequest").css("display", "block");
+                    $("#nametask").css("display", "block");
+                }
+            });
+        });
+
+        $(function () {
+            $("#recruitmenttask").css("display", "none");
+            $("#requestname").change(function () {
+                var item = $("#requestname option:selected").val();
+                if (item != "Recruitment") {
+                    $("#recruitmenttask").css("display", "none");
+                }
+                else {
+                    $("#recruitmenttask").css("display", "block");
+                }
+            });
+        });
+
+        function validateForm() {
+            var item = $("#requestname option:selected").val();
+            if (item == "Overtime") {
+                let x = document.forms["myForm"]["content"].value;
+                let y = document.getElementById("receivername").value;
+                let z = document.getElementById("requestname").value;
+                let optionProject = document.getElementById("chooseProject").value;
+                let w = document.getElementById("moretime").value;
+                if (y == 0) {
+                    document.getElementById("result2").innerHTML = "<p>You must be choose one receiver</p>";
+                    document.getElementById("result2").style.color = "red";
+                    return false;
+                }
+                else {
+                    document.getElementById("result2").innerHTML = "";
+                }
+                if (y == optionProject) {
+                    document.getElementById("resultProject").innerHTML = "<p>You must be choose one project</p>";
+                    document.getElementById("resultProject").style.color = "red";
+                    return false;
+                }
+                else {
+                    document.getElementById("result2").innerHTML = "";
+                }
+                if (z == 0) {
+                    document.getElementById("result3").innerHTML = "<p>You must be choose one request option</p>";
+                    document.getElementById("result3").style.color = "red";
+                    return false;
+                }
+                else {
+                    document.getElementById("result3").innerHTML = "";
+                }
+                if (x.trim() == "") {
+                    document.getElementById("result").innerHTML = "<p>You cannot leave Message field blank</p>";
+                    document.getElementById("result").style.color = "red";
+                    return false;
+                }
+                else {
+                    document.getElementById("result").innerHTML = "";
+                }
+                if (w == "") {
+                    document.getElementById("result4").innerHTML = "<p>You must be choose the time</p>";
+                    document.getElementById("result4").style.color = "red";
+                    return false;
+                }
+                else {
+                    document.getElementById("result").innerHTML = "";
+                }
+            }
+            else if (item == "RequestMoney") {
+                var getMoney = $('#requestmoney').val();
+                let getTaskMoney = document.getElementById("moneytask").value;
+                let z = document.getElementById("requestname").value;
+                if (getMoney < 50000) {
+                    document.getElementById("result5").innerHTML = "<p>You cannot input money request less than 50000 (vnd)</p>";
+                    document.getElementById("result5").style.color = "red";
+                    return false;
+                }
+                else {
+                    document.getElementById("result5").innerHTML = "";
+                }
+                if (z == 0) {
+                    document.getElementById("result3").innerHTML = "<p>You must be choose one request option</p>";
+                    document.getElementById("result3").style.color = "red";
+                    return false;
+                }
+                else {
+                    document.getElementById("result3").innerHTML = "";
+                }
+                if (getTaskMoney == 0) {
+                    document.getElementById("result6").innerHTML = "<p>You must be choose one task</p>";
+                    document.getElementById("result6").style.color = "red";
+                    return false;
+                }
+                else {
+                    document.getElementById("result6").innerHTML = "";
+                }
+            }
+            else if (item == "Recruitment") {
+                let getTaskname = document.getElementById("requestrecruitment").value;
+                let z = document.getElementById("requestname").value;
+                if (getTaskname == 0) {
+                    document.getElementById("result7").innerHTML = "<p>You must be choose one task</p>";
+                    document.getElementById("result7").style.color = "red";
+                    return false;
+                }
+                else {
+                    document.getElementById("result7").innerHTML = "";
+                }
+                if (z == 0) {
+                    document.getElementById("result3").innerHTML = "<p>You must be choose one request option</p>";
+                    document.getElementById("result3").style.color = "red";
+                    return false;
+                }
+                else {
+                    document.getElementById("result3").innerHTML = "";
+                }
+            }
+            else {
+                let x = document.forms["myForm"]["content"].value;
+                let y = document.getElementById("receivername").value;
+                let z = document.getElementById("requestname").value;
+                let chooseTask = document.getElementById("chooseTask").value;
+                let chooseProject = document.getElementById("chooseProject").value;
+
+                if (y == 0) {
+                    document.getElementById("result2").innerHTML = "<p>You must be choose one receiver</p>";
+                    document.getElementById("result2").style.color = "red";
+                    return false;
+                }
+                else {
+                    document.getElementById("result2").innerHTML = "";
+                }
+                if (chooseTask == 0) {
+                    document.getElementById("resultTask").innerHTML = "<p>You must be choose one task</p>";
+                    document.getElementById("resultTask").style.color = "red";
+                    return false;
+                }
+                else {
+                    document.getElementById("resultTask").innerHTML = "";
+                }
+                if (z == 0) {
+                    document.getElementById("result3").innerHTML = "<p>You must be choose one request option</p>";
+                    document.getElementById("result3").style.color = "red";
+                    return false;
+                }
+                else {
+                    document.getElementById("result3").innerHTML = "";
+                }
+                if (x == "") {
+                    document.getElementById("result").innerHTML = "<p>You cannot leave Message field blank</p>";
+                    document.getElementById("result").style.color = "red";
+                    return false;
+                }
+                else {
+                    document.getElementById("result").innerHTML = "";
+                }
+                if (chooseProject == 0) {
+                    document.getElementById("resultProject").innerHTML = "<p>You must be choose one project</p>";
+                    document.getElementById("resultProject").style.color = "red";
+                    return false;
+                }
+                else {
+                    document.getElementById("resultProject").innerHTML = "";
+                }
+            }
+        }
+
+        getTime = {
+            init: function () {
+                getTime.registerEvents();
+            },
+            registerEvents: function () {
+                $('#chooseTask').blur(function () {
+                    var name = $('#chooseTask').val();
+                    if (name.trim() != "") {
+                        $.ajax({
+                            url: "/KOPC/Requestpm/getTime",
+                            data: { name: name },
+                            dataType: "json",
+                            type: "POST",
+                            success: function (response) {
+                                $('#getTime').html(response.atime.toString("dd/MM/yyyy HH:mm:ss"));
+                            }
+                        });
+                    } else {
+                        alert("Enter Project Code");
+                    }
+                });
+            }
+        }
+
+        getTime.init();
+        $('#moretime').blur(function () {
+            var moretime = $('#moretime').val();
+            var gettime = $('#getTime').html();
+            console.log(moretime);
+            console.log(gettime);
+            if (moretime.toString("yyyy/MM/dd HH:mm:ss") <= gettime.toString("dd/MM/yyyy HH:mm")) {
+                document.getElementById("result4").innerHTML = "<p>You cannot choose Time Request smaller End Time </p>";
+                document.getElementById("result4").style.color = "red";
+            }
+            else {
+                $('#result4').html(" ");
+            }
+
+            var getMore = new Date(moretime).getTime();
+            var getTimerequest = new Date(gettime).getTime();
+            var getHour = (getMore - getTimerequest) / 3600 / 1000;
+            $('#totaltime').val(getHour);
+
+        });
+        console.log("Display" + $('#timerequest'));
+
+        $(function () {
+            $('#summernote').summernote()
+        });
+
+        getProject = {
+            init: function () {
+                getProject.registerEvents();
+            },
+            registerEvents: function () {
+                $('#chooseProject').blur(function () {
+                    var name = $('#chooseProject').val();
+                    var html = "";
+                    if (name.trim() != "") {
+                        $.ajax({
+                            url: "/KOPC/Requestpm/getProject",
+                            data: { name: name },
+                            dataType: "json",
+                            type: "POST",
+                            success: function (response) {
+                                var task = response.task;
+                                for (let i = 0; i < task.length; i++) {
+                                    html += "<option value=" + task[i]["affairid"] + ">" + task[i]["affairname"] + "-----" + task[i]["endtimeplan"] + "</option>";
+                                }
+
+                                $('#chooseTask').html(html);
+                            }
+                        });
+                    } else {
+                        alert("Enter Project Code");
+                    }
+                });
+            }
+        }
+
+        getProject.init();
+    </script>
+}
+<script src="~/js/notify.js"></script>

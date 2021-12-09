@@ -1,0 +1,115 @@
+﻿@model FourN.Data.Models.Projects
+@{ 
+    var userid = @Context.Session.GetCurrentAuthentication().UserId;
+    var department = @Context.Session.GetCurrentAuthentication().department;
+}
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">DETAIlS</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                </ol>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<div class="card">
+    <div class="card-header border-0">
+        <h3 class="card-title">Products</h3>
+        <div class="card-tools">
+            @if (department == (int)RoleNumber.PM || department == (int)RoleNumber.Leader)
+            {
+                <a href="/ProjectManagement/Project/Edit/@Model.projectid" class="btn btn-tool btn-sm">
+                    <i class="fas fa-pencil-alt"></i>
+                </a>
+            }
+        </div>
+    </div>
+    <div class="card-body table-responsive p-0">
+        <table class="table">
+            <tbody>
+                <tr>
+                    <th>
+                        Name
+                    </th>
+                    <td><h3><b>@Model.projectname</b></h3></td>
+                </tr>
+                @if (Model.status != 6)
+                {
+                    <tr>
+                        <th>
+                            Start Date (Plan)
+                        </th>
+                        <td>@Model.startplan.ToString(string.Format("dd/MM/yyyy HH:mm:ss"))</td>
+                        <th>
+                            End Date (Plan)
+                        </th>
+                        <td>@Model.endplan.ToString(string.Format("dd/MM/yyyy HH:mm:ss"))</td>
+                    </tr>
+                }
+                else
+                {
+                    <tr>
+                        <th>
+                            Start Date (Actual)
+                        </th>
+                        <td>@Model.startactual?.ToString(string.Format("dd/MM/yyyy HH:mm:ss"))</td>
+                        <th>
+                            End Date (Actual)
+                        </th>
+                        <td>@Model.endactual?.ToString(string.Format("dd/MM/yyyy HH:mm:ss"))</td>
+                    </tr>
+                }
+                <tr>
+                    <th>
+                        Leader
+                    </th>
+                    <td>@ViewData["leader"]</td>
+                </tr>
+                <tr>
+                    <th>
+                        Status
+                    </th>
+                    <td>
+                        @switch (Model.status)
+                        {
+                            case 0:<span>BID OPENING</span>; break;
+                            case 1: <span>NEW</span>; break;
+                            case 2: <span>ANALYSIS AND DESIGN</span>; break;
+                            case 3: <span>IMPLEMENTATION</span>; break;
+                            case 4: <span>TESTING AND OTHER QA TASKS</span>; break;
+                            case 5: <span>DEPLOYMENT</span>; break;
+                            case 6: <span>DONE</span>; break;
+                        }
+
+                        @if (Model.status == 2 || Model.status == 3 || Model.status == 4 || Model.status == 5)
+                        {
+                            int processing = 0;
+                            foreach (var affair in ViewBag.affair)
+                            {
+                                processing += affair.affairtag;
+                            }
+                            <p>@processing hours</p>
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <th>
+                        Required
+                    </th>
+                    <td>@Html.Raw(Model.require)</td>
+                <tr>
+                <tr>
+                    <th>
+                        Note
+                    </th>
+                    <td>@Html.Raw(Model.note)</td>
+                <tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<script src="~/js/notify.js"></script>

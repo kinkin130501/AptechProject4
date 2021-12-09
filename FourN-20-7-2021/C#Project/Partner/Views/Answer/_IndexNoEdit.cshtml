@@ -1,0 +1,103 @@
+﻿@model ExaminationQuestionsActiveViewModel
+@{
+    int startNumber = 65;
+    char prefix;
+    var answer = "";
+    var ran = new Random();
+}
+<div>
+
+    <dl class="row">
+        <dt class="col-sm-2">
+            Câu hỏi
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Content)
+        </dd>
+        <dt class="col-sm-2">
+            Loại
+        </dt>
+        <dd class="col-sm-10">
+            @{
+                var type = HelperViewData.GetEnumDisplayName((QuestionTypes)Model.QuestionType);
+            }
+            @type
+        </dd>
+        <dt class="col-sm-2">
+            Điểm
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Score) điểm
+        </dd>
+
+    </dl>
+    @if (Model.AnswerActive.Count != 0)
+    {
+        if (Model.QuestionType == (int)QuestionTypes.TracNghiem)
+        {
+            <div>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Đáp án</th>
+                            <th>Nội dung</th>
+                            <th>Đáp án đúng</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @if (Model.IsRandom)
+                        {
+                            @foreach (var i in Model.AnswerActive.OrderBy(x => ran.Next()))
+                            {
+                                prefix = (char)startNumber;
+                                startNumber++;
+
+                                @if (i.IsCorrect) { answer = "Đáp án đúng"; } else { answer = ""; }
+                                <tr>
+
+                                    <td>@prefix</td>
+                                    <td style="white-space: pre-line">@i.Content</td>
+                                    <td>@answer</td>
+
+                                </tr>
+                            }
+                        }
+                        else
+                        {
+                            @foreach (var i in Model.AnswerActive)
+                            {
+                                prefix = (char)startNumber;
+                                startNumber++;
+
+                                @if (i.IsCorrect) { answer = "Đáp án đúng"; } else { answer = ""; }
+                                <tr>
+
+                                    <td>@prefix</td>
+                                    <td style="white-space: pre-line">@i.Content</td>
+                                    <td>@answer</td>
+
+                                </tr>
+                            }
+                        }
+
+
+                    </tbody>
+                </table>
+            </div>
+        }
+        else
+        {
+            <h3>Gợi ý đáp án:</h3>
+            @foreach (var i in Model.AnswerActive)
+            {
+                <p>@i.Content</p>    
+            }
+        }
+    }
+    else
+    {
+        <p class="text-center">Câu hỏi này hiện chưa có đáp án</p>
+    }
+</div>
+
+

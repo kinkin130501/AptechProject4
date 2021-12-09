@@ -1,0 +1,96 @@
+﻿@model DepartmentViewModel
+<div class="container">
+    <div class="row">
+        <div class="col-md-2"></div>
+        <div class="col-md-4">
+            <img src="@Model.Image" style="margin: 15px auto; width: 300px; height: 250px" />
+        </div>
+        <div class="col-md-4">
+            <h3>@Model.Title</h3>
+            <div>
+                @Html.Raw(Model.ShortDesc)
+            </div>
+        </div>
+        <div class="col-md-2"></div>
+    </div>
+    <div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <h4>Description: </h4>
+                <div>
+                    @Html.Raw(Model.Desc)
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <h4>Require: </h4>
+                <div>
+                    @Model.Quantity
+                </div>
+                <div>
+                    @Model.TimeEnd
+                </div>
+                <div>
+                <h4>List Candidate</h4>
+                @if (Model.ListCandidate.Count() > 0)
+                {
+                    <ul>
+                        @foreach (var item in Model.ListCandidate)
+                        {
+                            <li>@item.Name - @item.Phone - @item.Email - <a href="@item.FileURL" download="@item.Name">Curriculum Vitae</a></li> 
+                        }
+                    </ul>
+                }
+                else
+                {
+                    <label><i>Not still update</i></label>
+                }
+            </div>
+            </div>
+        </div>
+    </div>
+    @*<div class="row">
+        <div class="col-md-6">
+            <div class="form-group">
+                <h4>Quantity: </h4>
+                <div>
+                    @Model.Quantity
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="form-group">
+                <h4>Expire at: </h4>
+                <div>
+                    @Model.TimeEnd
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <h4>List Candidate</h4>
+            @if (Model.ListCandidate.Count() > 0)
+            {
+                <ul>
+                    @foreach (var item in Model.ListCandidate)
+                    {
+                        <li>@item.Name - @item.Phone - @item.Email</li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <label><i>Not still update</i></label>
+            }
+        </div>
+    </div>*@
+<div class="text-left" style="padding: 10px">
+    @if (Model.DepartmentStatus == (int)DepartmentStatus.Apply)
+    {
+        <a class="btn btn-primary" asp-action="Edit" asp-route-departmentid="@Model.DepartmentId">Edit Information</a>
+    }
+    <a class="btn btn-warning" asp-action="Index">Back</a>
+</div>
+</div> 

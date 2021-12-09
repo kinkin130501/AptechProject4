@@ -1,0 +1,118 @@
+﻿@model FourN.Data.Models.Projects
+
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">EDIT PROJECT</h1>
+            </div><!-- /.col -->
+            <div class="col-sm-6">
+            </div>
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<div class="card card-primary">
+    <div class="card-header">
+        <h3 class="card-title"></h3>
+    </div>
+    <form method="post" asp-controller="Project" asp-action="Edit">
+        <div class="card-body">
+            <input type="hidden" asp-for="projectid" value="@Model.projectid" />
+            <input type="hidden" asp-for="projectcode" value="@Model.projectcode" />
+            <input type="hidden" asp-for="status" value="@Model.status" />
+            <div class="form-group">
+                <label for="inputEmail4">Project Name</label>
+                <input value="@Model.projectname" asp-for="projectname" class="form-control" />
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="inputEmail4">Start Day Plan</label>
+                    <div class="input-group date" id="" data-target-input="nearest">
+                        <input readonly value="@Model.startplan.ToString("yyyy/MM/dd HH:mm:ss")" asp-for="startplan" type="text" class="form-control" />
+                    </div>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="txtAuthor">End Day Plan</label>
+                    <div class="input-group date" id="" data-target-input="nearest">
+                        <input readonly value="@Model.endplan.ToString("yyyy/MM/dd HH:mm:ss")" asp-for="endplan" type="text" class="form-control" />
+                    </div>
+                </div>
+            </div>
+            @*@if (Model.status != 0 && Model.status != 6)
+            {
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                        <label for="inputEmail4">Start Day Actual</label>
+                        <div class="input-group date" id="" data-target-input="nearest">
+                            <input value="@Model.startplan.ToString("yyyy/MM/dd HH:mm:ss")" asp-for="startactual" type="text" class="form-control" />
+                        </div>
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="txtAuthor">End Day Actual</label>
+                        <div class="input-group date" id="" data-target-input="nearest">
+                            <input value="@Model.endplan.ToString("yyyy/MM/dd HH:mm:ss")" asp-for="endactual" type="text" class="form-control" />
+                        </div>
+                    </div>
+                </div>
+            }*@
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <label for="txtAuthor">Leader</label>
+                    @if (Model.leaderid != null)
+                    {
+                        <input type="hidden" value="@Model.leaderid" id="getLeaderID" />
+                    }
+                    <select asp-for="leaderid" class="custom-select">
+                        @foreach (var item in ViewBag.listLeader)
+                        {
+                            <option class="selectLeaderID" value="@item.userid">@item.username</option>
+                        }
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <label for="txtAuthor">Document</label>
+                    @if (Model.docid != null)
+                    {
+                        <input type="hidden" value="@Model.docid" class="getDocID" />
+                    }
+                    <select asp-for="docid" class="custom-select">
+                        @foreach (var item in ViewBag.doc)
+                        {
+                            <option class="selectDocID" value="@item.docid">@item.title</option>
+                        }
+                    </select>
+                </div>
+            </div>
+            @if (Model.status == 0)
+            {
+                <div class="form-check">
+                    <input type="checkbox" value="1" name="checkboxBID" />
+                    <label class="form-check-label" for="exampleRadios1">ACCEPTANCE OF BIDS</label>
+                </div>
+            }
+            else if (Model.status == 6)
+            {
+                <div class="form-check">
+                    <input type="checkbox" value="7" name="checkboxBID" />
+                    <label class="form-check-label" for="exampleRadios1">MAINTAIN</label>
+                </div>
+            }
+            <div class="form-group">
+                <label for="inputEmail4">Required</label>
+                <textarea style="height: 100px;" asp-for="require" class="form-control  summerynote"> @Html.Raw(Model.require) </textarea>
+            </div>
+
+            <div class="form-group">
+                <label for="inputEmail4">Note</label>
+                <textarea style="height: 100px;" asp-for="note" class="form-control  summerynote"> @Html.Raw(Model.require) </textarea>
+            </div>
+        </div>
+        <!-- /.card-body -->
+
+        <div class="card-footer">
+            <button onclick="return checkTimeProject()" type="submit" class="btn btn-primary">Submit</button>
+        </div>
+    </form>
+    @*}*@
+</div>
+<script src="~/js/notify.js"></script>
